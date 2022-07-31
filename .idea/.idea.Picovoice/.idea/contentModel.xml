@@ -30,9 +30,16 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Picovoice Script" t="Include">
-            <e p="InTalkingRange.cs" t="Include" />
-            <e p="PicovoiceImplementation.cs" t="Include" />
+          <e p="StateMachine" t="Include">
+            <e p="Colleague" t="Include">
+              <e p="ColleagueBaseState.cs" t="Include" />
+              <e p="ColleagueListeningState.cs" t="Include" />
+              <e p="ColleagueStateMachine.cs" t="Include" />
+              <e p="ColleagueTalkingState.cs" t="Include" />
+              <e p="ColleagueWorkingState.cs" t="Include" />
+            </e>
+            <e p="State.cs" t="Include" />
+            <e p="StateMachine.cs" t="Include" />
           </e>
         </e>
         <e p="StarterAssets" t="Include">
