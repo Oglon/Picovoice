@@ -11,7 +11,6 @@
           <e p="Readme.txt" t="Include" />
           <e p="ReleaseNotes.txt" t="Include" />
         </e>
-        <e p="InverseTarget.cs" t="Include" />
         <e p="PolygonCity" t="Include">
           <e p="Change_Log.txt" t="Include" />
         </e>
@@ -30,6 +29,10 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Objective System" t="Include">
+            <e p="Objective.cs" t="Include" />
+            <e p="ObjectiveHandler.cs" t="Include" />
+          </e>
           <e p="StateMachine" t="Include">
             <e p="Colleague" t="Include">
               <e p="ColleagueBaseState.cs" t="Include" />

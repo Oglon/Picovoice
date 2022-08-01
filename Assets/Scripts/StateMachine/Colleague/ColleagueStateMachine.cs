@@ -9,8 +9,9 @@ public class ColleagueStateMachine : StateMachine
     [field: SerializeField] public float PlayerListenRange { get; private set; }
     public Transform Player { get; private set; }
     [field: SerializeField] public GameObject Target { get; private set; }
+    [field: SerializeField] public GameObject MainTarget { get; private set; }
 
-    public Camera playerHead;
+    public Camera playerHead { get; private set; }
 
 
     public bool _isProcessing;
