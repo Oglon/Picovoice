@@ -4,22 +4,48 @@ using UnityEngine;
 
 public class ColleagueTalkingState : ColleagueBaseState
 {
-    public ColleagueTalkingState(ColleagueStateMachine stateMachine) : base(stateMachine)
+    private string _colleague;
+    private int _response;
+
+    Vector3 computer = new Vector3(0.7f, 1.2f, -0.16f);
+
+    public ColleagueTalkingState(ColleagueStateMachine stateMachine, int response) : base(stateMachine)
     {
+        this._response = response;
     }
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        _colleague = stateMachine.gameObject.tag;
+        Answer();
     }
 
     public override void Tick(float deltaTime)
     {
-        throw new System.NotImplementedException();
+        stateMachine.Target.transform.position = stateMachine.playerHead.transform.position;
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+    }
+
+    private void Answer()
+    {
+        if (_colleague == "Intern")
+        {
+            Debug.Log("Intern");
+            if (_response == 1)
+            {
+                Debug.Log("1");
+            }
+        }
+
+        if (_colleague == "Colleague")
+        {
+        }
+
+        if (_colleague == "Boss")
+        {
+        }
     }
 }
