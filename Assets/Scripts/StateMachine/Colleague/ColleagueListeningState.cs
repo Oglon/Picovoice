@@ -12,7 +12,7 @@ public class ColleagueListeningState : ColleagueBaseState
     public override void Enter()
     {
         Debug.Log("In Talking Range");
-        ToggleProcessing();
+        stateMachine.StartProcessing();
     }
 
     public override void Tick(float deltaTime)
@@ -27,19 +27,5 @@ public class ColleagueListeningState : ColleagueBaseState
 
     public override void Exit()
     {
-    }
-
-    private void ToggleProcessing()
-    {
-        if (!stateMachine._isProcessing)
-        {
-            StartProcessing();
-        }
-    }
-
-    private void StartProcessing()
-    {
-        stateMachine._rhinoManager.Process();
-        stateMachine._isProcessing = true;
     }
 }

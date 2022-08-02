@@ -10,7 +10,7 @@ public abstract class ColleagueBaseState : State
     {
         this.stateMachine = stateMachine;
     }
-    
+
     protected bool IsInTalkingRange()
     {
         float playerDistanceSqr =

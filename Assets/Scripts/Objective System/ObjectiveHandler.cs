@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveHandler : MonoBehaviour
 {
@@ -12,25 +13,50 @@ public class ObjectiveHandler : MonoBehaviour
 
     void Start()
     {
-        _objectives = new List<Objective>
+        if (SceneManager.GetActiveScene().name == "Office Level 1")
         {
-            new Objective("Talk to the Intern", true),
-            new Objective("Talk to the Boss", false),
-            new Objective("Talk to the Colleague", false),
-            new Objective("Solve Cesar Cipher and present the solution to your Colleague", false),
-            new Objective("Talk to Intern", false),
-            new Objective("Solve Gummy Bear Riddle and present the solution to your Colleague", false),
-            new Objective("Talk to the Boss", false),
-            new Objective("Solve the Cipher and present the solution to your Colleague", false),
-            new Objective("Talk to the Intern", false),
-            new Objective("Get the Door Code from your Boss", false),
-            new Objective("Tell the Intern about the Code", false),
-            new Objective("Get your file from the cleaning cabinet", false),
-            new Objective("Level Complete", false)
-        };
+            _objectives = new List<Objective>
+            {
+                new Objective("Talk to the Intern", true),
+                new Objective("Talk to the Boss", false),
+                new Objective("Talk to the Colleague", false),
+                new Objective("Solve Cesar Cipher and present the solution to your Colleague", false),
+                new Objective("Talk to Intern", false),
+                new Objective("Solve Gummy Bear Riddle and present the solution to your Colleague", false),
+                new Objective("Talk to the Boss", false),
+                new Objective("Solve the Cipher and present the solution to your Colleague", false),
+                new Objective("Talk to the Intern", false),
+                new Objective("Get the Door Code from your Boss", false),
+                new Objective("Tell the Intern about the Code", false),
+                new Objective("Get your file from the cleaning cabinet", false),
+                new Objective("Level Complete", false)
+            };
 
-        _currentObjective = _objectives[0];
-        Debug.Log(_currentObjective.getDescription());
+            _currentObjective = _objectives[0];
+            Debug.Log(_currentObjective.getDescription());
+        }
+        else
+        {
+            _objectives = new List<Objective>
+            {
+                new Objective("Talk to the Intern", true),
+                new Objective("Talk to the Boss about the secret price", false),
+                new Objective("Talk to the Colleague", false),
+                new Objective("Encode the letter", false),
+                new Objective("Talk to Colleague", false),
+                new Objective("Talk to Boss", false),
+                new Objective("Talk to the Intern", false),
+                new Objective("Solve Morse Code", false),
+                new Objective("Talk to the Intern", false),
+                new Objective("Talk to the Boss", false),
+                new Objective("Solve Rhino Code", false),
+                new Objective("Talk to Boss", false),
+                new Objective("Level Complete", false)
+            };
+
+            _currentObjective = _objectives[0];
+            Debug.Log(_currentObjective.getDescription()); 
+        }
     }
 
     private void Update()
@@ -41,7 +67,7 @@ public class ObjectiveHandler : MonoBehaviour
         }
     }
 
-    private void Progress()
+    public void Progress()
     {
         if (index == _objectives.Count)
             return;
@@ -52,5 +78,10 @@ public class ObjectiveHandler : MonoBehaviour
         index++;
 
         Debug.Log(_currentObjective.getDescription());
+    }
+
+    public int getCurrentIndex()
+    {
+        return index;
     }
 }
