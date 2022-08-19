@@ -22,6 +22,8 @@ public class ColleagueTalkingState : ColleagueBaseState
 
     public override void Tick(float deltaTime)
     {
+        stateMachine.Subtitles();
+
         stateMachine.Target.transform.position = stateMachine.playerHead.transform.position;
     }
 
