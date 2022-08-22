@@ -1,3 +1,4 @@
+using System;
 using Pv.Unity;
 using TMPro;
 using UnityEngine;
@@ -52,25 +53,28 @@ public class ColleagueStateMachine : StateMachine
         {
             _sensitive = false;
         }
+
+        Debug.Log(_sensitive);
     }
 
     void inferenceCallback(Inference inference)
     {
         if (!IsInTalkingRange())
             return;
-
-        if (SceneManager.GetActiveScene().name == "Office Level 1")
+        string _sceneName = SceneManager.GetActiveScene().name;
+        if (_sceneName.Contains("Office Level 1"))
         {
             if (inference.IsUnderstood)
             {
                 _delta = 6;
-                // levelMax equals to the highest normalized value power 2, a small number because < 1
-                // pass the value to a static var so we can access it from anywhere
+
                 MicLoudness = LevelMax();
+                Debug.Log(MicLoudness);
 
                 if (MicLoudness > 6)
                 {
                     TextMeshPro.SetText("Don't scream at me!");
+                    return;
                 }
 
                 if (inference.Intent == "Friendly_SomeoneInMyOffice")
@@ -839,11 +843,15 @@ public class ColleagueStateMachine : StateMachine
         {
             if (inference.IsUnderstood)
             {
+                _delta = 6;
+
                 MicLoudness = LevelMax();
+                Debug.Log(MicLoudness);
 
                 if (MicLoudness > 6)
                 {
                     TextMeshPro.SetText("Don't scream at me!");
+                    return;
                 }
 
                 if (inference.Intent == "Friendly_SecretPrice")
@@ -1329,6 +1337,11 @@ public class ColleagueStateMachine : StateMachine
     private void ToggleProcessing()
     {
         _isProcessing = !_isProcessing;
+
+        if (!_isProcessing)
+        {
+            SwitchState(new ColleagueWorkingState(this));
+        }
     }
 
     public void StartProcessing()
@@ -1342,8 +1355,6 @@ public class ColleagueStateMachine : StateMachine
 
     public void Subtitles()
     {
-        Debug.Log(_delta);
-
         if (_delta > 0)
         {
             _delta -= Time.deltaTime;

@@ -16,7 +16,8 @@ public class ObjectiveHandler : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Office Level 1")
+        string _sceneName = SceneManager.GetActiveScene().name;
+        if (_sceneName.Contains("Office Level 1"))
         {
             _objectives = new List<Objective>
             {
