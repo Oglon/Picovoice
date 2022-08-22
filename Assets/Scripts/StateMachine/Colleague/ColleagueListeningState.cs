@@ -11,8 +11,7 @@ public class ColleagueListeningState : ColleagueBaseState
 
     public override void Enter()
     {
-        Debug.Log("In Talking Range");
-        stateMachine.StartProcessing();
+        stateMachine.Listening();
     }
 
     public override void Tick(float deltaTime)

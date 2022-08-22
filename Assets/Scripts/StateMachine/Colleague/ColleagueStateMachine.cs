@@ -53,8 +53,6 @@ public class ColleagueStateMachine : StateMachine
         {
             _sensitive = false;
         }
-
-        Debug.Log(_sensitive);
     }
 
     void inferenceCallback(Inference inference)
@@ -69,7 +67,6 @@ public class ColleagueStateMachine : StateMachine
                 _delta = 6;
 
                 MicLoudness = LevelMax();
-                Debug.Log(MicLoudness);
 
                 if (MicLoudness > 6)
                 {
@@ -123,7 +120,8 @@ public class ColleagueStateMachine : StateMachine
                         {
                             if (_sensitive)
                             {
-                                TextMeshPro.SetText("Well I might have seen something but cou");
+                                TextMeshPro.SetText(
+                                    "Well I might have seen something but I need your help first. There is a Cesar Cipher in your office. Can you tell me the solution?");
                             }
                             else
                             {
@@ -846,7 +844,6 @@ public class ColleagueStateMachine : StateMachine
                 _delta = 6;
 
                 MicLoudness = LevelMax();
-                Debug.Log(MicLoudness);
 
                 if (MicLoudness > 6)
                 {
@@ -860,7 +857,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 1)
                         {
-                            Debug.Log("There's a secret price but the boss knows more");
+                            TextMeshPro.SetText("There's a secret price but the boss knows more");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -871,7 +868,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 2)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "That's right, it’s for the most productive employee. You should maybe assist your Colleague.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -885,7 +882,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 1)
                         {
-                            Debug.Log("There's a secret price but the boss knows more");
+                            TextMeshPro.SetText("There's a secret price but the boss knows more");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -896,7 +893,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 2)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "That's right, it’s for the most productive employee. You should maybe assist your Colleague.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -910,7 +907,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 1)
                         {
-                            Debug.Log("There's a secret price but the boss knows more");
+                            TextMeshPro.SetText("There's a secret price but the boss knows more");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -921,7 +918,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 2)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "That's right, it’s for the most productive employee. You should maybe assist your Colleague.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -935,7 +932,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 3)
                         {
-                            Debug.Log("Yes can you help me solve the letter.");
+                            TextMeshPro.SetText("Yes can you help me solve the letter.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -946,7 +943,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 7)
                         {
-                            Debug.Log("Yes, can you help me with the morse code?");
+                            TextMeshPro.SetText("Yes, can you help me with the morse code?");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -959,7 +956,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 3)
                         {
-                            Debug.Log("Yes can you help me solve the letter.");
+                            TextMeshPro.SetText("Yes can you help me solve the letter.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -970,7 +967,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 7)
                         {
-                            Debug.Log("Yes, can you help me with the morse code?");
+                            TextMeshPro.SetText("Yes, can you help me with the morse code?");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -983,7 +980,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 3)
                         {
-                            Debug.Log("Yes can you help me solve the letter.");
+                            TextMeshPro.SetText("Yes can you help me solve the letter.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -994,7 +991,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 7)
                         {
-                            Debug.Log("Yes, can you help me with the morse code?");
+                            TextMeshPro.SetText("Yes, can you help me with the morse code?");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1007,7 +1004,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 4)
                         {
-                            Debug.Log("Yes can you help me solve the letter.");
+                            TextMeshPro.SetText("Yes, can you help me solve the letter?");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1020,7 +1017,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 4)
                         {
-                            Debug.Log("Yes can you help me solve the letter.");
+                            TextMeshPro.SetText("Yes, can you help me solve the letter?");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1033,7 +1030,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 4)
                         {
-                            Debug.Log("Yes can you help me solve the letter.");
+                            TextMeshPro.SetText("Yes, can you help me solve the letter?");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1046,7 +1043,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 5)
                         {
-                            Debug.Log("Thank you so much, the boss wanted to talk to you.");
+                            TextMeshPro.SetText("Thank you so much, the boss wanted to talk to you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1059,7 +1056,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 5)
                         {
-                            Debug.Log("Thank you so much, the boss wanted to talk to you.");
+                            TextMeshPro.SetText("Thank you so much, the boss wanted to talk to you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1072,7 +1069,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 5)
                         {
-                            Debug.Log("Thank you so much, the boss wanted to talk to you.");
+                            TextMeshPro.SetText("Thank you so much, the boss wanted to talk to you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1085,18 +1082,18 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 6)
                         {
-                            Debug.Log("Yes, the Intern needs your help");
+                            TextMeshPro.SetText("Yes, the Intern needs your help");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
                         }
                     }
 
-                    if (this.gameObject.tag == "Intern")
+                    if (this.gameObject.tag == "Boss")
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 9)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "Yes, can you solve this code? Please present the solution to the intern, he told me it was unsolvable.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -1108,7 +1105,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 11)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "I wanted to congratulate you on the grand price. You helped everyone in the office.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -1122,18 +1119,18 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 6)
                         {
-                            Debug.Log("Yes, the Intern needs your help");
+                            TextMeshPro.SetText("Yes, the Intern needs your help");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
                         }
                     }
 
-                    if (this.gameObject.tag == "Intern")
+                    if (this.gameObject.tag == "Boss")
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 9)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "Yes, can you solve this code? Please present the solution to the intern, he told me it was unsolvable.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -1145,7 +1142,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 11)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "I wanted to congratulate you on the grand price. You helped everyone in the office.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -1159,18 +1156,18 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 6)
                         {
-                            Debug.Log("Yes, the Intern needs your help");
+                            TextMeshPro.SetText("Yes, the Intern needs your help");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
                         }
                     }
 
-                    if (this.gameObject.tag == "Intern")
+                    if (this.gameObject.tag == "Boss")
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 9)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "Yes, can you solve this code? Please present the solution to the intern, he told me it was unsolvable.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -1182,7 +1179,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 11)
                         {
-                            Debug.Log(
+                            TextMeshPro.SetText(
                                 "I wanted to congratulate you on the grand price. You helped everyone in the office.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
@@ -1196,7 +1193,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 8)
                         {
-                            Debug.Log("Thank you very much. The Boss wanted to talk to you.");
+                            TextMeshPro.SetText("Thank you very much. The Boss wanted to talk to you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1209,7 +1206,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 8)
                         {
-                            Debug.Log("Thank you very much. The Boss wanted to talk to you.");
+                            TextMeshPro.SetText("Thank you very much. The Boss wanted to talk to you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1222,7 +1219,7 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 8)
                         {
-                            Debug.Log("Thank you very much. The Boss wanted to talk to you.");
+                            TextMeshPro.SetText("Thank you very much. The Boss wanted to talk to you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1235,7 +1232,8 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 10)
                         {
-                            Debug.Log("I thought the code was just gibberish. Thanks. The Boss was looking for you.");
+                            TextMeshPro.SetText(
+                                "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1248,7 +1246,8 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 10)
                         {
-                            Debug.Log("I thought the code was just gibberish. Thanks. The Boss was looking for you.");
+                            TextMeshPro.SetText(
+                                "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1261,7 +1260,8 @@ public class ColleagueStateMachine : StateMachine
                     {
                         if (ObjectiveHandler.getCurrentIndex() == 10)
                         {
-                            Debug.Log("I thought the code was just gibberish. Thanks. The Boss was looking for you.");
+                            TextMeshPro.SetText(
+                                "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
                             ObjectiveHandler.Progress();
                             ToggleProcessing();
                             return;
@@ -1270,35 +1270,35 @@ public class ColleagueStateMachine : StateMachine
                 }
                 else if (inference.Intent == "Weather")
                 {
-                    Debug.Log(
+                    TextMeshPro.SetText(
                         "The weather is great");
                     ToggleProcessing();
                     return;
                 }
                 else if (inference.Intent == "Game")
                 {
-                    Debug.Log(
+                    TextMeshPro.SetText(
                         "The weather is great");
                     ToggleProcessing();
                     return;
                 }
                 else if (inference.Intent == "HowIsItGoing")
                 {
-                    Debug.Log(
+                    TextMeshPro.SetText(
                         "The weather is great");
                     ToggleProcessing();
                     return;
                 }
                 else if (inference.Intent == "Travel")
                 {
-                    Debug.Log(
+                    TextMeshPro.SetText(
                         "The weather is great");
                     ToggleProcessing();
                     return;
                 }
                 else if (inference.Intent == "Name")
                 {
-                    Debug.Log(
+                    TextMeshPro.SetText(
                         "The weather is great");
                     ToggleProcessing();
                     return;
@@ -1306,7 +1306,7 @@ public class ColleagueStateMachine : StateMachine
             }
             else
             {
-                Debug.Log("Didn't understand the command.\n");
+                TextMeshPro.SetText("Didn't understand the command.\n");
                 ToggleProcessing();
                 return;
             }
@@ -1342,6 +1342,12 @@ public class ColleagueStateMachine : StateMachine
         {
             SwitchState(new ColleagueWorkingState(this));
         }
+    }
+
+    public void Listening()
+    {
+        _isProcessing = false;
+        StartProcessing();
     }
 
     public void StartProcessing()

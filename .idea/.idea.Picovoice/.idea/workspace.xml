@@ -10,9 +10,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5dcedd6c-929d-4258-bbbc-45393383fa54" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Picovoice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Picovoice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Office Level 1 Sensitive.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Office Level 1 Sensitive.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objective System/ObjectiveHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objective System/ObjectiveHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueListeningState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueListeningState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +145,8 @@
       <workItem from="1660823664278" duration="7511000" />
       <workItem from="1660855945158" duration="3046000" />
       <workItem from="1660890006047" duration="13139000" />
-      <workItem from="1661149918986" duration="4029000" />
+      <workItem from="1661149918986" duration="4421000" />
+      <workItem from="1661169128221" duration="3948000" />
     </task>
     <servers />
   </component>

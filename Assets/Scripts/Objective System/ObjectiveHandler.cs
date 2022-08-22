@@ -31,7 +31,7 @@ public class ObjectiveHandler : MonoBehaviour
                 new Objective("Ask if the Intern needs your help!", false),
                 new Objective("Solve Gummy Bear Riddle (G,R,Y,W) and present the solution to your Colleague!", false),
                 new Objective("Talk to the Boss!", false),
-                new Objective("Solve the Cipher (O U ꓶ C) and present the solution to your Colleague!", false),
+                new Objective("Solve the Cipher (|=|,|_|,-|,|=) and present the solution to your Colleague!", false),
                 new Objective("Talk to the Intern, he knows how to find your file!", false),
                 new Objective("Get the Door Code from your Boss!", false),
                 new Objective("Confirm your Boss that you want the Door Code!", false),
