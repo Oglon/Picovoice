@@ -24,7 +24,7 @@ public class ColleagueTalkingState : ColleagueBaseState
     {
         stateMachine.Subtitles();
 
-        stateMachine.Target.transform.position = stateMachine.playerHead.transform.position;
+        stateMachine.Target.transform.position = stateMachine.PlayerHead.transform.position;
     }
 
     public override void Exit()

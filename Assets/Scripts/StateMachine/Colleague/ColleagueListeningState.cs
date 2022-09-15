@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Pv.Unity;
 using UnityEngine;
 
@@ -17,7 +18,17 @@ public class ColleagueListeningState : ColleagueBaseState
     public override void Tick(float deltaTime)
     {
         stateMachine.Subtitles();
-        stateMachine.Target.transform.position = stateMachine.playerHead.transform.position;
+
+        if (stateMachine.gameObject.tag == "Colleague")
+        {
+            var lookPos = stateMachine.PlayerHead.transform.position - stateMachine.transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            stateMachine.transform.rotation =
+                Quaternion.Slerp(stateMachine.transform.rotation, rotation, Time.deltaTime);
+        }
+
+        stateMachine.Target.transform.position = stateMachine.PlayerHead.transform.position;
 
         if (!IsInTalkingRange())
         {

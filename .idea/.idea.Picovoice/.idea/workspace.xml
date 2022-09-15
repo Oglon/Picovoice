@@ -10,10 +10,16 @@
   <component name="ChangeListManager">
     <list default="true" id="5dcedd6c-929d-4258-bbbc-45393383fa54" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Picovoice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Picovoice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Office Level 1 Sensitive.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Office Level 1 Sensitive.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PolygonOffice/Prefabs/Props/Misc/SM_Prop_Photocopier_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PolygonOffice/Prefabs/Props/Misc/SM_Prop_Photocopier_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Backup.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Backup/Level 2 Backup.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Backup/Level 2 Backup.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Office Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Office Level 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objective System/Objective.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objective System/Objective.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objective System/ObjectiveHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objective System/ObjectiveHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueListeningState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueListeningState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueStateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueTalkingState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueTalkingState.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +35,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30B60915-0EEC-4822-8F1F-AACB7C3086BA/1c/c3338755/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/823FB226-A3F9-439C-B41F-DCB61F9C86A1/95/af375814/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/890D6FE2-6E8C-408E-A64B-353E791FAFCE/9a/a1145cef/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d8d38b92d94a4ff8a91e61d39c6d19cd15d000/0e/afd9f8e9/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/de1f8ef4975b4eacbeb0accc1b22c9b02a000/ae/96910dad/ShortcutExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AudioLoudnessDetection.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ScaleFromAudioClip.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ScaleFromMicrophone.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Objective System/Objective.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Objective System/ObjectiveHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueBaseState.cs" root0="FORCE_HIGHLIGHTING" />
@@ -36,6 +47,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueTalkingState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StateMachine/Colleague/ColleagueWorkingState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SliderFromMicrophone.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -147,6 +159,17 @@
       <workItem from="1660890006047" duration="13139000" />
       <workItem from="1661149918986" duration="4421000" />
       <workItem from="1661169128221" duration="3948000" />
+      <workItem from="1661177259917" duration="2030000" />
+      <workItem from="1661943348465" duration="5205000" />
+      <workItem from="1661977066177" duration="4339000" />
+      <workItem from="1662016756074" duration="5033000" />
+      <workItem from="1662374064756" duration="10037000" />
+      <workItem from="1662414445856" duration="84000" />
+      <workItem from="1662414604584" duration="666000" />
+      <workItem from="1662415669395" duration="625000" />
+      <workItem from="1662416321731" duration="2739000" />
+      <workItem from="1662454297575" duration="8801000" />
+      <workItem from="1662921486751" duration="69000" />
     </task>
     <servers />
   </component>
