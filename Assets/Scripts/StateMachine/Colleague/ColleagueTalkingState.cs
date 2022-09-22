@@ -66,6 +66,14 @@ public class ColleagueTalkingState : ColleagueBaseState
         stateMachine.NamePanel.SetActive(true);
         stateMachine.NameAnimatorPlayer.ShowText(stateMachine.gameObject.tag);
 
+        if (stateMachine.Loudness.returnValue >= 0.5f)
+        {
+            if (!inference.Intent.Contains("Unfriendly_"))
+            {
+                inference.Intent = "Unfriendly_" + inference.Intent;
+            }
+        }
+        
         if (inference.IsUnderstood)
         {
             if (inference.Intent == "Friendly_SomeoneInMyOffice")

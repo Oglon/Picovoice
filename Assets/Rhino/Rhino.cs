@@ -57,7 +57,7 @@ namespace Pv.Unity
 
         public bool IsUnderstood { get; }
 
-        public string Intent { get; }
+        public string Intent { get; set; }
 
         public Dictionary<string, string> Slots { get; }
     }
