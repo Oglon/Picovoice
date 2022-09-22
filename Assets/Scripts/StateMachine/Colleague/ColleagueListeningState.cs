@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Pv.Unity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ColleagueListeningState : ColleagueBaseState
 {
@@ -12,12 +13,33 @@ public class ColleagueListeningState : ColleagueBaseState
 
     public override void Enter()
     {
-        stateMachine.Listening();
+        if (stateMachine.gameObject.CompareTag($"Boss"))
+        {
+            if (stateMachine.ObjectiveHandler.getCurrentIndex() == 12)
+            {
+                var sceneName = SceneManager.GetActiveScene().name;
+
+                if (sceneName.Contains("Office Level 1"))
+                {
+                    ColleagueStateMachine.delta = 10f;
+                    stateMachine.SubtitlePanel.SetActive(true);
+                    stateMachine.NamePanel.SetActive(true);
+                    stateMachine.NameAnimatorPlayer.ShowText("Boss");
+                    stateMachine.TextAnimatorPlayer.ShowText(
+                        "You want the dor code, right?.");
+                }
+            }
+        }
+        
+            stateMachine.Listening();
+            stateMachine.Sprite.sprite = stateMachine.Ear;
+        
     }
 
     public override void Tick(float deltaTime)
     {
         stateMachine.Subtitles();
+
 
         if (stateMachine.gameObject.tag == "Colleague")
         {

@@ -19,7 +19,7 @@ namespace Pv.Unity
 
     public class RhinoManager
     {
-        private VoiceProcessor _voiceProcessor;
+        public VoiceProcessor _voiceProcessor;
         private Rhino _rhino;
         private Action<Inference> _inferenceCallback;
         private Action<RhinoException> _processErrorCallback;

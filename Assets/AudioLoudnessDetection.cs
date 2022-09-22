@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AudioLoudnessDetection : MonoBehaviour
 {
     public int sampleWindow = 64;
     private AudioClip microphoneClip;
 
-    private float _returnValue;
+    public float returnValue;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +24,12 @@ public class AudioLoudnessDetection : MonoBehaviour
 
     public float GetLoudnessFromMicrophone()
     {
-        return GetLoudnessFromAudioClip(Microphone.GetPosition(Microphone.devices[0]), microphoneClip);
+        return returnValue;
+        // return GetLoudnessFromAudioClip(Microphone.GetPosition(Microphone.devices[0]), microphoneClip);
     }
 
     public float GetLoudnessFromAudioClip(int clipPosition, AudioClip clip)
     {
-        Debug.Log("Call");
         int startposition = clipPosition - sampleWindow;
 
         if (startposition < 0)
@@ -46,12 +47,12 @@ public class AudioLoudnessDetection : MonoBehaviour
         }
 
 
-        _returnValue = totalLoudness / sampleWindow;
+        returnValue = totalLoudness / sampleWindow;
         // if (_returnValue <= 0.1f)
         // {
         //     _returnValue = 0;
         // }
 
-        return _returnValue;
+        return returnValue;
     }
 }

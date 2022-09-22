@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace Pv.Unity
 {
@@ -32,10 +33,7 @@ namespace Pv.Unity
         /// </summary>
         public bool IsRecording
         {
-            get
-            {
-                return _audioSource.clip != null && Microphone.IsRecording(CurrentDeviceName);
-            }
+            get { return _audioSource.clip != null && Microphone.IsRecording(CurrentDeviceName); }
         }
 
         /// <summary>
@@ -86,10 +84,19 @@ namespace Pv.Unity
             }
         }
 
+        public int sampleWindow = 64;
+
+        public float returnValue;
+
+        private int _iteration;
+
+        private AudioLoudnessDetection _audioLoudnessDetection;
+
         /// <summary>
         /// Singleton access
         /// </summary>
         static VoiceProcessor _instance;
+
         public static VoiceProcessor Instance
         {
             get
@@ -100,11 +107,12 @@ namespace Pv.Unity
                     _instance = new GameObject("Pv.Unity.VoiceProcessor").AddComponent<VoiceProcessor>();
                     DontDestroyOnLoad(_instance.gameObject);
                 }
+
                 return _instance;
             }
         }
 
-        AudioSource _audioSource;
+        public AudioSource _audioSource;
         private event Action RestartRecording;
 
         void Awake()
@@ -115,7 +123,7 @@ namespace Pv.Unity
                 _audioSource = gameObject.AddComponent<AudioSource>();
             }
 
-            UpdateDevices();            
+            UpdateDevices();
         }
 
         /// <summary>
@@ -126,7 +134,7 @@ namespace Pv.Unity
             Devices = new List<string>();
             foreach (var device in Microphone.devices)
                 Devices.Add(device);
-            
+
             if (Devices == null || Devices.Count == 0)
             {
                 CurrentDeviceIndex = -1;
@@ -145,7 +153,8 @@ namespace Pv.Unity
         {
             if (deviceIndex < 0 || deviceIndex >= Devices.Count)
             {
-                Debug.LogError(string.Format("Specified device index {0} is not a valid recording device", deviceIndex));
+                Debug.LogError(string.Format("Specified device index {0} is not a valid recording device",
+                    deviceIndex));
                 return;
             }
 
@@ -174,10 +183,13 @@ namespace Pv.Unity
         /// <param name="frameSize">Size of audio frames to be delivered</param>
         public void StartRecording(int sampleRate = 16000, int frameSize = 512)
         {
+            GameObject.FindWithTag("Audio").TryGetComponent(out AudioLoudnessDetection loudnessDetection);
+            _audioLoudnessDetection = loudnessDetection;
+
             if (IsRecording)
             {
                 // if sample rate or frame size have changed, restart recording
-                if (sampleRate != SampleRate || frameSize != FrameLength) 
+                if (sampleRate != SampleRate || frameSize != FrameLength)
                 {
                     RestartRecording += () =>
                     {
@@ -186,6 +198,7 @@ namespace Pv.Unity
                     };
                     StopRecording();
                 }
+
                 return;
             }
 
@@ -205,12 +218,34 @@ namespace Pv.Unity
         {
             if (!IsRecording)
                 return;
-
             Microphone.End(CurrentDeviceName);
             Destroy(_audioSource.clip);
             _audioSource.clip = null;
 
             StopCoroutine(RecordData());
+        }
+
+        public void GetLoudnessFromAudioClip(AudioClip clip, int clipPosition)
+        {
+            int startposition = clipPosition - sampleWindow;
+
+            if (startposition < 0)
+                startposition = 0;
+
+            float[] wavedata = new float[sampleWindow];
+            clip.GetData(wavedata, startposition);
+
+            //compute loudness
+            float totalLoudness = 0;
+
+            for (int i = 0; i < sampleWindow; i++)
+            {
+                totalLoudness += Mathf.Abs(wavedata[i]);
+            }
+
+
+            returnValue = totalLoudness / sampleWindow;
+            _audioLoudnessDetection.returnValue = returnValue;
         }
 
         /// <summary>
@@ -221,7 +256,7 @@ namespace Pv.Unity
             float[] sampleBuffer = new float[FrameLength];
             int startReadPos = 0;
 
-            if(OnRecordingStart != null)
+            if (OnRecordingStart != null)
                 OnRecordingStart.Invoke();
 
             while (IsRecording)
@@ -248,6 +283,7 @@ namespace Pv.Unity
 
                     // read bit at start of clip
                     int numSamplesClipStart = endReadPos - _audioSource.clip.samples;
+                    GetLoudnessFromAudioClip(_audioSource.clip, 1);
                     float[] startClipSamples = new float[numSamplesClipStart];
                     _audioSource.clip.GetData(startClipSamples, 0);
 
@@ -270,7 +306,7 @@ namespace Pv.Unity
                 }
 
                 // raise buffer event
-                if(OnFrameCaptured != null)
+                if (OnFrameCaptured != null)
                     OnFrameCaptured.Invoke(pcmBuffer);
             }
 

@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class SliderFromMicrophone : MonoBehaviour
 {
     public AudioLoudnessDetection detector;
-
+    
     public Slider slider;
 
     public float threshold = 0.1f;
 
-    public float loudness;
+    public float loudness =0;
+    public float currentVolume;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +24,10 @@ public class SliderFromMicrophone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // loudness = detector.GetLoudnessFromMicrophone() * loudnessSensibility;
+        currentVolume = detector.GetLoudnessFromMicrophone() * 2;
 
-        loudness = detector.GetLoudnessFromMicrophone() * 2;
-
-        if (loudness < threshold)
-            loudness = 0;
-
+        loudness = Mathf.MoveTowards(loudness, currentVolume, Time.deltaTime);
+        
         slider.value = loudness;
     }
 }

@@ -11,6 +11,7 @@ public class ColleagueWorkingState : ColleagueBaseState
     public override void Enter()
     {
         stateMachine.Target.transform.position = stateMachine.MainTarget.transform.position;
+        stateMachine.Sprite.sprite = stateMachine.Working;
     }
 
     public override void Tick(float deltaTime)
