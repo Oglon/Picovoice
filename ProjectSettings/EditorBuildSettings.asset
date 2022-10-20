@@ -6,20 +6,35 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Office Level 1.unity
-    guid: 35299a6a99d6dfe4bb709527ba95aab0
-  - enabled: 1
-    path: Assets/Scenes/Office Level 1 Sensitive.unity
-    guid: 5950ab54a4f136c44babe0068b7f34fa
-  - enabled: 1
-    path: Assets/Scenes/Office Level 2.unity
-    guid: 5c1bc2dd4968c644c8f07f83e248ffa9
-  - enabled: 1
-    path: Assets/Scenes/Office Level 2 Sensitive.unity
-    guid: 44a0636f7e9787848bf63adc512eff40
-  - enabled: 1
     path: Assets/Scenes/LevelSelection.unity
     guid: d17bc00326aa8b143b707a757f67cc2d
+  - enabled: 0
+    path: Assets/Scenes/XTutorial.unity
+    guid: ebd8cd781c0817c40846708519b94997
+  - enabled: 1
+    path: Assets/Scenes/Office Level 1.unity
+    guid: 35299a6a99d6dfe4bb709527ba95aab0
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/XOffice Level 2.unity
+    guid: 5c1bc2dd4968c644c8f07f83e248ffa9
+  - enabled: 0
+    path: Assets/Scenes/XOffice Level 2 Sensitive.unity
+    guid: 44a0636f7e9787848bf63adc512eff40
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 54e9644b66e21b441b9a6eb04b6dad58
+  - enabled: 1
+    path: Assets/Scenes/Office Level 1 Sensitive.unity
+    guid: fdcf24fa3f8ec404487210302d5e85e4
+  - enabled: 1
+    path: Assets/Scenes/Office Level 2.unity
+    guid: 127cb3900cae9074889cc925cbcd280d
+  - enabled: 1
+    path: Assets/Scenes/Office Level 2 Sensitive.unity
+    guid: fdb1e8d30e59dd64699eabe32f6be197
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 0}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

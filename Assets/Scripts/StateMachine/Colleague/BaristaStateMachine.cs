@@ -1,7 +1,10 @@
+using System.IO;
 using Febucci.UI;
 using Pv.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class BaristaStateMachine : StateMachine
 {
@@ -16,12 +19,15 @@ public class BaristaStateMachine : StateMachine
     [field: SerializeField] public GameObject SubtitlePanel { get; private set; }
     [field: SerializeField] public GameObject NamePanel { get; private set; }
     [field: SerializeField] public bool Sensitive { get; private set; }
+    [field: SerializeField] public Slider slider { get; private set; }
 
     [field: SerializeField] public Sprite Ear { get; private set; }
     [field: SerializeField] public Sprite Speech { get; private set; }
     [field: SerializeField] public Sprite Working { get; private set; }
 
     [field: SerializeField] public SpriteRenderer Sprite { get; private set; }
+
+    [field: SerializeField] public PickUpController PickUpController { get; private set; }
     public Camera PlayerHead { get; private set; }
 
     public static float delta;
@@ -33,6 +39,8 @@ public class BaristaStateMachine : StateMachine
     private int count;
 
     private GameObject coffee;
+
+    private AudioSource AudioSource;
 
     private const string
         AccessKey =
@@ -52,6 +60,11 @@ public class BaristaStateMachine : StateMachine
 
     private void Update()
     {
+        if (PickUpController.equipped)
+        {
+            delta = 10;
+        }
+
         switch (delta)
         {
             case > 0:
@@ -64,7 +77,7 @@ public class BaristaStateMachine : StateMachine
                         delta = 6f;
                         NameAnimatorPlayer.ShowText("?");
                         TextAnimatorPlayer.ShowText(
-                            "You probably want to order a coffee but the Barista hasn't noticed you, right? She is working as the Sprite indicates.");
+                            "You probably want to order a coffee but the Barista hasn't noticed you, right? She is working as the Brain Sprite above her head indicates.");
                         count++;
                         break;
                     case 1:
@@ -86,12 +99,34 @@ public class BaristaStateMachine : StateMachine
                         delta = 6f;
                         NameAnimatorPlayer.ShowText("?");
                         TextAnimatorPlayer.ShowText(
-                            "Congratulations, you were polite and got your morning coffee!");
+                            "Congratulations, you were polite while ordering your morning coffee.");
                         count++;
                         break;
                     case 6:
-                        SceneManager.LoadScene("LevelSelection");
+                        delta = 6f;
+                        slider.gameObject.SetActive(true);
+                        NameAnimatorPlayer.ShowText("?");
+                        TextAnimatorPlayer.ShowText(
+                            "The Bar on the left reflects the Volume of your voice. Characters will react to this as well.");
+                        count++;
+                        break;
+                    case 7:
+                        delta = 6f;
+                        NameAnimatorPlayer.ShowText("?");
+                        TextAnimatorPlayer.ShowText(
+                            "Pick up relevant objects by getting close to them an pressing E.");
+                        count++;
+                        break;
 
+                    case 8:
+                        delta = 6f;
+                        NameAnimatorPlayer.ShowText("?");
+                        TextAnimatorPlayer.ShowText(
+                            "Congartulations. You got your morning coffee while being polite to the cashier.");
+                        count++;
+                        break;
+                    case 9:
+                        SceneManager.LoadScene("LevelSelection");
                         break;
                 }
 
@@ -113,16 +148,14 @@ public class BaristaStateMachine : StateMachine
         {
             if (inference.Intent == "Attention")
             {
-                float degrees = 0;
-                Vector3 to = new Vector3(0, degrees, 0);
-
-                gameObject.transform.eulerAngles = Vector3.Lerp(gameObject.transform.rotation.eulerAngles, to, Time.deltaTime);
+                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 Sprite.sprite = Speech;
                 delta = 4f;
                 NameAnimatorPlayer.ShowText("Barista");
                 TextAnimatorPlayer.ShowText(
                     "Oh sorry, I didn't see you enter. What can I get you?");
+                HandleAudio("Oh sorry, I didn't see you enter. What can I get you?");
                 count++;
             }
             else if (inference.Intent == "OneCoffee")
@@ -132,6 +165,7 @@ public class BaristaStateMachine : StateMachine
                 NameAnimatorPlayer.ShowText("Barista");
                 TextAnimatorPlayer.ShowText(
                     "Sure, one coffee coming right up. Here you go!");
+                HandleAudio("Sure, one coffee coming right up. Here you go!");
                 coffee.SetActive(true);
                 count++;
                 Debug.Log(count);
@@ -143,6 +177,7 @@ public class BaristaStateMachine : StateMachine
                 NameAnimatorPlayer.ShowText("Barista");
                 TextAnimatorPlayer.ShowText(
                     "Sure, one coffee coming right up. Here you go!");
+                HandleAudio("Sure, one coffee coming right up. Here you go!");
                 coffee.SetActive(true);
                 count++;
             }
@@ -152,6 +187,7 @@ public class BaristaStateMachine : StateMachine
             else
             {
                 TextAnimatorPlayer.ShowText("I'm sorry but I have no idea what you are talking about.");
+                HandleAudio("I'm sorry but I have no idea what you are talking about.");
                 ToggleProcessing();
             }
 
@@ -164,7 +200,8 @@ public class BaristaStateMachine : StateMachine
 
     private static string GetContextPath()
     {
-        return "D:/Unity Projects/Picovoice/Assets/StreamingAssets/contexts/windows/barista.rhn";
+        string srcPath = Path.Combine(Application.streamingAssetsPath, "contexts/windows/barista.rhn");
+        return srcPath;
     }
 
     private void OnDrawGizmosSelected()
@@ -206,7 +243,27 @@ public class BaristaStateMachine : StateMachine
         _rhinoManager.Process();
     }
 
-    public void Subtitles()
+    private void PlayAudio(AudioClip audioClip)
     {
+        AudioSource.clip = audioClip;
+        AudioSource.Play();
+    }
+
+    private AudioClip GetAudioClip(string title)
+    {
+        string clipPath = "Audio/Barista/";
+        clipPath = clipPath + title;
+
+        AudioClip clip = Resources.Load<AudioClip>(clipPath);
+        return clip;
+    }
+
+    private void HandleAudio(string title)
+    {
+        AudioClip audioClip = GetAudioClip(title);
+        float length;
+        length = audioClip.length <= 10 ? 10f : audioClip.length;
+        ColleagueStateMachine.delta = length;
+        PlayAudio(audioClip);
     }
 }

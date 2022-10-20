@@ -23,17 +23,15 @@ public class ColleagueListeningState : ColleagueBaseState
                 {
                     ColleagueStateMachine.delta = 10f;
                     stateMachine.SubtitlePanel.SetActive(true);
-                    stateMachine.NamePanel.SetActive(true);
                     stateMachine.NameAnimatorPlayer.ShowText("Boss");
-                    stateMachine.TextAnimatorPlayer.ShowText(
+                    stateMachine.DialogueAnimatorPlayer.ShowText(
                         "You want the dor code, right?.");
                 }
             }
         }
-        
-            stateMachine.Listening();
-            stateMachine.Sprite.sprite = stateMachine.Ear;
-        
+
+        stateMachine.Listening();
+        stateMachine.Sprite.sprite = stateMachine.Ear;
     }
 
     public override void Tick(float deltaTime)
@@ -54,6 +52,15 @@ public class ColleagueListeningState : ColleagueBaseState
 
         if (!IsInTalkingRange())
         {
+            if (stateMachine.gameObject.tag == "Colleague")
+            {
+                var lookPos = stateMachine.MainTarget.transform.position - stateMachine.transform.position;
+                lookPos.y = 0;
+                var rotation = Quaternion.LookRotation(lookPos);
+                stateMachine.transform.rotation =
+                    Quaternion.Slerp(stateMachine.transform.rotation, rotation, Time.deltaTime);
+            }
+
             stateMachine.SwitchState(new ColleagueWorkingState(stateMachine));
         }
     }
