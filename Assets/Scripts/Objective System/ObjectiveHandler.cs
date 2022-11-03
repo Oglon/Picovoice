@@ -10,17 +10,56 @@ public class ObjectiveHandler : MonoBehaviour
     public TextMeshProUGUI ObjectiveTMP;
     public TextMeshProUGUI HintTMP;
     public GameObject HintPanel;
+    public SpriteRenderer Icon;
+
+    public TextMeshProUGUI StartTMP;
+    public GameObject StartPanel;
 
     private List<Objective> _objectives;
     private Objective _currentObjective;
     private int index = 1;
 
+    private float counter = 4f;
+    private bool skip = false;
+
+    private CharacterController _characterController;
+
+    private string startText;
 
     void Start()
     {
         ObjectiveTMP = GameObject.Find("Objective").GetComponent<TextMeshProUGUI>();
         HintTMP = GameObject.Find("Hint").GetComponent<TextMeshProUGUI>();
         HintPanel = GameObject.Find("Hint Box");
+
+        StartTMP = GameObject.Find("StartText").GetComponent<TextMeshProUGUI>();
+        StartPanel = GameObject.Find("StartBox");
+
+        Icon = GameObject.Find("Icon").GetComponent<SpriteRenderer>();
+
+        _characterController = GameObject.Find("PlayerCapsule").GetComponent<CharacterController>();
+
+        _characterController.enabled = false;
+
+        StartPanel.SetActive(true);
+        StartTMP.gameObject.SetActive(true);
+
+        if (SceneManager.GetActiveScene().name.Contains("1"))
+        {
+            Icon.sprite = Resources.Load<Sprite>("File");
+            startText =
+                "My file is missing from my desk. Someone took it while I was gone. I should ask the Intern if he saw someone in my office!";
+        }
+        else
+        {
+            Icon.sprite = Resources.Load<Sprite>("Price");
+            startText =
+                "There are talks around the office about a secret price. I should ask the Intern if he knows something about that.";
+        }
+
+        StartTMP.text = startText;
+
+        Icon.gameObject.SetActive(false);
 
         HintPanel.SetActive(false);
         HintTMP.gameObject.SetActive(false);
@@ -91,6 +130,20 @@ public class ObjectiveHandler : MonoBehaviour
 
     private void Update()
     {
+        if (!skip)
+        {
+            if (counter >= 0)
+            {
+                counter -= Time.deltaTime;
+            }
+            else
+            {
+                _characterController.enabled = true;
+                StartPanel.gameObject.SetActive(false);
+            }
+        }
+
+
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             Progress();
@@ -105,6 +158,11 @@ public class ObjectiveHandler : MonoBehaviour
         {
             HintPanel.SetActive(false);
             HintTMP.gameObject.SetActive(false);
+        }
+
+        if (index == _objectives.Count)
+        {
+            Icon.gameObject.SetActive(true);
         }
     }
 

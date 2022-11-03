@@ -17,6 +17,7 @@ public class Notice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Panel.SetActive(Microphone.devices.Length > 0);
+        Debug.Log(Microphone.devices.Length);
+        Panel.SetActive(Microphone.devices.Length <= 0);
     }
 }

@@ -3,6 +3,7 @@ using Pv.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class ColleagueStateMachine : StateMachine
 {
@@ -40,8 +41,6 @@ public class ColleagueStateMachine : StateMachine
         NameAnimatorPlayer = GameObject.Find("Name").GetComponent<TextAnimatorPlayer>();
         Slider = GameObject.Find("Slider");
 
-        Slider.SetActive(true);
-
         AudioSource = gameObject.GetComponent<AudioSource>();
 
         SubtitlePanel = GameObject.Find("Dialogue Box");
@@ -60,6 +59,11 @@ public class ColleagueStateMachine : StateMachine
 
         Sensitive = SceneManager.GetActiveScene().name.Contains("Sensitive");
         Sprite.sprite = Working;
+
+        if (Sensitive)
+        {
+            Slider.SetActive(true);
+        }
 
 
         if (gameObject.CompareTag("Intern"))

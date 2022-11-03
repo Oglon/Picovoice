@@ -7,7 +7,7 @@ using UnityEngine.XR;
 
 public class ColleagueTalkingState : ColleagueBaseState
 {
-    private float _responseTime = 5f;
+    private float _responseTime;
     private Inference inference;
 
     Vector3 computer = new Vector3(0.7f, 1.2f, -0.16f);
@@ -27,7 +27,7 @@ public class ColleagueTalkingState : ColleagueBaseState
     {
         stateMachine.Subtitles();
 
-        _responseTime -= deltaTime;
+        _responseTime = ColleagueStateMachine.delta;
 
         stateMachine.Target.transform.position = stateMachine.PlayerHead.transform.position;
 
@@ -67,10 +67,10 @@ public class ColleagueTalkingState : ColleagueBaseState
 
         if (stateMachine.Loudness.returnValue >= 0.5f)
         {
-            if (!inference.Intent.Contains("Unfriendly_"))
-            {
-                inference.Intent = "Unfriendly_" + inference.Intent;
-            }
+            if (stateMachine.Sensitive)
+                stringPass(VolumeResponse());
+            stateMachine.ToggleProcessing();
+            return true;
         }
 
         if (inference.IsUnderstood)
@@ -96,6 +96,7 @@ public class ColleagueTalkingState : ColleagueBaseState
 
                         stateMachine.ToggleProcessing();
                         SceneManager.LoadScene("LevelSelection");
+
                         return true;
                     }
                 }
@@ -155,9 +156,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "I don't appreciate your rudeness but the file is in the cleaning cabinet.");
-                            stateMachine.ObjectiveHandler.Progress();
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -214,6 +213,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                                 "The Intern may have an idea on how to get your file.");
                         }
 
+                        DespawnGameObject("PigpenCode");
                         stateMachine.ObjectiveHandler.Progress();
                         stateMachine.ToggleProcessing();
                         return true;
@@ -249,6 +249,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         stringPass(
                             "Amazing. The Intern may have an idea on how to get your file.");
+                        DespawnGameObject("PigpenCode");
                         stateMachine.ObjectiveHandler.Progress();
                         stateMachine.ToggleProcessing();
                         return true;
@@ -271,17 +272,18 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "Be nicer next time. The Intern may have an idea on how to get your file.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
                             stringPass(
                                 "The Intern may have an idea on how to get your file.");
+                            DespawnGameObject("PigpenCode");
+                            stateMachine.ObjectiveHandler.Progress();
+                            stateMachine.ToggleProcessing();
                         }
 
-                        stateMachine.ObjectiveHandler.Progress();
-                        stateMachine.ToggleProcessing();
+
                         return true;
                     }
                 }
@@ -296,7 +298,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         stringPass(
                             stateMachine.Sensitive
                                 ? "Good morning. I didn't see anyone. Maybe the Boss saw someone?"
-                                : "No but maybe the Boss saw something");
+                                : "I didnt. But maybe the Boss saw something?");
 
                         stateMachine.ObjectiveHandler.Progress();
                         stateMachine.ToggleProcessing();
@@ -339,7 +341,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                 {
                     if (stateMachine.ObjectiveHandler.getCurrentIndex() == 1)
                     {
-                        stringPass("No but maybe the Boss saw something");
+                        stringPass("I didnt. But maybe the Boss saw something?");
                         stateMachine.ObjectiveHandler.Progress();
                         stateMachine.ToggleProcessing();
                         return true;
@@ -378,11 +380,11 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass("Don't talk to me like that");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
-                            stringPass("No but maybe the Boss saw something");
+                            stringPass("I didnt. But maybe the Boss saw something?");
                             stateMachine.ObjectiveHandler.Progress();
                         }
 
@@ -397,7 +399,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass("Don't talk to me like that");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -416,7 +418,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass("Don't talk to me like that.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -449,6 +451,8 @@ public class ColleagueTalkingState : ColleagueBaseState
                                 ? "Thank you su much, could you maybe help the Intern as well?"
                                 : "That was just a warmup. I've hidden a puzzle in this office and the Intern could need your help. Will you help him?");
 
+                        DespawnGameObject("CesarCode");
+
                         stateMachine.ObjectiveHandler.Progress();
                         stateMachine.ToggleProcessing();
                         return true;
@@ -477,6 +481,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         stringPass(
                             "That was just a warmup. I've hidden a puzzle in this office and the Intern could need your help. Will you help him?");
+                        DespawnGameObject("CesarCode");
                         stateMachine.ObjectiveHandler.Progress();
                         stateMachine.ToggleProcessing();
                         return true;
@@ -505,12 +510,13 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass("Don't talk to me like that.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
                             stringPass(
                                 "That was just a warmup. I've hidden a puzzle in this office and the Intern could need your help. Will you help him?");
+                            DespawnGameObject("CesarCode");
                             stateMachine.ObjectiveHandler.Progress();
                         }
 
@@ -636,8 +642,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "Don't talk to me like that!.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -779,8 +784,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "Please don't talk to me like that.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -831,6 +835,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                             stateMachine.ObjectiveHandler.Progress();
                         }
 
+                        DespawnGameObject("GummyVearCode");
                         stateMachine.ToggleProcessing();
                         return true;
                     }
@@ -859,8 +864,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "Don't talk to me like that.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -884,6 +888,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
+                            //TODO: Test
                             stringPass(
                                 "We got a new cipher that contains a code. Can you please solve it and present it to your Colleague?");
                             stateMachine.ObjectiveHandler.Progress();
@@ -923,8 +928,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "Don't talk to me like that!");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -985,8 +989,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.Sensitive)
                         {
-                            stringPass(
-                                "Don't talk to me like that.");
+                            stringPass(UnfriendlyResponse());
                         }
                         else
                         {
@@ -999,6 +1002,14 @@ public class ColleagueTalkingState : ColleagueBaseState
                         return true;
                     }
                 }
+            }
+
+            else if (inference.Intent == "Curse")
+            {
+                stringPass(
+                    CurseResponse());
+                stateMachine.ToggleProcessing();
+                return true;
             }
 
             else if (inference.Intent == "Weather")
@@ -1337,6 +1348,14 @@ public class ColleagueTalkingState : ColleagueBaseState
         stateMachine.SubtitlePanel.SetActive(true);
         stateMachine.NameAnimatorPlayer.ShowText(stateMachine.gameObject.tag);
 
+        if (stateMachine.Loudness.returnValue >= 0.5f)
+        {
+            if (stateMachine.Sensitive)
+                stringPass(VolumeResponse());
+            stateMachine.ToggleProcessing();
+            return true;
+        }
+
         if (inference.IsUnderstood)
         {
             switch (inference.Intent)
@@ -1423,11 +1442,18 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 1)
                         {
-                            stringPass(
-                                "There's a secret price but the boss knows more");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "There's a secret price but the boss knows more");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
 
                         stringPass(
@@ -1440,11 +1466,18 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 2)
                         {
-                            stringPass(
-                                "That's right, it’s for the most productive employee. You should maybe assist your Colleague.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "That's right, it’s for the most productive employee. You should maybe assist your Colleague.");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
 
                         stringPass(
@@ -1463,6 +1496,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 3)
                         {
                             stringPass("Yes can you help me solve the letter.");
+                            SpawnGameObject(Code.Tuple, ColleagueType.Colleague);
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1490,6 +1524,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 3)
                         {
                             stringPass("Yes can you help me solve the letter.");
+                            SpawnGameObject(Code.Tuple, ColleagueType.Colleague);
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1501,6 +1536,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 7)
                         {
                             stringPass("Yes, can you help me with the morse code?");
+                            SpawnGameObject(Code.Morse, ColleagueType.Intern);
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1515,10 +1551,18 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 3)
                         {
-                            stringPass("Yes can you help me solve the letter.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass("Yes can you help me solve the letter.");
+                                SpawnGameObject(Code.Tuple, ColleagueType.Colleague);
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1526,10 +1570,18 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 7)
                         {
-                            stringPass("Yes, can you help me with the morse code?");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass("Yes, can you help me with the morse code?");
+                                SpawnGameObject(Code.Morse, ColleagueType.Intern);
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1574,10 +1626,17 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 4)
                         {
-                            stringPass("Yes, can you help me solve the letter?");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass("Yes, can you help me solve the letter?");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1622,11 +1681,18 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 5)
                         {
-                            stringPass(
-                                "The Boss wanted to talk to you.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "The Boss wanted to talk to you.");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1721,10 +1787,17 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 6)
                         {
-                            stringPass("Yes, the Intern needs your help");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass("Yes, the Intern needs your help");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1732,12 +1805,19 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 9)
                         {
-                            stringPass(
-                                "Yes, can you solve this code? Please present the solution to the intern, he told me it was unsolvable.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            SpawnGameObject(Code.Element, ColleagueType.Intern);
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "Yes, can you solve this code? Please present the solution to the intern, he told me it was unsolvable.");
+                                stateMachine.ObjectiveHandler.Progress();
+                                SpawnGameObject(Code.Element, ColleagueType.Intern);
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1745,12 +1825,19 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 11)
                         {
-                            stringPass(
-                                "I wanted to congratulate you on the grand price. You helped everyone in the office.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            SceneManager.LoadScene("LevelSelection");
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "I wanted to congratulate you on the grand price. You helped everyone in the office.");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                SceneManager.LoadScene("LevelSelection");
+                                return true;
+                            }
                         }
                     }
 
@@ -1765,6 +1852,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         {
                             stringPass(
                                 "Thank you very much. The Boss wanted to talk to you.");
+                            DespawnGameObject("MorseCode");
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1781,6 +1869,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         {
                             stringPass(
                                 "Thank you very much. The Boss wanted to talk to you.");
+                            DespawnGameObject("MorseCode");
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1795,11 +1884,19 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 8)
                         {
-                            stringPass(
-                                "Thank you very much. The Boss wanted to talk to you.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "Thank you very much. The Boss wanted to talk to you.");
+                                DespawnGameObject("MorseCode");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
@@ -1814,6 +1911,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         {
                             stringPass(
                                 "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
+                            DespawnGameObject("ElementCode");
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1830,6 +1928,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                         {
                             stringPass(
                                 "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
+                            DespawnGameObject("ElementCode");
                             stateMachine.ObjectiveHandler.Progress();
                             stateMachine.ToggleProcessing();
                             return true;
@@ -1844,15 +1943,31 @@ public class ColleagueTalkingState : ColleagueBaseState
                     {
                         if (stateMachine.ObjectiveHandler.getCurrentIndex() == 10)
                         {
-                            stringPass(
-                                "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
-                            stateMachine.ObjectiveHandler.Progress();
-                            stateMachine.ToggleProcessing();
-                            return true;
+                            if (stateMachine.Sensitive)
+                            {
+                                stringPass(UnfriendlyResponse());
+                            }
+                            else
+                            {
+                                stringPass(
+                                    "I thought the code was just gibberish. Thanks. The Boss was looking for you.");
+                                DespawnGameObject("ElementCode");
+                                stateMachine.ObjectiveHandler.Progress();
+                                stateMachine.ToggleProcessing();
+                                return true;
+                            }
                         }
                     }
 
                     break;
+                }
+
+                case "Curse":
+                {
+                    stringPass(
+                        CurseResponse());
+                    stateMachine.ToggleProcessing();
+                    return true;
                 }
 
                 case "Weather":
@@ -2224,8 +2339,8 @@ public class ColleagueTalkingState : ColleagueBaseState
 
     private void DespawnGameObject(string objectName)
     {
-        GameObject gameObject = GameObject.Find(objectName);
-        GameObject.Destroy(gameObject);
+        PickUpController pickUpController = GameObject.Find(objectName).GetComponent<PickUpController>();
+        pickUpController.Delete();
     }
 
     private void stringPass(string response)
@@ -2242,8 +2357,22 @@ public class ColleagueTalkingState : ColleagueBaseState
 
     private AudioClip GetAudioClip(string title)
     {
+        var str = title;
+        var charsToRemove = new string[] { "!", "?" };
+        foreach (var c in charsToRemove)
+        {
+            str = str.Replace(c, string.Empty);
+        }
+
+        if (str.EndsWith("."))
+        {
+            str = str.Remove(str.Length - 1);
+        }
+
+        Debug.Log(str);
+
         string clipPath = "Audio/" + stateMachine.ColleagueType.ToString() + "/";
-        clipPath = clipPath + title;
+        clipPath = clipPath + str;
 
         AudioClip clip = Resources.Load<AudioClip>(clipPath);
         return clip;
@@ -2253,8 +2382,84 @@ public class ColleagueTalkingState : ColleagueBaseState
     {
         AudioClip audioClip = GetAudioClip(title);
         float length;
-        length = audioClip.length <= 10 ? 10f : audioClip.length;
+        length = audioClip.length * 3;
         ColleagueStateMachine.delta = length;
         PlayAudio(audioClip);
+    }
+
+    private string CurseResponse()
+    {
+        System.Random rnd = new System.Random();
+        int responseInt = rnd.Next(1, 5);
+        string responseString = "";
+
+        switch (responseInt)
+        {
+            case 1:
+                responseString = "Don't use these words around me!";
+                break;
+
+            case 2:
+                responseString = "Don't talk to me like that!";
+                break;
+
+            case 3:
+                responseString = "I don't appreciate you using these words.";
+                break;
+
+            case 4:
+                responseString = "No curse words around here!";
+                break;
+        }
+
+        return responseString;
+    }
+
+    private string UnfriendlyResponse()
+    {
+        System.Random rnd = new System.Random();
+        int responseInt = rnd.Next(1, 4);
+        string responseString = "";
+
+        switch (responseInt)
+        {
+            case 1:
+                responseString = "I don't like your tone!";
+                break;
+
+            case 2:
+                responseString = "I think you could say that in a nicer way!";
+                break;
+
+            case 3:
+                responseString = "Tone matters around here.";
+                break;
+        }
+
+        return responseString;
+    }
+
+    private string VolumeResponse()
+    {
+        System.Random rnd = new System.Random();
+        int responseInt = rnd.Next(1, 4);
+        string responseString = "";
+
+        switch (responseInt)
+        {
+            case 1:
+                responseString = "Stop shouting.";
+                break;
+
+            case 2:
+                responseString = "Tone down your voice.";
+                break;
+
+            case 3:
+                responseString = "Don't scream at me.";
+                break;
+        }
+
+        return responseString;
     }
 }

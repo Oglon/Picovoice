@@ -42,6 +42,8 @@ public class BaristaStateMachine : StateMachine
 
     private AudioSource AudioSource;
 
+    [field: SerializeField] public SpriteRenderer Icon { get; private set; }
+
     private const string
         AccessKey =
             "LEXyhVN7pdElKZ0mRGtgdoPGPg8MzEN2Tj0QuA3LqQESAX+y6o5o8A==";
@@ -53,6 +55,11 @@ public class BaristaStateMachine : StateMachine
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         PlayerHead = Camera.main;
         Sprite.sprite = Working;
+
+        Icon = GameObject.Find("Icon").GetComponent<SpriteRenderer>();
+        Icon.sprite = Resources.Load<Sprite>("Coffee");
+        
+        Icon.gameObject.SetActive(false);
 
         coffee = GameObject.FindWithTag("Coffee");
         coffee.SetActive(false);
@@ -107,7 +114,7 @@ public class BaristaStateMachine : StateMachine
                         slider.gameObject.SetActive(true);
                         NameAnimatorPlayer.ShowText("?");
                         TextAnimatorPlayer.ShowText(
-                            "The Bar on the left reflects the Volume of your voice. Characters will react to this as well.");
+                            "If the Bar on the left is on screen it reflects the Volume of your voice. Characters will react to this as well.");
                         count++;
                         break;
                     case 7:
@@ -120,6 +127,7 @@ public class BaristaStateMachine : StateMachine
 
                     case 8:
                         delta = 6f;
+                        Icon.gameObject.SetActive(true);
                         NameAnimatorPlayer.ShowText("?");
                         TextAnimatorPlayer.ShowText(
                             "Congartulations. You got your morning coffee while being polite to the cashier.");
