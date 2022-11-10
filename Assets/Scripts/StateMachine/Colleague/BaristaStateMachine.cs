@@ -12,19 +12,17 @@ public class BaristaStateMachine : StateMachine
     public Transform Player { get; private set; }
     [field: SerializeField] public GameObject Target { get; private set; }
     [field: SerializeField] public GameObject MainTarget { get; private set; }
-    [field: SerializeField] public ObjectiveHandler ObjectiveHandler { get; private set; }
     [field: SerializeField] public AudioLoudnessDetection Loudness { get; private set; }
     [field: SerializeField] public TextAnimatorPlayer TextAnimatorPlayer { get; private set; }
     [field: SerializeField] public TextAnimatorPlayer NameAnimatorPlayer { get; private set; }
     [field: SerializeField] public GameObject SubtitlePanel { get; private set; }
     [field: SerializeField] public GameObject NamePanel { get; private set; }
     [field: SerializeField] public bool Sensitive { get; private set; }
-    [field: SerializeField] public Slider slider { get; private set; }
+    [field: SerializeField] public GameObject slider { get; private set; }
 
     [field: SerializeField] public Sprite Ear { get; private set; }
     [field: SerializeField] public Sprite Speech { get; private set; }
     [field: SerializeField] public Sprite Working { get; private set; }
-
     [field: SerializeField] public SpriteRenderer Sprite { get; private set; }
 
     [field: SerializeField] public PickUpController PickUpController { get; private set; }
@@ -40,7 +38,7 @@ public class BaristaStateMachine : StateMachine
 
     private GameObject coffee;
 
-    private AudioSource AudioSource;
+    public AudioSource AudioSource;
 
     [field: SerializeField] public SpriteRenderer Icon { get; private set; }
 
@@ -58,8 +56,11 @@ public class BaristaStateMachine : StateMachine
 
         Icon = GameObject.Find("Icon").GetComponent<SpriteRenderer>();
         Icon.sprite = Resources.Load<Sprite>("Coffee");
-        
+
         Icon.gameObject.SetActive(false);
+
+        slider = GameObject.Find("Slider");
+        slider.SetActive(false);
 
         coffee = GameObject.FindWithTag("Coffee");
         coffee.SetActive(false);
@@ -67,11 +68,8 @@ public class BaristaStateMachine : StateMachine
 
     private void Update()
     {
-        if (PickUpController.equipped)
-        {
-            delta = 10;
-        }
-
+        Debug.Log(delta);
+        
         switch (delta)
         {
             case > 0:
@@ -121,7 +119,7 @@ public class BaristaStateMachine : StateMachine
                         delta = 6f;
                         NameAnimatorPlayer.ShowText("?");
                         TextAnimatorPlayer.ShowText(
-                            "Pick up relevant objects by getting close to them an pressing E.");
+                            "Pick up relevant objects by getting close to them and pressing E.");
                         count++;
                         break;
 
@@ -130,7 +128,7 @@ public class BaristaStateMachine : StateMachine
                         Icon.gameObject.SetActive(true);
                         NameAnimatorPlayer.ShowText("?");
                         TextAnimatorPlayer.ShowText(
-                            "Congartulations. You got your morning coffee while being polite to the cashier.");
+                            "Congratulations. You got your morning coffee while being polite to the cashier.");
                         count++;
                         break;
                     case 9:
@@ -156,14 +154,12 @@ public class BaristaStateMachine : StateMachine
         {
             if (inference.Intent == "Attention")
             {
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                this.gameObject.transform.rotation = Quaternion.Euler(0, 87, 0);
 
                 Sprite.sprite = Speech;
                 delta = 4f;
                 NameAnimatorPlayer.ShowText("Barista");
-                TextAnimatorPlayer.ShowText(
-                    "Oh sorry, I didn't see you enter. What can I get you?");
-                HandleAudio("Oh sorry, I didn't see you enter. What can I get you?");
+                StringPass("Oh sorry, I didn't see you enter. What can I get you?");
                 count++;
             }
             else if (inference.Intent == "OneCoffee")
@@ -171,9 +167,8 @@ public class BaristaStateMachine : StateMachine
                 Sprite.sprite = Speech;
                 delta = 4f;
                 NameAnimatorPlayer.ShowText("Barista");
-                TextAnimatorPlayer.ShowText(
+                StringPass(
                     "Sure, one coffee coming right up. Here you go!");
-                HandleAudio("Sure, one coffee coming right up. Here you go!");
                 coffee.SetActive(true);
                 count++;
                 Debug.Log(count);
@@ -183,9 +178,8 @@ public class BaristaStateMachine : StateMachine
                 Sprite.sprite = Speech;
                 delta = 4f;
                 NameAnimatorPlayer.ShowText("Barista");
-                TextAnimatorPlayer.ShowText(
+                StringPass(
                     "Sure, one coffee coming right up. Here you go!");
-                HandleAudio("Sure, one coffee coming right up. Here you go!");
                 coffee.SetActive(true);
                 count++;
             }
@@ -194,8 +188,9 @@ public class BaristaStateMachine : StateMachine
             }
             else
             {
+                NameAnimatorPlayer.ShowText("Barista");
                 TextAnimatorPlayer.ShowText("I'm sorry but I have no idea what you are talking about.");
-                HandleAudio("I'm sorry but I have no idea what you are talking about.");
+                StringPass("I'm sorry but I have no idea what you are talking about.");
                 ToggleProcessing();
             }
 
@@ -251,6 +246,12 @@ public class BaristaStateMachine : StateMachine
         _rhinoManager.Process();
     }
 
+    private void StringPass(string response)
+    {
+        TextAnimatorPlayer.ShowText(response);
+        HandleAudio(response);
+    }
+
     private void PlayAudio(AudioClip audioClip)
     {
         AudioSource.clip = audioClip;
@@ -259,9 +260,23 @@ public class BaristaStateMachine : StateMachine
 
     private AudioClip GetAudioClip(string title)
     {
-        string clipPath = "Audio/Barista/";
-        clipPath = clipPath + title;
+        var str = title;
+        var charsToRemove = new string[] { "!", "?" };
+        foreach (var c in charsToRemove)
+        {
+            str = str.Replace(c, string.Empty);
+        }
 
+        if (str.EndsWith("."))
+        {
+            str = str.Remove(str.Length - 1);
+        }
+
+        string clipPath = "Audio/Barista/";
+        clipPath = clipPath + str;
+
+        Debug.Log(clipPath);
+        
         AudioClip clip = Resources.Load<AudioClip>(clipPath);
         return clip;
     }
@@ -270,7 +285,7 @@ public class BaristaStateMachine : StateMachine
     {
         AudioClip audioClip = GetAudioClip(title);
         float length;
-        length = audioClip.length <= 10 ? 10f : audioClip.length;
+        length = audioClip.length;
         ColleagueStateMachine.delta = length;
         PlayAudio(audioClip);
     }

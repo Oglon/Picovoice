@@ -9,20 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelection.unity
     guid: d17bc00326aa8b143b707a757f67cc2d
   - enabled: 1
-    path: Assets/Scenes/Office Level 1.unity
-    guid: 35299a6a99d6dfe4bb709527ba95aab0
-  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 54e9644b66e21b441b9a6eb04b6dad58
   - enabled: 1
+    path: Assets/Scenes/Office Level 1.unity
+    guid: 3e7dd5e313c52064bb943a7610a2355a
+  - enabled: 1
     path: Assets/Scenes/Office Level 1 Sensitive.unity
-    guid: 556c79bccca14a74f94c8c78327fb3c7
+    guid: da622670b0b248048a84c921d004a5b7
   - enabled: 1
     path: Assets/Scenes/Office Level 2.unity
-    guid: 82457e369ffd8ca4da6ffae24e820e87
+    guid: 3b20854af50dec841afe56ea50641714
   - enabled: 1
     path: Assets/Scenes/Office Level 2 Sensitive.unity
-    guid: 086f8a958ddb11d4baebc3bdde049e3c
+    guid: 492018bcfd22b13409634939349c3d31
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 0}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

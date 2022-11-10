@@ -17,8 +17,9 @@ public class ColleagueStateMachine : StateMachine
     [field: SerializeField] public TextAnimatorPlayer NameAnimatorPlayer { get; private set; }
     [field: SerializeField] public Picovoice Picovoice { get; private set; }
     [field: SerializeField] public GameObject SubtitlePanel { get; private set; }
-    [field: SerializeField] public GameObject Slider { get; private set; }
     [field: SerializeField] public bool Sensitive { get; private set; }
+ 
+
 
     public AudioSource AudioSource;
 
@@ -32,6 +33,7 @@ public class ColleagueStateMachine : StateMachine
     public Camera PlayerHead { get; private set; }
 
     public static float delta;
+    public static float endCounter;
 
     public bool isProcessing;
 
@@ -39,7 +41,6 @@ public class ColleagueStateMachine : StateMachine
     {
         DialogueAnimatorPlayer = GameObject.Find("Dialogue").GetComponent<TextAnimatorPlayer>();
         NameAnimatorPlayer = GameObject.Find("Name").GetComponent<TextAnimatorPlayer>();
-        Slider = GameObject.Find("Slider");
 
         AudioSource = gameObject.GetComponent<AudioSource>();
 
@@ -58,13 +59,8 @@ public class ColleagueStateMachine : StateMachine
         SwitchState(new ColleagueWorkingState(this));
 
         Sensitive = SceneManager.GetActiveScene().name.Contains("Sensitive");
+
         Sprite.sprite = Working;
-
-        if (Sensitive)
-        {
-            Slider.SetActive(true);
-        }
-
 
         if (gameObject.CompareTag("Intern"))
         {

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,16 +13,18 @@ public class ObjectiveHandler : MonoBehaviour
     public TextMeshProUGUI StartTMP;
     public GameObject StartPanel;
 
+    [field: SerializeField] public GameObject Slider { get; private set; }
+
     private List<Objective> _objectives;
     private Objective _currentObjective;
     private int index = 1;
 
-    private float counter = 4f;
+    private float counter = 7f;
     private bool skip = false;
 
     private CharacterController _characterController;
 
-    private string startText;
+    public string startText;
 
     void Start()
     {
@@ -44,17 +44,20 @@ public class ObjectiveHandler : MonoBehaviour
         StartPanel.SetActive(true);
         StartTMP.gameObject.SetActive(true);
 
+        Slider = GameObject.Find("Slider");
+        Slider.SetActive(false);
+
         if (SceneManager.GetActiveScene().name.Contains("1"))
         {
             Icon.sprite = Resources.Load<Sprite>("File");
             startText =
-                "My file is missing from my desk. Someone took it while I was gone. I should ask the Intern if he saw someone in my office!";
+                "My file is missing from my desk. Someone took it while I was gone. I should ask the Intern in front of my office if he saw someone in my office!";
         }
         else
         {
             Icon.sprite = Resources.Load<Sprite>("Price");
             startText =
-                "There are talks around the office about a secret price. I should ask the Intern if he knows something about that.";
+                "There are talks around the office about a secret price. I should ask the Intern in front of my office if he knows something about that.";
         }
 
         StartTMP.text = startText;
@@ -88,6 +91,8 @@ public class ObjectiveHandler : MonoBehaviour
                     "Present your Colleague the solution 5276"),
                 new Objective("Talk to the Intern, he knows how to find your file!", false,
                     "Ask the Intern if he saw your file."),
+                new Objective("Confirm that you will get the door key from the boss", false,
+                    "Say yes to your Colleague"),
                 new Objective("Get the Door Code from your Boss!", false, "Approach your Boss"),
                 new Objective("Confirm your Boss that you want the Door Code!", false, "Respond with Yes"),
                 new Objective("Tell the Intern the Door Code", false, "Tell the Intern that the Door Code is 1111"),
@@ -106,7 +111,7 @@ public class ObjectiveHandler : MonoBehaviour
                     "Ask the Intern 'Do you know something about the secret prize?'"),
                 new Objective("Talk to the Boss about the secret price!", false,
                     "Ask the Boss 'Do you know about the secret price?'"),
-                new Objective("Ask your Colleague if you can help him!", false, "Ask the Colleague if she needs help."),
+                new Objective("Ask your Colleague if you can help her!", false, "Ask the Colleague if she needs help."),
                 new Objective("Confirm that you will help your Colleague!", false, "Respond with Yes"),
                 new Objective("Decrypt the code and tell your Colleague the solution!", false,
                     "The code is 5276"),
