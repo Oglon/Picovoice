@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
+  m_Name: 7-Guide
+  m_EditorClassIdentifier: 
+  text: Looks like she is angry. The Timer above her head indicates how long she
+    will be angry at you. If they are not that angry apologizing might help. Try
+    saying "Im sorry".
+  audioClip: {fileID: 8300000, guid: 8d86de3bb46011a4c892b8417c34d976, type: 3}
+  rude: 0
+  excuse: 0
+  CodeType: 0

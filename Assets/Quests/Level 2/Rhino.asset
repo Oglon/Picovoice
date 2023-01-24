@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac18aacd0cde6449f7af929431610a, type: 3}
+  m_Name: Rhino
+  m_EditorClassIdentifier: 
+  questName: An elemental code
+  objectives:
+  - {fileID: 11400000, guid: 92bf6d202dd05af4bb12b6d8e23554be, type: 2}
+  - {fileID: 11400000, guid: 4552da26c938f6d4c9bd02f5fd9b933e, type: 2}
+  - {fileID: 11400000, guid: b49e9524529e5f845afc14fd61d48632, type: 2}
+  - {fileID: 11400000, guid: 6a326008c52100b48909bdcff54a808b, type: 2}
+  currentObjective: {fileID: 11400000, guid: 92bf6d202dd05af4bb12b6d8e23554be, type: 2}
+  followUp: {fileID: 0}
+  questIndex: 4

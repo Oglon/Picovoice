@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac18aacd0cde6449f7af929431610a, type: 3}
+  m_Name: 3_Documents
+  m_EditorClassIdentifier: 
+  questName: Document
+  objectives:
+  - {fileID: 11400000, guid: 3b83479e917b3944991723cc7d141d9f, type: 2}
+  - {fileID: 11400000, guid: 8b8d65cd25f99a2468d80a2c9b39ee10, type: 2}
+  - {fileID: 11400000, guid: c0473215018a74a48afdbe9fa0f6cf3e, type: 2}
+  currentObjective: {fileID: 11400000, guid: 3b83479e917b3944991723cc7d141d9f, type: 2}
+  followUp: {fileID: 11400000, guid: 89ed7cd11abb0f4469641da95dbac8d5, type: 2}
+  questIndex: 3

@@ -13,39 +13,16 @@ public class ColleagueListeningState : ColleagueBaseState
 
     public override void Enter()
     {
-        if (SceneManager.GetActiveScene().name.Contains("Sensitive"))
-        {
-            stateMachine.ObjectiveHandler.Slider.SetActive(true);
-        }
-
-        if (stateMachine.gameObject.CompareTag($"Boss"))
-        {
-            if (stateMachine.ObjectiveHandler.getCurrentIndex() == 12)
-            {
-                var sceneName = SceneManager.GetActiveScene().name;
-
-                if (sceneName.Contains("Office Level 1"))
-                {
-                    StringPass("You want the door code, right?");
-                }
-            }
-        }
-
+        stateMachine.ObjectiveHandler.AudioBar.SetActive();
         stateMachine.Listening();
         stateMachine.Sprite.sprite = stateMachine.Ear;
+        stateMachine.MicrophoneVisual.IsActive();
     }
 
     public override void Tick(float deltaTime)
     {
-        stateMachine.Subtitles();
-
-        if (stateMachine.Loudness.returnValue >= 0.5f && SceneManager.GetActiveScene().name.Contains("Sensitive"))
-        {
-            stateMachine.SwitchState(new ColleagueTalkingState(stateMachine));
-        }
-
-        Debug.Log(stateMachine.Loudness.returnValue);
-
+        rudeTimerSubtraction(deltaTime);
+        
         if (stateMachine.gameObject.tag == "Colleague")
         {
             var lookPos = stateMachine.PlayerHead.transform.position - stateMachine.transform.position;
@@ -68,17 +45,18 @@ public class ColleagueListeningState : ColleagueBaseState
                     Quaternion.Slerp(stateMachine.transform.rotation, rotation, Time.deltaTime);
             }
 
+            stateMachine.ObjectiveHandler.AudioBar.SetInactive();
             stateMachine.SwitchState(new ColleagueWorkingState(stateMachine));
         }
     }
 
     public override void Exit()
     {
+        stateMachine.MicrophoneVisual.IsInactive();
     }
 
     private void StringPass(string response)
     {
-        stateMachine.DialogueAnimatorPlayer.ShowText(response);
         HandleAudio(response);
     }
 

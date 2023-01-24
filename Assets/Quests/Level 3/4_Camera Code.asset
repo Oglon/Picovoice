@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac18aacd0cde6449f7af929431610a, type: 3}
+  m_Name: 4_Camera Code
+  m_EditorClassIdentifier: 
+  questName: Camera
+  objectives:
+  - {fileID: 11400000, guid: 412fb6ff2e7a7374da3b6ebf8c5479e1, type: 2}
+  - {fileID: 11400000, guid: 7e0c7ba1cd4888f49868fb556fcf1b83, type: 2}
+  - {fileID: 11400000, guid: ddef5740e2483404ca6382a84ce1581b, type: 2}
+  currentObjective: {fileID: 11400000, guid: 412fb6ff2e7a7374da3b6ebf8c5479e1, type: 2}
+  followUp: {fileID: 11400000, guid: 87abb942dbba859498cb056b35592342, type: 2}
+  questIndex: 4

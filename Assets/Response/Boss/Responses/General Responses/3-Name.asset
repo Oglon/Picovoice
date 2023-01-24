@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
+  m_Name: 3-Name
+  m_EditorClassIdentifier: 
+  text: Charles, but we are not on a first-name basis.
+  audioClip: {fileID: 8300000, guid: 4f24f65f345e4324db7c63f0602b454a, type: 3}
+  rude: 0
+  excuse: 0
+  CodeType: 6

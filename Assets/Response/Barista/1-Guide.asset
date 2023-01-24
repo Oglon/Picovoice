@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
+  m_Name: 1-Guide
+  m_EditorClassIdentifier: 
+  text: Welcome to "A Day at the Office"! Before you begin your Office Day, you should
+    probably pick up a coffee. The Barista is working as the Brain Sprite indicates.
+    Try saying Excuse Me to get her attention.
+  audioClip: {fileID: 8300000, guid: 16f99c96c7961914599768335fd9f19a, type: 3}
+  rude: 0
+  excuse: 0
+  CodeType: 0

@@ -1,47 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Objective
+[CreateAssetMenu]
+public class Objective : ScriptableObject
 {
-    private string _objectiveDesc { get; set; }
-    private bool _objectiveState { get; set; }
-    private string _objectiveHint { get; set; }
+    public string objectiveDesc;
+    public string objectiveHint;
+    public int questIndex;
 
     public Objective(string desc, bool state, string hint)
     {
-        this._objectiveDesc = desc;
-        this._objectiveState = state;
-        this._objectiveHint = hint;
-    }
-
-    public bool GetState()
-    {
-        return _objectiveState;
-    }
-
-    public void setState(bool state)
-    {
-        _objectiveState = state;
+        objectiveDesc = desc;
+        objectiveHint = hint;
     }
 
     public string getDescription()
     {
-        return _objectiveDesc;
-    }
-
-    public void setDescription(string desc)
-    {
-        _objectiveDesc = desc;
+        return objectiveDesc;
     }
 
     public string getHint()
     {
-        return _objectiveHint;
-    }
-
-    public void setHint(string hint)
-    {
-        _objectiveHint = hint;
+        return objectiveHint;
     }
 }

@@ -17,7 +17,7 @@ public class ColleagueWorkingState : ColleagueBaseState
 
     public override void Tick(float deltaTime)
     {
-        stateMachine.Subtitles();
+        rudeTimerSubtraction(deltaTime);
         if (IsInTalkingRange())
         {
             stateMachine.SwitchState(new ColleagueListeningState(stateMachine));

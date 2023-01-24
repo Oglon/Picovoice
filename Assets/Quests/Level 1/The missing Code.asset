@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac18aacd0cde6449f7af929431610a, type: 3}
+  m_Name: The missing Code
+  m_EditorClassIdentifier: 
+  questName: The missing Code
+  objectives:
+  - {fileID: 11400000, guid: f49736108865044428fc1582208801f3, type: 2}
+  - {fileID: 11400000, guid: 4e565ead25a316c44a811acee62d19ef, type: 2}
+  - {fileID: 11400000, guid: a1f32f3a5967fd0448188e47e4304b30, type: 2}
+  - {fileID: 11400000, guid: 1ed99aefa8d5400468e04f262254670c, type: 2}
+  currentObjective: {fileID: 11400000, guid: a1f32f3a5967fd0448188e47e4304b30, type: 2}
+  followUp: {fileID: 0}
+  questIndex: 5

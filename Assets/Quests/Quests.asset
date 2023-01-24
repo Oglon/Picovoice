@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955dd0e3a985c5c4487748cff5e7cfde, type: 3}
+  m_Name: Quests
+  m_EditorClassIdentifier: 
+  Q101: {fileID: 11400000, guid: a631d4dccb182154f8dd927b55e9834e, type: 2}
+  Q102: {fileID: 11400000, guid: 84a8b0e3c07646a49a75f4752a9d265a, type: 2}
+  Q103: {fileID: 11400000, guid: 557ca1d09f78771409653c9cd7290ea1, type: 2}
+  Q104: {fileID: 11400000, guid: 89ed7cd11abb0f4469641da95dbac8d5, type: 2}
+  Q105: {fileID: 11400000, guid: 87abb942dbba859498cb056b35592342, type: 2}
+  Q201: {fileID: 11400000, guid: 001f7b741b2877f48bd6195030817208, type: 2}
+  Q202: {fileID: 11400000, guid: 89a899f9e6940324eb6269eebbf45f23, type: 2}
+  Q203: {fileID: 11400000, guid: f47abbf5561c07346bcc9383066e743b, type: 2}
+  Q204: {fileID: 11400000, guid: c2f19dab7481e774b98b97a560e7ee04, type: 2}
+  Q205: {fileID: 0}

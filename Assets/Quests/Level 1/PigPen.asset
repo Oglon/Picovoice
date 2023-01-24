@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac18aacd0cde6449f7af929431610a, type: 3}
+  m_Name: PigPen
+  m_EditorClassIdentifier: 
+  questName: A complicated Cipher
+  objectives:
+  - {fileID: 11400000, guid: 661dff767a3025548bfa979d3d7d3dff, type: 2}
+  - {fileID: 11400000, guid: 6f118ee968566cd43ac27b23677ba9ac, type: 2}
+  currentObjective: {fileID: 11400000, guid: 661dff767a3025548bfa979d3d7d3dff, type: 2}
+  followUp: {fileID: 11400000, guid: a0ec093ee893f414ba382e7f9d5342df, type: 2}
+  questIndex: 4

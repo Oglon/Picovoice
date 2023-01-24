@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class AudioLoudnessDetection : MonoBehaviour
 {
@@ -24,8 +22,12 @@ public class AudioLoudnessDetection : MonoBehaviour
 
     public float GetLoudnessFromMicrophone()
     {
+        if (SceneManager.GetActiveScene().name.Contains("StartMenu"))
+        {
+            return GetLoudnessFromAudioClip(Microphone.GetPosition(Microphone.devices[0]), microphoneClip);
+        }
+
         return returnValue;
-        // return GetLoudnessFromAudioClip(Microphone.GetPosition(Microphone.devices[0]), microphoneClip);
     }
 
     public float GetLoudnessFromAudioClip(int clipPosition, AudioClip clip)

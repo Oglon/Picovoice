@@ -4,5 +4,12 @@ using UnityEngine;
 
 public enum Code
 {
-   Cesar, Element, GummyBear, Morse, Pigpen, Tuple
+    Cesar,
+    Morse,
+    Documents,
+    Donut,
+    File,
+    Sticks,
+    Phone,
+    Empty
 }

@@ -1,10 +1,10 @@
 using System.IO;
 using Febucci.UI;
 using Pv.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class BaristaStateMachine : StateMachine
 {
@@ -18,7 +18,7 @@ public class BaristaStateMachine : StateMachine
     [field: SerializeField] public GameObject SubtitlePanel { get; private set; }
     [field: SerializeField] public GameObject NamePanel { get; private set; }
     [field: SerializeField] public bool Sensitive { get; private set; }
-    [field: SerializeField] public GameObject slider { get; private set; }
+    [field: SerializeField] public AudioBar AudioBar { get; private set; }
 
     [field: SerializeField] public Sprite Ear { get; private set; }
     [field: SerializeField] public Sprite Speech { get; private set; }
@@ -26,6 +26,7 @@ public class BaristaStateMachine : StateMachine
     [field: SerializeField] public SpriteRenderer Sprite { get; private set; }
 
     [field: SerializeField] public PickUpController PickUpController { get; private set; }
+    [field: SerializeField] public TextMeshPro Timer { get; private set; }
     public Camera PlayerHead { get; private set; }
 
     public static float delta;
@@ -38,13 +39,28 @@ public class BaristaStateMachine : StateMachine
 
     private GameObject coffee;
 
+    public UIManager uiManager;
+
     public AudioSource AudioSource;
 
-    [field: SerializeField] public SpriteRenderer Icon { get; private set; }
+    [field: SerializeField] public Image Icon { get; private set; }
+    [field: SerializeField] public MicrophoneVisual MicrophoneVisual { get; private set; }
 
     private const string
         AccessKey =
             "LEXyhVN7pdElKZ0mRGtgdoPGPg8MzEN2Tj0QuA3LqQESAX+y6o5o8A==";
+
+    [field: SerializeField] public DialogueResponse Guide1 { get; private set; }
+    [field: SerializeField] public DialogueResponse Barista2 { get; private set; }
+    [field: SerializeField] public DialogueResponse Guide3 { get; private set; }
+    [field: SerializeField] public DialogueResponse Barista4 { get; private set; }
+    [field: SerializeField] public DialogueResponse Guide5 { get; private set; }
+    [field: SerializeField] public DialogueResponse Barista6 { get; private set; }
+    [field: SerializeField] public DialogueResponse Guide7 { get; private set; }
+    [field: SerializeField] public DialogueResponse Barista8 { get; private set; }
+    [field: SerializeField] public DialogueResponse Guide9 { get; private set; }
+    [field: SerializeField] public DialogueResponse Guide10 { get; private set; }
+    [field: SerializeField] public DialogueResponse Guide11 { get; private set; }
 
     private void Start()
     {
@@ -54,88 +70,133 @@ public class BaristaStateMachine : StateMachine
         PlayerHead = Camera.main;
         Sprite.sprite = Working;
 
-        Icon = GameObject.Find("Icon").GetComponent<SpriteRenderer>();
         Icon.sprite = Resources.Load<Sprite>("Coffee");
 
         Icon.gameObject.SetActive(false);
 
-        slider = GameObject.Find("Slider");
-        slider.SetActive(false);
+        AudioBar.gameObject.SetActive(false);
 
         coffee = GameObject.FindWithTag("Coffee");
         coffee.SetActive(false);
+
+        uiManager = GameObject.Find("Dialogue Box").GetComponent<UIManager>();
+        uiManager.HintTMP.text = "You don't need a Hint for this part.";
+        uiManager.UpdateObjective("Grab a morning coffee");
+        count = 0;
+        Timer.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        Debug.Log(delta);
-        
-        switch (delta)
+        if (Input.GetKey(KeyCode.H))
         {
-            case > 0:
-                delta -= Time.deltaTime;
+            uiManager.ShowHint("Well done!");
+            if (count == 14)
+            {
+                count++;
+            }
+        }
+        else if (!Input.GetKey(KeyCode.H))
+        {
+            uiManager.HideHint();
+        }
+
+        if (delta > 0)
+        {
+            delta -= Time.deltaTime;
+        }
+        else
+        {
+            Order();
+        }
+    }
+
+    private void Order()
+    {
+        switch (count)
+        {
+            case 0:
+                PlayAudio(Guide1);
+                delta = Guide1.audioClip.length - 2f;
+                count++;
                 break;
-            case <= 0:
-                switch (count)
-                {
-                    case 0:
-                        delta = 6f;
-                        NameAnimatorPlayer.ShowText("?");
-                        TextAnimatorPlayer.ShowText(
-                            "You probably want to order a coffee but the Barista hasn't noticed you, right? She is working as the Brain Sprite above her head indicates.");
-                        count++;
-                        break;
-                    case 1:
-                        count++;
-                        delta = 4f;
-                        TextAnimatorPlayer.ShowText(
-                            "If you want her attention you should try saying \"Excuse me\"");
-                        StartProcessing();
-                        break;
-                    case 3:
-                        delta = 6f;
-                        NameAnimatorPlayer.ShowText("?");
-                        TextAnimatorPlayer.ShowText(
-                            "People react to your politeness. For a polite order say \"Can I get a coffee, please?\"");
-                        StartProcessing();
-                        count++;
-                        break;
-                    case 5:
-                        delta = 6f;
-                        NameAnimatorPlayer.ShowText("?");
-                        TextAnimatorPlayer.ShowText(
-                            "Congratulations, you were polite while ordering your morning coffee.");
-                        count++;
-                        break;
-                    case 6:
-                        delta = 6f;
-                        slider.gameObject.SetActive(true);
-                        NameAnimatorPlayer.ShowText("?");
-                        TextAnimatorPlayer.ShowText(
-                            "If the Bar on the left is on screen it reflects the Volume of your voice. Characters will react to this as well.");
-                        count++;
-                        break;
-                    case 7:
-                        delta = 6f;
-                        NameAnimatorPlayer.ShowText("?");
-                        TextAnimatorPlayer.ShowText(
-                            "Pick up relevant objects by getting close to them and pressing E.");
-                        count++;
-                        break;
-
-                    case 8:
-                        delta = 6f;
-                        Icon.gameObject.SetActive(true);
-                        NameAnimatorPlayer.ShowText("?");
-                        TextAnimatorPlayer.ShowText(
-                            "Congratulations. You got your morning coffee while being polite to the cashier.");
-                        count++;
-                        break;
-                    case 9:
-                        SceneManager.LoadScene("LevelSelection");
-                        break;
-                }
-
+            case 1:
+                Sprite.sprite = Ear;
+                MicrophoneVisual.IsActive();
+                Listening();
+                break;
+            case 2:
+                transform.localRotation *= Quaternion.Euler(0, 180, 0);
+                PlayAudio(Barista2);
+                delta = Barista2.audioClip.length;
+                count++;
+                break;
+            case 3:
+                PlayAudio(Guide3);
+                delta = Guide3.audioClip.length;
+                count++;
+                break;
+            case 4:
+                Sprite.sprite = Ear;
+                MicrophoneVisual.IsActive();
+                Listening();
+                break;
+            case 5:
+                PlayAudio(Barista4);
+                delta = Barista4.audioClip.length;
+                count++;
+                break;
+            case 6:
+                PlayAudio(Guide5);
+                delta = Guide5.audioClip.length;
+                count++;
+                break;
+            case 7:
+                Sprite.sprite = Ear;
+                MicrophoneVisual.IsActive();
+                Listening();
+                break;
+            case 8:
+                PlayAudio(Barista6);
+                delta = Barista6.audioClip.length;
+                count++;
+                Timer.gameObject.SetActive(true);
+                break;
+            case 9:
+                PlayAudio(Guide7);
+                delta = Guide7.audioClip.length;
+                count++;
+                break;
+            case 10:
+                Sprite.sprite = Ear;
+                MicrophoneVisual.IsActive();
+                Listening();
+                break;
+            case 11:
+                Timer.gameObject.SetActive(false);
+                PlayAudio(Barista8);
+                delta = Barista8.audioClip.length;
+                coffee.SetActive(true);
+                count++;
+                break;
+            case 12:
+                AudioBar.gameObject.SetActive(true);
+                PlayAudio(Guide9);
+                delta = Guide9.audioClip.length;
+                count++;
+                break;
+            case 13:
+                PlayAudio(Guide10);
+                delta = Guide10.audioClip.length;
+                count++;
+                break;
+            case 15:
+                PlayAudio(Guide11);
+                delta = Guide11.audioClip.length;
+                count++;
+                break;
+            case 16:
+                SceneManager.LoadScene("StartMenu");
                 break;
         }
     }
@@ -144,9 +205,7 @@ public class BaristaStateMachine : StateMachine
     {
         if (!IsInTalkingRange())
             return;
-        var sceneName = SceneManager.GetActiveScene().name;
 
-        delta = 4f;
         SubtitlePanel.SetActive(true);
 
 
@@ -154,48 +213,49 @@ public class BaristaStateMachine : StateMachine
         {
             if (inference.Intent == "Attention")
             {
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 87, 0);
-
-                Sprite.sprite = Speech;
-                delta = 4f;
-                NameAnimatorPlayer.ShowText("Barista");
-                StringPass("Oh sorry, I didn't see you enter. What can I get you?");
-                count++;
+                if (count == 1)
+                {
+                    count++;
+                    Sprite.sprite = Speech;
+                    MicrophoneVisual.IsInactive();
+                }
             }
             else if (inference.Intent == "OneCoffee")
             {
-                Sprite.sprite = Speech;
-                delta = 4f;
-                NameAnimatorPlayer.ShowText("Barista");
-                StringPass(
-                    "Sure, one coffee coming right up. Here you go!");
-                coffee.SetActive(true);
-                count++;
-                Debug.Log(count);
+                if (count == 4)
+                {
+                    count++;
+                    Sprite.sprite = Speech;
+                    MicrophoneVisual.IsInactive();
+                }
             }
             else if (inference.Intent == "OneCoffeeFriendly")
             {
-                Sprite.sprite = Speech;
-                delta = 4f;
-                NameAnimatorPlayer.ShowText("Barista");
-                StringPass(
-                    "Sure, one coffee coming right up. Here you go!");
-                coffee.SetActive(true);
-                count++;
+                if (count == 4)
+                {
+                    count++;
+                    Sprite.sprite = Speech;
+                    MicrophoneVisual.IsInactive();
+                }
             }
-            else if (inference.Intent == "YouToo")
+            else if (inference.Intent == "Faster")
             {
+                if (count == 7)
+                {
+                    count++;
+                    Sprite.sprite = Speech;
+                    MicrophoneVisual.IsInactive();
+                }
             }
-            else
+            else if (inference.Intent == "Sorry")
             {
-                NameAnimatorPlayer.ShowText("Barista");
-                TextAnimatorPlayer.ShowText("I'm sorry but I have no idea what you are talking about.");
-                StringPass("I'm sorry but I have no idea what you are talking about.");
-                ToggleProcessing();
+                if (count == 10)
+                {
+                    count++;
+                    Sprite.sprite = Speech;
+                    MicrophoneVisual.IsInactive();
+                }
             }
-
-
-            // Loudness.gameObject.SetActive(false);
 
             isProcessing = false;
         }
@@ -246,47 +306,10 @@ public class BaristaStateMachine : StateMachine
         _rhinoManager.Process();
     }
 
-    private void StringPass(string response)
+    private void PlayAudio(DialogueResponse response)
     {
-        TextAnimatorPlayer.ShowText(response);
-        HandleAudio(response);
-    }
-
-    private void PlayAudio(AudioClip audioClip)
-    {
-        AudioSource.clip = audioClip;
+        AudioSource.clip = response.audioClip;
         AudioSource.Play();
-    }
-
-    private AudioClip GetAudioClip(string title)
-    {
-        var str = title;
-        var charsToRemove = new string[] { "!", "?" };
-        foreach (var c in charsToRemove)
-        {
-            str = str.Replace(c, string.Empty);
-        }
-
-        if (str.EndsWith("."))
-        {
-            str = str.Remove(str.Length - 1);
-        }
-
-        string clipPath = "Audio/Barista/";
-        clipPath = clipPath + str;
-
-        Debug.Log(clipPath);
-        
-        AudioClip clip = Resources.Load<AudioClip>(clipPath);
-        return clip;
-    }
-
-    private void HandleAudio(string title)
-    {
-        AudioClip audioClip = GetAudioClip(title);
-        float length;
-        length = audioClip.length;
-        ColleagueStateMachine.delta = length;
-        PlayAudio(audioClip);
+        uiManager.GetDialogue(response);
     }
 }

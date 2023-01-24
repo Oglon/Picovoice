@@ -1,9 +1,7 @@
-using Febucci.UI;
 using Pv.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class ColleagueStateMachine : StateMachine
 {
@@ -12,14 +10,16 @@ public class ColleagueStateMachine : StateMachine
     [field: SerializeField] public GameObject Target { get; private set; }
     [field: SerializeField] public GameObject MainTarget { get; private set; }
     [field: SerializeField] public ObjectiveHandler ObjectiveHandler { get; private set; }
+    [field: SerializeField] public ResponseScript CharacterResponse { get; set; }
     [field: SerializeField] public AudioLoudnessDetection Loudness { get; private set; }
-    [field: SerializeField] public TextAnimatorPlayer DialogueAnimatorPlayer { get; private set; }
-    [field: SerializeField] public TextAnimatorPlayer NameAnimatorPlayer { get; private set; }
     [field: SerializeField] public Picovoice Picovoice { get; private set; }
-    [field: SerializeField] public GameObject SubtitlePanel { get; private set; }
     [field: SerializeField] public bool Sensitive { get; private set; }
- 
+    [field: SerializeField] public float RudeTimer { get; set; }
+    [field: SerializeField] public int rudeIncidents = 0;
 
+
+    [field: SerializeField] public MicrophoneVisual MicrophoneVisual { get; private set; }
+    public UIManager uiManager;
 
     public AudioSource AudioSource;
 
@@ -31,7 +31,7 @@ public class ColleagueStateMachine : StateMachine
 
     [field: SerializeField] public SpriteRenderer Sprite { get; private set; }
     public Camera PlayerHead { get; private set; }
-
+    [field: SerializeField] public TextMeshPro Timer { get; private set; }
     public static float delta;
     public static float endCounter;
 
@@ -39,22 +39,18 @@ public class ColleagueStateMachine : StateMachine
 
     private void Start()
     {
-        DialogueAnimatorPlayer = GameObject.Find("Dialogue").GetComponent<TextAnimatorPlayer>();
-        NameAnimatorPlayer = GameObject.Find("Name").GetComponent<TextAnimatorPlayer>();
-
         AudioSource = gameObject.GetComponent<AudioSource>();
-
-        SubtitlePanel = GameObject.Find("Dialogue Box");
 
         Ear = Resources.Load<Sprite>("Ear");
         Speech = Resources.Load<Sprite>("Speech");
         Working = Resources.Load<Sprite>("Working");
+        
+        uiManager = GameObject.Find("Dialogue Box").GetComponent<UIManager>();
 
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         PlayerHead = Camera.main;
         ObjectiveHandler = Player.GetComponent<ObjectiveHandler>();
 
-        DialogueAnimatorPlayer.ShowText("");
 
         SwitchState(new ColleagueWorkingState(this));
 
@@ -111,19 +107,6 @@ public class ColleagueStateMachine : StateMachine
         StartProcessing();
     }
 
-    public void Subtitles()
-    {
-        switch (delta)
-        {
-            case > 0:
-                delta -= Time.deltaTime;
-                break;
-            case <= 0:
-                DialogueAnimatorPlayer.ShowText("");
-                SubtitlePanel.SetActive(false);
-                break;
-        }
-    }
 
     public void ToggleProcessing()
     {

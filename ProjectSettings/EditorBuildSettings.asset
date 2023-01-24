@@ -6,25 +6,25 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LevelSelection.unity
-    guid: d17bc00326aa8b143b707a757f67cc2d
+    path: Assets/Scenes/StartMenu.unity
+    guid: d68c7c247d3659545a942ab63391f07b
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 54e9644b66e21b441b9a6eb04b6dad58
   - enabled: 1
     path: Assets/Scenes/Office Level 1.unity
-    guid: 3e7dd5e313c52064bb943a7610a2355a
+    guid: a430eaef8178a31469eae1adda168f4d
   - enabled: 1
     path: Assets/Scenes/Office Level 1 Sensitive.unity
-    guid: da622670b0b248048a84c921d004a5b7
+    guid: 8798f315e2a148c468092a679db8a4f1
   - enabled: 1
     path: Assets/Scenes/Office Level 2.unity
-    guid: 3b20854af50dec841afe56ea50641714
+    guid: b2b1f6f62121e48479d99423f30a08ff
   - enabled: 1
     path: Assets/Scenes/Office Level 2 Sensitive.unity
-    guid: 492018bcfd22b13409634939349c3d31
+    guid: 6adce8ef2d4d3734bac6e34126455cb2
   m_configObjects:
-    Unity.XR.OpenVR.Settings: {fileID: 0}
+    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: d05f31b57e020a24591db543675a543c, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d0c122303dc93c84e935e70f878d97d7, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 43abd3e9b4d84c54c8a9a8fae8a2c635, type: 2}
