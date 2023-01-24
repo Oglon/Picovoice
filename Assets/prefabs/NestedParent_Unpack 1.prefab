@@ -32,7 +32,7 @@ Transform:
   - {fileID: 6631375095269272994}
   - {fileID: 8556211771751343408}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2324431840052659015
 GameObject:
@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2324431840052659015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.775}
+  m_LocalPosition: {x: 0.425, y: -0.1, z: 0.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,6 +73,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2396782518027098338}
     m_Modifications:
+    - target: {fileID: 2338929020876402016, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Volume
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5393215578589016640, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Height
       value: 1.5
@@ -89,6 +93,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6b911390c5825014e8377183a7837d3f, type: 2}
+    - target: {fileID: 6046165689849045318, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202935572371271329, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: <Walking1>k__BackingField
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e9d854b77c384a4589acc7ac8fdcaf9, type: 3}
+    - target: {fileID: 7202935572371271329, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: <Walking2>k__BackingField
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e7b2b78f1f35e14882db707b81caf24, type: 3}
+    - target: {fileID: 7202935572371271329, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: <Walking3>k__BackingField
+      value: 
+      objectReference: {fileID: 8300000, guid: fc4a886faa254be45b99c2abfe9450bf, type: 3}
+    - target: {fileID: 7202935572371271329, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: <AmbientClip>k__BackingField
+      value: 
+      objectReference: {fileID: 8300000, guid: 338ef501802eb82489027d51d9510f00, type: 3}
+    - target: {fileID: 7202935572371271329, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: <ObjectiveHandler>k__BackingField
+      value: 
+      objectReference: {fileID: 748314191150930374}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -175,12 +203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12fe2c763416714b99c520fade5bab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectiveTMP: {fileID: 0}
-  HintTMP: {fileID: 0}
-  HintPanel: {fileID: 0}
-  Icon: {fileID: 0}
-  StartTMP: {fileID: 0}
-  StartPanel: {fileID: 0}
+  AudioBar: {fileID: 0}
+  _currentQuest: {fileID: 0}
+  startQuest: {fileID: 11400000, guid: 4b4e60b70535d2948a25a13e35b41ec9, type: 2}
+  QuestHolder: {fileID: 11400000, guid: 4fa4dc9a448c94748a00ec81a324a119, type: 2}
+  uiManager: {fileID: 0}
 --- !u!1001 &2710749390769404120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 3674953648078882518}
     - target: {fileID: 8762286023885395323, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.1348748
+      value: 1.9754717
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
