@@ -10,7 +10,6 @@ public class Quest : ScriptableObject
 
     private Analytics _analytics;
 
-
     public string questName;
 
     public List<Objective> objectives;
@@ -33,6 +32,8 @@ public class Quest : ScriptableObject
 
     public void Progress()
     {
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddObjective(currentObjective.ToString());
         if ((objectives.IndexOf(currentObjective) + 1).Equals(objectives.Count))
         {
             OnFollowingQuest?.Invoke();

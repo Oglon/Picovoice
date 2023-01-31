@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ColleagueListeningState : ColleagueBaseState
 {
+    private Analytics _analytics;
+
     public ColleagueListeningState(ColleagueStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -12,15 +14,19 @@ public class ColleagueListeningState : ColleagueBaseState
         stateMachine.Listening();
         stateMachine.Sprite.sprite = stateMachine.Ear;
         stateMachine.MicrophoneVisual.IsActive();
+
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
     }
 
     public override void Tick(float deltaTime)
     {
         rudeTimerSubtraction(deltaTime);
-        
+
         if (stateMachine.gameObject.tag == "Colleague")
         {
             var lookPos = stateMachine.PlayerHead.transform.position - stateMachine.transform.position;
+            _analytics.setLastDistance((stateMachine.PlayerHead.transform.position - stateMachine.transform.position)
+                .sqrMagnitude);
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
             stateMachine.transform.rotation =

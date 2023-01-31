@@ -26,13 +26,13 @@ public class Picovoice : MonoBehaviour
         _rhinoManager = RhinoManager.Create(AccessKey, GetContextPath(), InferenceCallback);
     }
 
-    private void Update()
-    {
-        if (!stop)
-        {
-            Debug.Log("Pico: " + _rhinoManager.IsAudioDeviceAvailable() + " Devices: " + Microphone.devices.Length);
-        }
-    }
+    // private void Update()
+    // {
+    //     if (!stop)
+    //     {
+    //         Debug.Log("Pico: " + _rhinoManager.IsAudioDeviceAvailable() + " Devices: " + Microphone.devices.Length);
+    //     }
+    // }
 
     public void setStateMachine(ColleagueStateMachine stateMachine)
     {

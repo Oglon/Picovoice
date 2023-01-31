@@ -20,8 +20,11 @@ public class PickUpController : MonoBehaviour
 
     private Picovoice Picovoice;
 
+    private Analytics _analytics;
+
     private void Start()
     {
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
         player = GameObject.Find("PlayerCapsule").gameObject.transform;
         container = GameObject.Find("Container").gameObject.transform;
 
@@ -72,12 +75,13 @@ public class PickUpController : MonoBehaviour
             audioSource.Play();
             currentQuest.Progress();
 
-            Destroy(transform.gameObject);
+            Destroy(gameObject);
             return;
         }
 
         if (gameObject.CompareTag("Goal"))
         {
+            _analytics.CreateCSV();
             Picovoice.Delete();
             audioSource.Play();
             SceneManager.LoadScene("StartMenu");

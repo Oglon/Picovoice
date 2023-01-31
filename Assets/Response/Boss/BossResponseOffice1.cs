@@ -84,6 +84,7 @@ public class BossResponseOffice1 : ResponseScript
     [field: SerializeField] private ObjectiveHandler objectiveHandler;
     private Quest currentQuest;
 
+    private Analytics _analytics;
 
     public override DialogueResponse GetResponse(Inference inference, bool sensitive, int rudeIncidents,
         float rudeCooldown)
@@ -93,6 +94,10 @@ public class BossResponseOffice1 : ResponseScript
 
         if (inference.IsUnderstood)
         {
+            _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+            _analytics.AddGeneral(inference.Intent, Time.timeSinceLevelLoad, getColleagueType(),
+                _analytics.getLastDistance());
+
             string intent = sensitive ? inference.Intent : RemoveSensitive(inference.Intent);
 
             if (intent == "Sorry")
@@ -492,5 +497,20 @@ public class BossResponseOffice1 : ResponseScript
         }
 
         return response;
+    }
+    private string getColleagueType()
+    {
+        if (name.Contains("Intern"))
+        {
+            return "Intern";
+        }
+        else if (name.Contains("Boss"))
+        {
+            return "Boss";
+        }
+        else
+        {
+            return "Colleague";
+        }
     }
 }
