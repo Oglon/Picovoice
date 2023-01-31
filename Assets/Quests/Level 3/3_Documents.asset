@@ -16,6 +16,8 @@ MonoBehaviour:
   objectives:
   - {fileID: 11400000, guid: 3b83479e917b3944991723cc7d141d9f, type: 2}
   - {fileID: 11400000, guid: 8b8d65cd25f99a2468d80a2c9b39ee10, type: 2}
+  - {fileID: 11400000, guid: d3399c2e598178c43b8ad6b36d39761f, type: 2}
+  - {fileID: 11400000, guid: 063ab0efa64110041aed6622a36af65a, type: 2}
   - {fileID: 11400000, guid: c0473215018a74a48afdbe9fa0f6cf3e, type: 2}
   currentObjective: {fileID: 11400000, guid: 3b83479e917b3944991723cc7d141d9f, type: 2}
   followUp: {fileID: 11400000, guid: 89ed7cd11abb0f4469641da95dbac8d5, type: 2}

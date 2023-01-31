@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 1-1111
   m_EditorClassIdentifier: 
-  text: 'I have got access to the cameras. Looks like the cleaning person took the
-    file while emptying your trash. '
-  audioClip: {fileID: 8300000, guid: e2f2c32832e586d49afd1ee9a03e6525, type: 3}
+  text: I have got access to the cameras. Looks like the cleaning person took the
+    file while emptying your trash. It should be in the cleaning cabinet down the
+    floor.
+  audioClip: {fileID: 8300000, guid: d9bf436b96479cb49a14fa84bc1a205d, type: 3}
   rude: 0
   excuse: 0
   CodeType: 4

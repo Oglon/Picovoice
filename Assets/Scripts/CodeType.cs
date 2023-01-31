@@ -9,7 +9,8 @@ public enum Code
     Documents,
     Donut,
     File,
-    Sticks,
+    Card,
     Phone,
+    Prize,
     Empty
 }

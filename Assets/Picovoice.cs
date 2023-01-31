@@ -13,6 +13,8 @@ public class Picovoice : MonoBehaviour
 
     private static readonly string _platform;
 
+    private bool stop;
+
     private const string
         AccessKey =
             "LEXyhVN7pdElKZ0mRGtgdoPGPg8MzEN2Tj0QuA3LqQESAX+y6o5o8A==";
@@ -22,6 +24,14 @@ public class Picovoice : MonoBehaviour
     {
         GetPlatform();
         _rhinoManager = RhinoManager.Create(AccessKey, GetContextPath(), InferenceCallback);
+    }
+
+    private void Update()
+    {
+        if (!stop)
+        {
+            Debug.Log("Pico: " + _rhinoManager.IsAudioDeviceAvailable() + " Devices: " + Microphone.devices.Length);
+        }
     }
 
     public void setStateMachine(ColleagueStateMachine stateMachine)
@@ -37,6 +47,7 @@ public class Picovoice : MonoBehaviour
     void InferenceCallback(Inference inference)
     {
         picoInference = inference;
+        Debug.Log("Pico Inference " + inference);
         _stateMachine.inferenceReaction(picoInference);
     }
 
@@ -73,5 +84,16 @@ public class Picovoice : MonoBehaviour
         string srcPath = Path.Combine(Application.streamingAssetsPath, "contexts/windows/colleague_windows.rhn");
         return srcPath;
     }
-    // return "D:/Unity Projects/Picovoice/Assets/StreamingAssets/contexts/windows/colleague_windows.rhn";
+
+    public void Restart()
+    {
+        _rhinoManager.Delete();
+        Start();
+    }
+
+    public void Delete()
+    {
+        stop = true;
+        _rhinoManager.Delete();
+    }
 }

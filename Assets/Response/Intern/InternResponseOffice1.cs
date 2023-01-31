@@ -132,7 +132,7 @@ public class InternResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_1111;
             }
 
-            if (intent == "1111")
+            if (intent == "Normal_1111")
             {
                 if (currentObjective.questIndex < Q5O1.questIndex)
                 {
@@ -167,7 +167,7 @@ public class InternResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_SomeoneInMyOffice;
             }
 
-            if (intent == "SomeoneInMyOffice")
+            if (intent == "Normal_SomeoneInMyOffice")
             {
                 return PreviousResponse = Normal_SomeoneInMyOffice;
             }
@@ -208,8 +208,9 @@ public class InternResponseOffice1 : ResponseScript
                 return PreviousResponse = ALTNeedHelp;
             }
 
-            if (intent == "NeedHelp")
+            if (intent == "Normal_NeedHelp")
             {
+                Debug.Log(currentObjective + ", " + Q3O1);
                 if (currentObjective.questIndex < Q3O1.questIndex)
                 {
                     return NotUnderstood();
@@ -245,7 +246,7 @@ public class InternResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_CameraCode;
             }
 
-            if (intent == "CameraCode")
+            if (intent == "Normal_CameraCode")
             {
                 return PreviousResponse = Normal_CameraCode;
             }
@@ -270,7 +271,7 @@ public class InternResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_Documents;
             }
 
-            if (intent == "Documents")
+            if (intent == "Normal_Documents")
             {
                 if (currentObjective.questIndex < Q3O3.questIndex)
                 {
@@ -298,21 +299,6 @@ public class InternResponseOffice1 : ResponseScript
                 }
 
                 return PreviousResponse = Unfriendly_Documents;
-            }
-
-            if (intent == "Friendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Unfriendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
             }
 
             if (intent == "Curse")
@@ -384,20 +370,17 @@ public class InternResponseOffice1 : ResponseScript
             {
                 return PreviousResponse = HowDoYouLikeItHere;
             }
-        }
-        else
-        {
             return PreviousResponse = NotUnderstood();
         }
 
-        return PreviousResponse;
+        return PreviousResponse = NotUnderstood();
     }
 
     private DialogueResponse NotUnderstood()
     {
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 11);
-        DialogueResponse response = new DialogueResponse();
+        DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
 
         switch (responseInt)
         {

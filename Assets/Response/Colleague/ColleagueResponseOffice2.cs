@@ -7,13 +7,13 @@ public class ColleagueResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse Normal_Escape { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_Escape { get; private set; }
 
-    [field: SerializeField] public DialogueResponse Friendly_5276 { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_5276 { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_5276 { get; private set; }
+    [field: SerializeField] public DialogueResponse Friendly_Keycard { get; private set; }
+    [field: SerializeField] public DialogueResponse Normal_Keycard { get; private set; }
+    [field: SerializeField] public DialogueResponse Unfriendly_Keycard { get; private set; }
 
-    [field: SerializeField] public DialogueResponse Friendly_Rhino { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_Rhino { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_Rhino { get; private set; }
+    [field: SerializeField] public DialogueResponse Fixed { get; private set; }
+
+    [field: SerializeField] public DialogueResponse Phone { get; private set; }
 
     [field: SerializeField] public DialogueResponse Friendly_SecretPrize { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_SecretPrize { get; private set; }
@@ -72,9 +72,10 @@ public class ColleagueResponseOffice2 : ResponseScript
 
     public DialogueResponse PreviousResponse { get; private set; }
 
+    [field: SerializeField] public Objective Q1O2;
     [field: SerializeField] public Objective Q2O1;
-    [field: SerializeField] public Objective Q2O2;
-    
+    [field: SerializeField] public Objective Q3O2;
+
 
     [field: SerializeField] private ObjectiveHandler objectiveHandler;
     private Quest currentQuest;
@@ -116,74 +117,29 @@ public class ColleagueResponseOffice2 : ResponseScript
                 return PreviousResponse = LeaveMeAlone;
             }
 
-            if (intent == "Friendly_SecretPrice")
+            if (intent == "Friendly_SecretPrize")
             {
                 return PreviousResponse = Friendly_SecretPrize;
             }
 
-            if (intent == "SecretPrice")
+            if (intent == "Normal_SecretPrize")
             {
                 return PreviousResponse = Normal_SecretPrize;
             }
 
-            if (intent == "Unfriendly_SecretPrice")
+            if (intent == "Unfriendly_SecretPrize")
             {
                 return PreviousResponse = Unfriendly_SecretPrize;
             }
 
-            if (intent == "Friendly_5276")
-            {
-                if (currentObjective.questIndex < Q2O2.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q2O2 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
-
-                return PreviousResponse = Friendly_5276;
-            }
-
-            if (intent == "5276")
-            {
-                if (currentObjective.questIndex < Q2O2.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q2O2 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
-
-                return PreviousResponse = Normal_5276;
-            }
-
-            if (intent == "Unfriendly_5276")
-            {
-                if (currentObjective.questIndex < Q2O2.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q2O2 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
-
-                return PreviousResponse = Unfriendly_5276;
-            }
-
             if (intent == "Friendly_NeedHelp")
             {
-                if (currentObjective.questIndex < Q2O1.questIndex)
+                if (currentObjective.questIndex < Q1O2.questIndex)
                 {
-                    return NotUnderstood();
+                    return PreviousResponse = ALT_NeedHelp;
                 }
 
-                if (Q2O1 == currentObjective)
+                if (Q1O2 == currentObjective)
                 {
                     currentQuest.Progress();
                     return PreviousResponse = Friendly_NeedHelp;
@@ -192,14 +148,14 @@ public class ColleagueResponseOffice2 : ResponseScript
                 return PreviousResponse = ALT_NeedHelp;
             }
 
-            if (intent == "NeedHelp")
+            if (intent == "Normal_NeedHelp")
             {
-                if (currentObjective.questIndex < Q2O1.questIndex)
+                if (currentObjective.questIndex < Q1O2.questIndex)
                 {
-                    return NotUnderstood();
+                    return PreviousResponse = ALT_NeedHelp;
                 }
 
-                if (Q2O1 == currentObjective)
+                if (Q1O2 == currentObjective)
                 {
                     currentQuest.Progress();
                     return PreviousResponse = Normal_NeedHelp;
@@ -210,12 +166,12 @@ public class ColleagueResponseOffice2 : ResponseScript
 
             if (intent == "Unfriendly_NeedHelp")
             {
-                if (currentObjective.questIndex < Q2O1.questIndex)
+                if (currentObjective.questIndex < Q1O2.questIndex)
                 {
-                    return NotUnderstood();
+                    return PreviousResponse = ALT_NeedHelp;
                 }
 
-                if (Q2O1 == currentObjective)
+                if (Q1O2 == currentObjective)
                 {
                     currentQuest.Progress();
                     return PreviousResponse = Unfriendly_NeedHelp;
@@ -229,7 +185,7 @@ public class ColleagueResponseOffice2 : ResponseScript
                 return PreviousResponse = Friendly_WantedToTalkToMe;
             }
 
-            if (intent == "WantedToTalkToMe")
+            if (intent == "Normal_WantedToTalkToMe")
             {
                 return PreviousResponse = Normal_WantedToTalkToMe;
             }
@@ -239,40 +195,76 @@ public class ColleagueResponseOffice2 : ResponseScript
                 return PreviousResponse = Unfriendly_WantedToTalkToMe;
             }
 
-            if (intent == "Friendly_Escape")
+            if (intent == "Friendly_Keycard")
             {
-                
+                if (Q3O2 == currentObjective)
+                {
+                }
 
-                return PreviousResponse = Friendly_Escape;
+                return PreviousResponse = Friendly_Keycard;
             }
 
-            if (intent == "Escape")
+            if (intent == "Normal_Keycard")
             {
-                
+                if (Q3O2 == currentObjective)
+                {
+                }
+
+                return PreviousResponse = Normal_Keycard;
+            }
+
+            if (intent == "Unfriendly_Keycard")
+            {
+                if (Q3O2 == currentObjective)
+                {
+                }
+
+                return PreviousResponse = Unfriendly_Keycard;
+            }
+
+            if (intent == "Friendly_Escape")
+            {
+                if (currentObjective.questIndex < Q2O1.questIndex)
+                {
+                    return NotUnderstood();
+                }
+
+                if (Q2O1 == currentObjective)
+                {
+                    currentQuest.Progress();
+                }
+
+                return PreviousResponse = Normal_Escape;
+            }
+
+            if (intent == "Normal_Escape")
+            {
+                if (currentObjective.questIndex < Q2O1.questIndex)
+                {
+                    return NotUnderstood();
+                }
+
+                if (Q2O1 == currentObjective)
+                {
+                    currentQuest.Progress();
+                }
 
                 return PreviousResponse = Normal_Escape;
             }
 
             if (intent == "Unfriendly_Escape")
             {
-                
+                if (currentObjective.questIndex < Q2O1.questIndex)
+                {
+                    return NotUnderstood();
+                }
 
-                return PreviousResponse = Unfriendly_Escape;
-            }
+                if (Q2O1 == currentObjective)
+                {
+                    currentQuest.Progress();
+                }
 
-            if (intent == "Friendly_Rhino")
-            {
-                return PreviousResponse = Friendly_Rhino;
-            }
-
-            if (intent == "Rhino")
-            {
-                return PreviousResponse = Normal_Rhino;
-            }
-
-            if (intent == "Unfriendly_Rhino")
-            {
-                return PreviousResponse = Unfriendly_Rhino;
+                return PreviousResponse = Normal_Escape;
             }
 
             if (intent == "Friendly_Yes")
@@ -280,7 +272,7 @@ public class ColleagueResponseOffice2 : ResponseScript
                 return PreviousResponse = ThanksResponse();
             }
 
-            if (intent == "Yes")
+            if (intent == "Normal_Yes")
             {
                 return PreviousResponse = ThanksResponse();
             }
@@ -359,20 +351,17 @@ public class ColleagueResponseOffice2 : ResponseScript
             {
                 return PreviousResponse = HowDoYouLikeItHere;
             }
-        }
-        else
-        {
             return PreviousResponse = NotUnderstood();
         }
 
-        return PreviousResponse;
+        return PreviousResponse = NotUnderstood();
     }
 
     private DialogueResponse NotUnderstood()
     {
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 11);
-        DialogueResponse response = new DialogueResponse();
+        DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
 
         switch (responseInt)
         {
@@ -422,14 +411,15 @@ public class ColleagueResponseOffice2 : ResponseScript
 
     public string RemoveSensitive(string intent)
     {
-        return intent.Replace("Friendly_", "").Replace("Unfriendly_", "");
+        Debug.Log(intent);
+        return intent.Replace("Friendly_", "Normal_").Replace("Unfriendly_", "Normal_");
     }
 
     private DialogueResponse CurseResponse()
     {
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 5);
-        DialogueResponse response = new DialogueResponse();
+        DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
 
         switch (responseInt)
         {
@@ -457,7 +447,7 @@ public class ColleagueResponseOffice2 : ResponseScript
     {
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
-        DialogueResponse response = new DialogueResponse();
+        DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
 
         switch (responseInt)
         {
@@ -491,7 +481,7 @@ public class ColleagueResponseOffice2 : ResponseScript
     {
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
-        DialogueResponse response = new DialogueResponse();
+        DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
 
         switch (responseInt)
         {

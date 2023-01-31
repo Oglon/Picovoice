@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 1-Unfriendly-1111
   m_EditorClassIdentifier: 
-  text: 'Hmm. Seems like the cleaning person took the file while emptying your trash. '
+  text: Seems like the cleaning person took the file while emptying your trash. It
+    should be in the cleaning cabinet down the floor.
   audioClip: {fileID: 8300000, guid: 91d2986f49604444786a624fca809947, type: 3}
   rude: 0
   excuse: 0

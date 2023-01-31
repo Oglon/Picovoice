@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 3-2
   m_EditorClassIdentifier: 
-  objectiveDesc: Collect the 3 USB-Sticks for the Intern
-  objectiveHint: Collect the USB-Sticks
+  objectiveDesc: Get the Keycard
+  objectiveHint: Ask "Can I have the Keycard"
   questIndex: 3

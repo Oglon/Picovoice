@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac18aacd0cde6449f7af929431610a, type: 3}
+  m_Name: 3_404 - Connection not found
+  m_EditorClassIdentifier: 
+  questName: 404 - Connection not found
+  objectives:
+  - {fileID: 11400000, guid: 84598e2ad7e05ce44aa1b0b6a1a74a86, type: 2}
+  - {fileID: 11400000, guid: b679d76219250854ba80b30e64e569be, type: 2}
+  - {fileID: 11400000, guid: e63c6f2314c101747bf2b0fb2ef7111a, type: 2}
+  - {fileID: 11400000, guid: b828cca22e1e6824c85548b904adba4d, type: 2}
+  - {fileID: 11400000, guid: e26620766efd02e418604a7262898bcb, type: 2}
+  currentObjective: {fileID: 11400000, guid: 84598e2ad7e05ce44aa1b0b6a1a74a86, type: 2}
+  followUp: {fileID: 11400000, guid: c2f19dab7481e774b98b97a560e7ee04, type: 2}
+  questIndex: 3

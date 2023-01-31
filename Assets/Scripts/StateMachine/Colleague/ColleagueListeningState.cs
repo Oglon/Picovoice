@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
-using Pv.Unity;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ColleagueListeningState : ColleagueBaseState
 {
@@ -79,8 +74,6 @@ public class ColleagueListeningState : ColleagueBaseState
         {
             str = str.Remove(str.Length - 1);
         }
-
-        Debug.Log(str);
 
         string clipPath = "Audio/" + stateMachine.ColleagueType.ToString() + "/";
         clipPath = clipPath + str;

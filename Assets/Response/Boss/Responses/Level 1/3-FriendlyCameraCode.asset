@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 3-FriendlyCameraCode
   m_EditorClassIdentifier: 
-  text: You can get the door code if you are kind enough to bring me a donut.
+  text: You can get the camera code if you are kind enough to bring me a donut.
   audioClip: {fileID: 8300000, guid: 14ee3125ddc7f94458325d9a4db3e4a5, type: 3}
   rude: 0
   excuse: 0

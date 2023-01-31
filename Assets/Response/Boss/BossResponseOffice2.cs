@@ -7,13 +7,15 @@ public class BossResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse Normal_Escape { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_Escape { get; private set; }
 
-    [field: SerializeField] public DialogueResponse Friendly_5276 { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_5276 { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_5276 { get; private set; }
+    [field: SerializeField] public DialogueResponse Friendly_Keycard { get; private set; }
+    [field: SerializeField] public DialogueResponse Normal_Keycard { get; private set; }
+    [field: SerializeField] public DialogueResponse Unfriendly_Keycard { get; private set; }
 
-    [field: SerializeField] public DialogueResponse Friendly_Rhino { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_Rhino { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_Rhino { get; private set; }
+    [field: SerializeField] public DialogueResponse Fixed { get; private set; }
+
+    [field: SerializeField] public DialogueResponse Friendly_Phone { get; private set; }
+    [field: SerializeField] public DialogueResponse Normal_Phone { get; private set; }
+    [field: SerializeField] public DialogueResponse Unfriendly_Phone { get; private set; }
 
     [field: SerializeField] public DialogueResponse Friendly_SecretPrize { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_SecretPrize { get; private set; }
@@ -27,8 +29,6 @@ public class BossResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse Normal_WantedToTalkToMe { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_WantedToTalkToMe { get; private set; }
     [field: SerializeField] public DialogueResponse WantedToTalkToMeALT { get; private set; }
-    [field: SerializeField] public DialogueResponse WantedToTalkToMe2 { get; private set; }
-    [field: SerializeField] public DialogueResponse WantedToTalkToMe3 { get; private set; }
     [field: SerializeField] public DialogueResponse Weather { get; private set; }
     [field: SerializeField] public DialogueResponse Game { get; private set; }
     [field: SerializeField] public DialogueResponse HowIsItGoing { get; private set; }
@@ -72,8 +72,8 @@ public class BossResponseOffice2 : ResponseScript
     public DialogueResponse PreviousResponse { get; private set; }
 
     [field: SerializeField] public Objective Q1O1;
-    [field: SerializeField] public Objective Q3O1;
     [field: SerializeField] public Objective Q4O1;
+
     [field: SerializeField] public Objective Q4O3;
 
     [field: SerializeField] private ObjectiveHandler objectiveHandler;
@@ -116,7 +116,7 @@ public class BossResponseOffice2 : ResponseScript
 
         if (inference.IsUnderstood)
         {
-            if (intent == "Friendly_SecretPrice")
+            if (intent == "Friendly_SecretPrize")
             {
                 if (Q1O1 == currentObjective)
                 {
@@ -126,7 +126,7 @@ public class BossResponseOffice2 : ResponseScript
                 return PreviousResponse = Friendly_SecretPrize;
             }
 
-            if (intent == "SecretPrice")
+            if (intent == "SecretPrize")
             {
                 if (Q1O1 == currentObjective)
                 {
@@ -136,7 +136,7 @@ public class BossResponseOffice2 : ResponseScript
                 return PreviousResponse = Normal_SecretPrize;
             }
 
-            if (intent == "Unfriendly_SecretPrice")
+            if (intent == "Unfriendly_SecretPrize")
             {
                 if (Q1O1 == currentObjective)
                 {
@@ -146,27 +146,12 @@ public class BossResponseOffice2 : ResponseScript
                 return PreviousResponse = Unfriendly_SecretPrize;
             }
 
-            if (intent == "Friendly_5276")
-            {
-                return PreviousResponse = Friendly_5276;
-            }
-
-            if (intent == "5276")
-            {
-                return PreviousResponse = Normal_5276;
-            }
-
-            if (intent == "Unfriendly_5276")
-            {
-                return PreviousResponse = Unfriendly_5276;
-            }
-
             if (intent == "Friendly_NeedHelp")
             {
                 return PreviousResponse = Friendly_NeedHelp;
             }
 
-            if (intent == "NeedHelp")
+            if (intent == "Normal_NeedHelp")
             {
                 return PreviousResponse = Normal_NeedHelp;
             }
@@ -178,64 +163,76 @@ public class BossResponseOffice2 : ResponseScript
 
             if (intent == "Friendly_WantedToTalkToMe")
             {
-                if (Q3O1 == currentObjective)
+                if (Q4O1 == currentObjective)
                 {
                     currentQuest.Progress();
                     return PreviousResponse = Friendly_WantedToTalkToMe;
                 }
-                
-                if (Q4O1 == currentObjective)
-                {
-                    currentQuest.Progress();
-                    return PreviousResponse = WantedToTalkToMe2;
-                }
-                if (Q4O3 == currentObjective)
-                {
-                    currentQuest.Progress();
-                    return PreviousResponse = WantedToTalkToMe3;
-                }
+
 
                 return PreviousResponse = WantedToTalkToMeALT;
             }
 
-            if (intent == "WantedToTalkToMe")
+            if (intent == "Normal_WantedToTalkToMe")
             {
-                if (Q3O1 == currentObjective)
+                if (Q4O1 == currentObjective)
                 {
                     currentQuest.Progress();
                     return PreviousResponse = Normal_WantedToTalkToMe;
                 }
-                if (Q4O1 == currentObjective)
-                {
-                    currentQuest.Progress();
-                    return PreviousResponse = WantedToTalkToMe2;
-                }
-                if (Q4O3 == currentObjective)
-                {
-                    currentQuest.Progress();
-                    return PreviousResponse = WantedToTalkToMe3;
-                }
+
                 return PreviousResponse = WantedToTalkToMeALT;
             }
 
             if (intent == "Unfriendly_WantedToTalkToMe")
             {
-                if (Q3O1 == currentObjective)
+                if (Q4O1 == currentObjective)
                 {
                     currentQuest.Progress();
                     return PreviousResponse = Unfriendly_WantedToTalkToMe;
                 }
-                if (Q4O1 == currentObjective)
-                {
-                    currentQuest.Progress();
-                    return PreviousResponse = WantedToTalkToMe2;
-                }
+
+                return PreviousResponse = WantedToTalkToMeALT;
+            }
+
+            if (intent == "Friendly_Keycard")
+            {
+                return PreviousResponse = Friendly_Keycard;
+            }
+
+            if (intent == "Normal_Keycard")
+            {
+                return PreviousResponse = Normal_Keycard;
+            }
+
+            if (intent == "Unfriendly_Keycard")
+            {
+                return PreviousResponse = Unfriendly_Keycard;
+            }
+
+            if (intent == "Friendly_Phone")
+            {
                 if (Q4O3 == currentObjective)
                 {
                     currentQuest.Progress();
-                    return PreviousResponse = WantedToTalkToMe3;
                 }
-                return PreviousResponse = WantedToTalkToMeALT;
+
+                return PreviousResponse = Friendly_Phone;
+            }
+
+            if (intent == "Normal_Phone")
+            {
+                if (Q4O3 == currentObjective)
+                {
+                    currentQuest.Progress();
+                }
+
+                return PreviousResponse = Normal_Phone;
+            }
+
+            if (intent == "Unfriendly_Phone")
+            {
+                return PreviousResponse = Unfriendly_Phone;
             }
 
             if (intent == "Friendly_Escape")
@@ -243,7 +240,7 @@ public class BossResponseOffice2 : ResponseScript
                 return PreviousResponse = Friendly_Escape;
             }
 
-            if (intent == "Escape")
+            if (intent == "Normal_Escape")
             {
                 return PreviousResponse = Normal_Escape;
             }
@@ -251,36 +248,6 @@ public class BossResponseOffice2 : ResponseScript
             if (intent == "Unfriendly_Escape")
             {
                 return PreviousResponse = Unfriendly_Escape;
-            }
-
-            if (intent == "Friendly_Rhino")
-            {
-                return PreviousResponse = Friendly_Rhino;
-            }
-
-            if (intent == "Rhino")
-            {
-                return PreviousResponse = Normal_Rhino;
-            }
-
-            if (intent == "Unfriendly_Rhino")
-            {
-                return PreviousResponse = Unfriendly_Rhino;
-            }
-
-            if (intent == "Friendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Unfriendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
             }
 
             if (intent == "Curse")
@@ -352,13 +319,11 @@ public class BossResponseOffice2 : ResponseScript
             {
                 return PreviousResponse = HowDoYouLikeItHere;
             }
-        }
-        else
-        {
+
             return PreviousResponse = NotUnderstood();
         }
 
-        return PreviousResponse;
+        return PreviousResponse = NotUnderstood();
     }
 
     private DialogueResponse NotUnderstood()

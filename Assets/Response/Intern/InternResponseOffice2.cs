@@ -1,19 +1,13 @@
 using Pv.Unity;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InternResponseOffice2 : ResponseScript
 {
     [field: SerializeField] public DialogueResponse Friendly_Escape { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_Escape { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_Escape { get; private set; }
-
-    [field: SerializeField] public DialogueResponse Friendly_5276 { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_5276 { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_5276 { get; private set; }
-
-    [field: SerializeField] public DialogueResponse Friendly_Rhino { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_Rhino { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_Rhino { get; private set; }
 
     [field: SerializeField] public DialogueResponse Friendly_SecretPrize { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_SecretPrize { get; private set; }
@@ -22,7 +16,19 @@ public class InternResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse Friendly_NeedHelp { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_NeedHelp { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_NeedHelp { get; private set; }
+    [field: SerializeField] public DialogueResponse ALT_NeedHelp { get; private set; }
 
+    [field: SerializeField] public DialogueResponse Friendly_Keycard { get; private set; }
+    [field: SerializeField] public DialogueResponse Normal_Keycard { get; private set; }
+    [field: SerializeField] public DialogueResponse Unfriendly_Keycard { get; private set; }
+
+    [field: SerializeField] public DialogueResponse Friendly_Fixed { get; private set; }
+    [field: SerializeField] public DialogueResponse Normal_Fixed { get; private set; }
+    [field: SerializeField] public DialogueResponse Unfriendly_Fixed { get; private set; }
+
+    [field: SerializeField] public DialogueResponse Friendly_Phone { get; private set; }
+    [field: SerializeField] public DialogueResponse Normal_Phone { get; private set; }
+    [field: SerializeField] public DialogueResponse Unfriendly_Phone { get; private set; }
 
     [field: SerializeField] public DialogueResponse Friendly_WantedToTalkToMe { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_WantedToTalkToMe { get; private set; }
@@ -71,18 +77,21 @@ public class InternResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse LeaveMeAlone { get; private set; }
     public DialogueResponse PreviousResponse { get; private set; }
 
-    [field: SerializeField] public Objective Q3O2;
-    [field: SerializeField] public Objective Q4O2;
-    [field: SerializeField] public Objective Q3O3;
+
+    private Quest currentQuest;
+
+    [field: SerializeField] public Objective Q3O1;
+    [field: SerializeField] public Objective Q3O5;
 
     [field: SerializeField] private ObjectiveHandler objectiveHandler;
-    private Quest currentQuest;
 
     public override DialogueResponse GetResponse(Inference inference, bool sensitive, int rudeIncidents,
         float rudeCooldown)
     {
         currentQuest = objectiveHandler.GetCurrentQuest();
         Objective currentObjective = currentQuest.currentObjective;
+
+        Debug.Log(inference.Intent);
 
         string intent = sensitive ? inference.Intent : RemoveSensitive(inference.Intent);
 
@@ -115,79 +124,67 @@ public class InternResponseOffice2 : ResponseScript
                 return PreviousResponse = LeaveMeAlone;
             }
 
-            if (intent == "Friendly_SecretPrice")
+            if (intent == "Friendly_SecretPrize")
             {
                 return PreviousResponse = Friendly_SecretPrize;
             }
 
-            if (intent == "SecretPrice")
+            if (intent == "Normal_SecretPrize")
             {
                 return PreviousResponse = Normal_SecretPrize;
             }
 
-            if (intent == "Unfriendly_SecretPrice")
+            if (intent == "Unfriendly_SecretPrize")
             {
                 return PreviousResponse = Unfriendly_SecretPrize;
             }
 
-            if (intent == "Friendly_5276")
-            {
-                return PreviousResponse = Friendly_5276;
-            }
-
-            if (intent == "5276")
-            {
-                return PreviousResponse = Normal_5276;
-            }
-
-            if (intent == "Unfriendly_5276")
-            {
-                return PreviousResponse = Unfriendly_5276;
-            }
-
             if (intent == "Friendly_NeedHelp")
             {
-                if (currentObjective.questIndex < Q3O2.questIndex)
+                if (currentObjective.questIndex < Q3O1.questIndex)
                 {
-                    return NotUnderstood();
+                    return PreviousResponse = ALT_NeedHelp;
                 }
 
-                if (Q3O2 == currentObjective)
+                if (Q3O1 == currentObjective)
                 {
                     currentQuest.Progress();
+                    return PreviousResponse = Friendly_NeedHelp;
                 }
 
-                return PreviousResponse = Friendly_NeedHelp;
+                return PreviousResponse = ALT_NeedHelp;
             }
 
-            if (intent == "NeedHelp")
+            if (intent == "Normal_NeedHelp")
             {
-                if (currentObjective.questIndex < Q3O2.questIndex)
+                if (currentObjective.questIndex < Q3O1.questIndex)
                 {
-                    return NotUnderstood();
+                    return PreviousResponse = ALT_NeedHelp;
                 }
 
-                if (Q3O2 == currentObjective)
+                if (Q3O1 == currentObjective)
                 {
                     currentQuest.Progress();
+                    return PreviousResponse = Normal_NeedHelp;
                 }
 
-                return PreviousResponse = Normal_NeedHelp;
+                return PreviousResponse = ALT_NeedHelp;
             }
 
             if (intent == "Unfriendly_NeedHelp")
             {
-                if (currentObjective.questIndex < Q3O2.questIndex)
+                if (currentObjective.questIndex < Q3O1.questIndex)
                 {
-                    return NotUnderstood();
+                    return PreviousResponse = ALT_NeedHelp;
                 }
 
-                if (Q3O2 == currentObjective)
+                if (Q3O1 == currentObjective)
                 {
                     currentQuest.Progress();
+                    return PreviousResponse = Unfriendly_NeedHelp;
                 }
 
-                return PreviousResponse = Unfriendly_NeedHelp;
+                return PreviousResponse = ALT_NeedHelp;
             }
 
             if (intent == "Friendly_WantedToTalkToMe")
@@ -195,7 +192,7 @@ public class InternResponseOffice2 : ResponseScript
                 return PreviousResponse = Friendly_WantedToTalkToMe;
             }
 
-            if (intent == "WantedToTalkToMe")
+            if (intent == "Normal_WantedToTalkToMe")
             {
                 return PreviousResponse = Normal_WantedToTalkToMe;
             }
@@ -207,87 +204,47 @@ public class InternResponseOffice2 : ResponseScript
 
             if (intent == "Friendly_Escape")
             {
-                if (currentObjective.questIndex < Q3O3.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q3O3 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
                 return PreviousResponse = Friendly_Escape;
             }
 
-            if (intent == "Escape")
+            if (intent == "Friendly_Fixed")
             {
-                if (currentObjective.questIndex < Q3O3.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q3O3 == currentObjective)
+                if (Q3O5 == currentObjective)
                 {
                     currentQuest.Progress();
                 }
+
+                return PreviousResponse = Friendly_Fixed;
+            }
+
+            if (intent == "Normal_Fixed")
+            {
+                if (Q3O5 == currentObjective)
+                {
+                    currentQuest.Progress();
+                }
+
+                return PreviousResponse = Normal_Fixed;
+            }
+
+            if (intent == "Unfriendly_Fixed")
+            {
+                if (Q3O5 == currentObjective)
+                {
+                    currentQuest.Progress();
+                }
+
+                return PreviousResponse = Unfriendly_Fixed;
+            }
+
+            if (intent == "Normal_Escape")
+            {
                 return PreviousResponse = Normal_Escape;
             }
 
             if (intent == "Unfriendly_Escape")
             {
-                if (currentObjective.questIndex < Q3O3.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q3O3 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
                 return PreviousResponse = Unfriendly_Escape;
-            }
-
-            if (intent == "Friendly_Rhino")
-            {
-                if (currentObjective.questIndex < Q4O2.questIndex)
-                {
-                    return NotUnderstood();
-                }
-
-                if (Q4O2 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
-
-                return PreviousResponse = Friendly_Rhino;
-            }
-
-            if (intent == "Rhino")
-            {
-                if (currentObjective.questIndex < Q4O2.questIndex)
-                {
-                    return NotUnderstood();
-                }
-                if (Q4O2 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
-
-                return PreviousResponse = Normal_Rhino;
-            }
-
-            if (intent == "Unfriendly_Rhino")
-            {
-                if (currentObjective.questIndex < Q4O2.questIndex)
-                {
-                    return NotUnderstood();
-                }
-                if (Q4O2 == currentObjective)
-                {
-                    currentQuest.Progress();
-                }
-
-                return PreviousResponse = Unfriendly_Rhino;
             }
 
             if (intent == "Friendly_Yes")
@@ -295,7 +252,7 @@ public class InternResponseOffice2 : ResponseScript
                 return PreviousResponse = ThanksResponse();
             }
 
-            if (intent == "Yes")
+            if (intent == "Normal_Yes")
             {
                 return PreviousResponse = ThanksResponse();
             }
@@ -374,13 +331,11 @@ public class InternResponseOffice2 : ResponseScript
             {
                 return PreviousResponse = HowDoYouLikeItHere;
             }
-        }
-        else
-        {
+
             return PreviousResponse = NotUnderstood();
         }
 
-        return PreviousResponse;
+        return PreviousResponse = NotUnderstood();
     }
 
     private DialogueResponse NotUnderstood()
@@ -437,7 +392,7 @@ public class InternResponseOffice2 : ResponseScript
 
     public string RemoveSensitive(string intent)
     {
-        return intent.Replace("Friendly_", "").Replace("Unfriendly_", "");
+        return intent.Replace("Friendly_", "Normal_").Replace("Unfriendly_", "Normal_");
     }
 
     private DialogueResponse CurseResponse()

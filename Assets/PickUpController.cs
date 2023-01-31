@@ -13,28 +13,36 @@ public class PickUpController : MonoBehaviour
     private ObjectiveHandler objectiveHandler;
     private Quest currentQuest;
 
-    public static int collection = 0;
-
     [field: SerializeField] public AudioClip PickUpSound { get; private set; }
     private AudioSource audioSource;
 
     private float pickUpRange = 4;
+
+    private Picovoice Picovoice;
 
     private void Start()
     {
         player = GameObject.Find("PlayerCapsule").gameObject.transform;
         container = GameObject.Find("Container").gameObject.transform;
 
-        player.TryGetComponent<AudioSource>(out audioSource);
+        Picovoice = GameObject.Find("Picovoice").GetComponent<Picovoice>();
+
+        PickUpSound = Resources.Load<AudioClip>("PickUp");
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.3f;
+        audioSource.clip = PickUpSound;
+
         coll = GetComponent<BoxCollider>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = true;
-        objectiveHandler = GameObject.Find("PlayerCapsule").GetComponent<ObjectiveHandler>();
+        GameObject gameObject = GameObject.Find("NestedParent_Unpack");
+        objectiveHandler = gameObject.transform.GetChild(2).gameObject.GetComponent<ObjectiveHandler>();
+
+        // objectiveHandler = GameObject.Find("PlayerCapsule").GetComponent<ObjectiveHandler>();
     }
 
     private void Update()
     {
-        
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
         if (!equipped && distanceToPlayer <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !SlotFull)
         {
@@ -49,27 +57,31 @@ public class PickUpController : MonoBehaviour
 
     private void PickUp()
     {
-        Debug.Log("PickUp");
+        currentQuest = objectiveHandler.GetCurrentQuest();
+
         if (gameObject.CompareTag("QuestItem"))
         {
+            audioSource.Play();
             currentQuest.Progress();
             Destroy(gameObject);
+            return;
         }
 
         if (gameObject.CompareTag("CollectionItem"))
         {
-            collection++;
-            if (collection == 3)
-            {
-                currentQuest.Progress();
-            }
+            audioSource.Play();
+            currentQuest.Progress();
 
-            Destroy(gameObject);
+            Destroy(transform.gameObject);
+            return;
         }
 
         if (gameObject.CompareTag("Goal"))
         {
+            Picovoice.Delete();
+            audioSource.Play();
             SceneManager.LoadScene("StartMenu");
+            return;
         }
 
         _rigidbody.isKinematic = true;
@@ -82,7 +94,6 @@ public class PickUpController : MonoBehaviour
 
         coll.isTrigger = true;
 
-        audioSource.clip = PickUpSound;
         audioSource.Play();
     }
 
@@ -98,9 +109,9 @@ public class PickUpController : MonoBehaviour
         coll.isTrigger = false;
     }
 
-    // public void Delete()
-    // {
-    //     Drop();
-    //     Destroy(gameObject);
-    // }
+    public void Delete()
+    {
+        Drop();
+        Destroy(gameObject);
+    }
 }

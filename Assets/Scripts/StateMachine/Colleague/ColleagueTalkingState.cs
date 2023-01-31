@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ColleagueTalkingState : ColleagueBaseState
 {
-    public event Action OnResponse;
-
     public ColleagueTalkingState(ColleagueStateMachine stateMachine, Inference Inference) : base(stateMachine)
     {
         inferenceTalking(Inference);
@@ -30,6 +28,7 @@ public class ColleagueTalkingState : ColleagueBaseState
             else
             {
                 stateMachine.ObjectiveHandler.AudioBar.SetInactive();
+                stateMachine.isProcessing = false;
                 stateMachine.SwitchState(new ColleagueWorkingState(stateMachine));
             }
         }
@@ -45,7 +44,7 @@ public class ColleagueTalkingState : ColleagueBaseState
             return;
         var sceneName = SceneManager.GetActiveScene().name;
 
-        DialogueResponse dialogueResponse = new DialogueResponse();
+        DialogueResponse dialogueResponse;
 
         if (stateMachine.Sensitive)
         {
@@ -68,6 +67,8 @@ public class ColleagueTalkingState : ColleagueBaseState
                 stateMachine.Sensitive,
                 stateMachine.rudeIncidents, stateMachine.RudeTimer);
         }
+
+        Debug.Log(dialogueResponse);
 
         if (dialogueResponse.excuse)
         {
@@ -101,6 +102,14 @@ public class ColleagueTalkingState : ColleagueBaseState
             GameObject DocumentB = GameObject.Find("Document_B");
             GameObject DocumentC = GameObject.Find("Document_C");
 
+            Outline outlineA = DocumentA.GetComponent<Outline>();
+            Outline outlineB = DocumentB.GetComponent<Outline>();
+            Outline outlineC = DocumentC.GetComponent<Outline>();
+
+            outlineA.OutlineMode = Outline.Mode.OutlineAll;
+            outlineB.OutlineMode = Outline.Mode.OutlineAll;
+            outlineC.OutlineMode = Outline.Mode.OutlineAll;
+
             GameObject CollectibleSpawnerA = GameObject.Find("Collectible_Spawner_A");
             GameObject CollectibleSpawnerB = GameObject.Find("Collectible_Spawner_B");
             GameObject CollectibleSpawnerC = GameObject.Find("Collectible_Spawner_C");
@@ -116,6 +125,10 @@ public class ColleagueTalkingState : ColleagueBaseState
             GameObject Donut = GameObject.Find("Donut");
             GameObject DonutSpawner = GameObject.Find("Donut_Spawner");
 
+            Outline outlineDonut = Donut.GetComponent<Outline>();
+
+            outlineDonut.OutlineMode = Outline.Mode.OutlineAll;
+
             Donut.transform.position = DonutSpawner.transform.position;
             return;
         }
@@ -125,7 +138,46 @@ public class ColleagueTalkingState : ColleagueBaseState
             GameObject File = GameObject.Find("File");
             GameObject FileSpawner = GameObject.Find("File_Spawner");
 
+            Outline outlineFile = File.GetComponent<Outline>();
+            outlineFile.OutlineMode = Outline.Mode.OutlineAll;
+
             File.transform.position = FileSpawner.transform.position;
+            return;
+        }
+
+        if (code == Code.Card)
+        {
+            GameObject Keycard = GameObject.Find("Keycard");
+            GameObject KeycardSpawner = GameObject.Find("Spawner_Keycard");
+
+            Outline outlineFile = Keycard.GetComponent<Outline>();
+            outlineFile.OutlineMode = Outline.Mode.OutlineAll;
+
+            Keycard.transform.position = KeycardSpawner.transform.position;
+            return;
+        }
+
+        if (code == Code.Phone)
+        {
+            GameObject Phone = GameObject.Find("Phone");
+            GameObject PhoneSpawner = GameObject.Find("Spawner_Phone");
+
+            Outline outlinePhone = Phone.GetComponent<Outline>();
+            outlinePhone.OutlineMode = Outline.Mode.OutlineAll;
+
+            Phone.transform.position = PhoneSpawner.transform.position;
+            return;
+        }
+
+        if (code == Code.Prize)
+        {
+            GameObject Prize = GameObject.Find("Prize");
+            GameObject PrizeSpawner = GameObject.Find("Spawner_Prize");
+
+            Outline outlinePhone = Prize.GetComponent<Outline>();
+            outlinePhone.OutlineMode = Outline.Mode.OutlineAll;
+
+            Prize.transform.position = PrizeSpawner.transform.position;
             return;
         }
 
@@ -146,6 +198,10 @@ public class ColleagueTalkingState : ColleagueBaseState
         string stringCode = code + "Code";
 
         GameObject gameObject = GameObject.Find(stringCode);
+
+        Outline outlineCode = gameObject.GetComponent<Outline>();
+        outlineCode.OutlineMode = Outline.Mode.OutlineAll;
+
         Debug.Log(stringCode);
         gameObject.transform.position = place.transform.position;
     }

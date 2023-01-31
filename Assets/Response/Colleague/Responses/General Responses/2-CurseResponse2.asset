@@ -16,4 +16,4 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 4f900641cc737ca4b848a0e7db07b185, type: 3}
   rude: 1
   excuse: 0
-  CodeType: 6
+  CodeType: 8

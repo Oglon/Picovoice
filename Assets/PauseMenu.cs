@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     [field: SerializeField] public StarterAssetsInputs Inputs;
     [field: SerializeField] public ObjectiveHandler ObjectiveHandler;
+    [field: SerializeField] public Picovoice Picovoice;
 
     void Update()
     {
@@ -53,6 +54,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        Picovoice.Restart();
+        
         string Quest = "";
 
         if (SceneManager.GetActiveScene().name.Contains("1"))

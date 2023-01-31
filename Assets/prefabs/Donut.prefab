@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6431197467744050622}
   - component: {fileID: 6431197467744050621}
+  - component: {fileID: 6431197468091664598}
+  - component: {fileID: 6431197468091664597}
   m_Layer: 0
   m_Name: Donut
   m_TagString: QuestItem
@@ -31,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6435374753826193029}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6431197467744050621
 MonoBehaviour:
@@ -47,6 +49,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipped: 0
   <PickUpSound>k__BackingField: {fileID: 0}
+--- !u!54 &6431197468091664598
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431197467744050623}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &6431197468091664597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431197467744050623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2426796, y: 0.09843254, z: 0.22004318}
+  m_Center: {x: -0.008844376, y: 0.008635521, z: -0.0101623535}
 --- !u!1001 &6431197467384283833
 PrefabInstance:
   m_ObjectHideFlags: 0

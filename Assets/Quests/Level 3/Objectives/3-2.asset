@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 3-2
   m_EditorClassIdentifier: 
-  objectiveDesc: Collect the 3 Documents for the Intern
+  objectiveDesc: Collect  3 Documents for the Intern
   objectiveHint: Collect the Documents
   questIndex: 3

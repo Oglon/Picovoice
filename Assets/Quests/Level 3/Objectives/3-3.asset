@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 3-3
   m_EditorClassIdentifier: 
-  objectiveDesc: Return the Documents to the Intern
-  objectiveHint: Return the Documents and tell the Intern 'Here are your Documents'
+  objectiveDesc: Collect 2 Documents for the Intern
+  objectiveHint: Collect the Documents
   questIndex: 3

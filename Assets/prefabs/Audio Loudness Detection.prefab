@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9123678228690990867}
   m_Layer: 0
   m_Name: Audio Loudness Detection
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sampleWindow: 64
+  returnValue: 0

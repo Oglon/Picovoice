@@ -118,7 +118,7 @@ public class ColleagueResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_1111;
             }
 
-            if (intent == "1111")
+            if (intent == "Normal_1111")
             {
                 return PreviousResponse = Normal_1111;
             }
@@ -143,7 +143,7 @@ public class ColleagueResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_SomeoneInMyOffice;
             }
 
-            if (intent == "SomeoneInMyOffice")
+            if (intent == "Normal_SomeoneInMyOffice")
             {
                 if (currentObjective.questIndex < Q1O1.questIndex)
                 {
@@ -187,6 +187,7 @@ public class ColleagueResponseOffice1 : ResponseScript
 
                 if (Q2O1 == currentObjective)
                 {
+                    Debug.Log("Trigger");
                     currentQuest.Progress();
                 }
 
@@ -208,27 +209,12 @@ public class ColleagueResponseOffice1 : ResponseScript
                 return PreviousResponse = Unfriendly_North;
             }
 
-            if (intent == "Friendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Unfriendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
             if (intent == "Friendly_NeedHelp")
             {
                 return PreviousResponse = Friendly_NeedHelp;
             }
 
-            if (intent == "NeedHelp")
+            if (intent == "Normal_NeedHelp")
             {
                 return PreviousResponse = Normal_NeedHelp;
             }
@@ -243,7 +229,7 @@ public class ColleagueResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_CameraCode;
             }
 
-            if (intent == "CameraCode")
+            if (intent == "Normal_CameraCode")
             {
                 return PreviousResponse = Normal_CameraCode;
             }
@@ -322,13 +308,10 @@ public class ColleagueResponseOffice1 : ResponseScript
             {
                 return PreviousResponse = HowDoYouLikeItHere;
             }
-        }
-        else
-        {
             return PreviousResponse = NotUnderstood();
         }
 
-        return PreviousResponse;
+        return PreviousResponse = NotUnderstood();
     }
 
     private DialogueResponse NotUnderstood()

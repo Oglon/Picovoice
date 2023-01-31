@@ -31,6 +31,8 @@ public class BossResponseOffice1 : ResponseScript
     [field: SerializeField] public DialogueResponse Normal_Donut { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_Donut { get; private set; }
 
+    [field: SerializeField] public DialogueResponse AlreadyToldCode { get; private set; }
+
     [field: SerializeField] public DialogueResponse Documents { get; private set; }
 
     [field: SerializeField] public DialogueResponse Weather { get; private set; }
@@ -113,7 +115,7 @@ public class BossResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_1111;
             }
 
-            if (intent == "1111")
+            if (intent == "Normal_1111")
             {
                 return PreviousResponse = Normal_1111;
             }
@@ -128,7 +130,7 @@ public class BossResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_SomeoneInMyOffice;
             }
 
-            if (intent == "SomeoneInMyOffice")
+            if (intent == "Normal_SomeoneInMyOffice")
             {
                 return PreviousResponse = Normal_SomeoneInMyOffice;
             }
@@ -158,7 +160,7 @@ public class BossResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_NeedHelp;
             }
 
-            if (intent == "NeedHelp")
+            if (intent == "Normal_NeedHelp")
             {
                 return PreviousResponse = Normal_NeedHelp;
             }
@@ -183,7 +185,7 @@ public class BossResponseOffice1 : ResponseScript
                 return PreviousResponse = Friendly_CameraCode;
             }
 
-            if (intent == "CameraCode")
+            if (intent == "Normal_CameraCode")
             {
                 if (currentObjective.questIndex < Q4O1.questIndex)
                 {
@@ -225,10 +227,15 @@ public class BossResponseOffice1 : ResponseScript
                     currentQuest.Progress();
                 }
 
+                if (currentObjective.questIndex > Q4O3.questIndex)
+                {
+                    return PreviousResponse = AlreadyToldCode;
+                }
+
                 return PreviousResponse = Friendly_Donut;
             }
 
-            if (intent == "Donut")
+            if (intent == "Normal_Donut")
             {
                 if (currentObjective.questIndex < Q4O3.questIndex)
                 {
@@ -238,6 +245,11 @@ public class BossResponseOffice1 : ResponseScript
                 if (Q4O3 == currentObjective)
                 {
                     currentQuest.Progress();
+                }
+
+                if (currentObjective.questIndex > Q4O3.questIndex)
+                {
+                    return PreviousResponse = AlreadyToldCode;
                 }
 
                 return PreviousResponse = Normal_Donut;
@@ -255,22 +267,12 @@ public class BossResponseOffice1 : ResponseScript
                     currentQuest.Progress();
                 }
 
+                if (currentObjective.questIndex > Q4O3.questIndex)
+                {
+                    return PreviousResponse = AlreadyToldCode;
+                }
+
                 return PreviousResponse = Unfriendly_Donut;
-            }
-
-            if (intent == "Friendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Yes")
-            {
-                return PreviousResponse = ThanksResponse();
-            }
-
-            if (intent == "Unfriendly_Yes")
-            {
-                return PreviousResponse = ThanksResponse();
             }
 
             if (intent == "Curse")
@@ -342,20 +344,18 @@ public class BossResponseOffice1 : ResponseScript
             {
                 return PreviousResponse = HowDoYouLikeItHere;
             }
-        }
-        else
-        {
+
             return PreviousResponse = NotUnderstood();
         }
 
-        return PreviousResponse;
+        return PreviousResponse = NotUnderstood();
     }
 
     private DialogueResponse NotUnderstood()
     {
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 11);
-        DialogueResponse response = new DialogueResponse();
+        DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
 
         switch (responseInt)
         {

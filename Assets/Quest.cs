@@ -8,6 +8,8 @@ public class Quest : ScriptableObject
     public event Action OnFollowingQuest;
     public event Action OnProgress;
 
+    private Analytics _analytics;
+
 
     public string questName;
 

@@ -16,5 +16,5 @@ MonoBehaviour:
   objectives:
   - {fileID: 11400000, guid: b6ba4e89b309b274f9553f94225e6401, type: 2}
   currentObjective: {fileID: 11400000, guid: b6ba4e89b309b274f9553f94225e6401, type: 2}
-  followUp: {fileID: 11400000, guid: 7ea2bd9ef4593c049a006dc3731d944c, type: 2}
+  followUp: {fileID: 11400000, guid: 84a8b0e3c07646a49a75f4752a9d265a, type: 2}
   questIndex: 1
