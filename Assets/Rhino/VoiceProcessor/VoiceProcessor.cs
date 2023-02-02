@@ -117,6 +117,9 @@ namespace Pv.Unity
 
         void Awake()
         {
+            GameObject.FindWithTag("Audio").TryGetComponent(out AudioLoudnessDetection loudnessDetection);
+            _audioLoudnessDetection = loudnessDetection;
+
             if (_audioSource == null) GetComponent<AudioSource>();
             if (_audioSource == null)
             {
@@ -183,9 +186,6 @@ namespace Pv.Unity
         /// <param name="frameSize">Size of audio frames to be delivered</param>
         public void StartRecording(int sampleRate = 16000, int frameSize = 512)
         {
-            GameObject.FindWithTag("Audio").TryGetComponent(out AudioLoudnessDetection loudnessDetection);
-            _audioLoudnessDetection = loudnessDetection;
-
             if (IsRecording)
             {
                 // if sample rate or frame size have changed, restart recording
@@ -225,27 +225,31 @@ namespace Pv.Unity
             StopCoroutine(RecordData());
         }
 
-        public void GetLoudnessFromAudioClip(AudioClip clip, int clipPosition)
+        private void Update()
         {
-            int startposition = clipPosition - sampleWindow;
+            float loudness = CalculateLoudness();
+            _audioLoudnessDetection.returnValue = loudness;
+        }
 
-            if (startposition < 0)
-                startposition = 0;
-
-            float[] wavedata = new float[sampleWindow];
-            clip.GetData(wavedata, startposition);
-
-            //compute loudness
-            float totalLoudness = 0;
-
-            for (int i = 0; i < sampleWindow; i++)
+        private float CalculateLoudness()
+        {
+            if (_audioSource.clip == null)
             {
-                totalLoudness += Mathf.Abs(wavedata[i]);
+                return 0;
             }
 
+            float[] samples = new float[_audioSource.clip.samples];
+            _audioSource.clip.GetData(samples, 0);
 
-            returnValue = totalLoudness / sampleWindow;
-            _audioLoudnessDetection.returnValue = returnValue;
+            float sum = 0;
+            for (int i = 0; i < samples.Length; i++)
+            {
+                sum += samples[i] * samples[i];
+            }
+
+            float rms = Mathf.Sqrt(sum / samples.Length);
+
+            return rms;
         }
 
         /// <summary>
@@ -283,7 +287,6 @@ namespace Pv.Unity
 
                     // read bit at start of clip
                     int numSamplesClipStart = endReadPos - _audioSource.clip.samples;
-                    GetLoudnessFromAudioClip(_audioSource.clip, 1);
                     float[] startClipSamples = new float[numSamplesClipStart];
                     _audioSource.clip.GetData(startClipSamples, 0);
 

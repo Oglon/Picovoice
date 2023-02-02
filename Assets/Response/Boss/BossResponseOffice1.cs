@@ -19,10 +19,6 @@ public class BossResponseOffice1 : ResponseScript
     [field: SerializeField] public DialogueResponse Normal_NeedHelp { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_NeedHelp { get; private set; }
 
-    [field: SerializeField] public DialogueResponse Friendly_InternKnowsAboutFile { get; private set; }
-    [field: SerializeField] public DialogueResponse Normal_InternKnowsAboutFile { get; private set; }
-    [field: SerializeField] public DialogueResponse Unfriendly_InternKnowsAboutFile { get; private set; }
-
     [field: SerializeField] public DialogueResponse Friendly_CameraCode { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_CameraCode { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_CameraCode { get; private set; }
@@ -353,6 +349,10 @@ public class BossResponseOffice1 : ResponseScript
             return PreviousResponse = NotUnderstood();
         }
 
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddGeneral("Not Understood", Time.timeSinceLevelLoad, getColleagueType(),
+            _analytics.getLastDistance());
+
         return PreviousResponse = NotUnderstood();
     }
 
@@ -443,6 +443,10 @@ public class BossResponseOffice1 : ResponseScript
 
     public override DialogueResponse GetVolumeResponse()
     {
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddGeneral("Too Loud", Time.timeSinceLevelLoad, getColleagueType(),
+            _analytics.getLastDistance());
+
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
         DialogueResponse response = new DialogueResponse();
@@ -498,6 +502,7 @@ public class BossResponseOffice1 : ResponseScript
 
         return response;
     }
+
     private string getColleagueType()
     {
         if (name.Contains("Intern"))

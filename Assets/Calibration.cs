@@ -55,6 +55,7 @@ public class Calibration : MonoBehaviour
                     CountdownTMP.text = Countdown().ToString();
                     break;
                 case 3:
+                    Debug.Log("Max: " + volume);
                     AudioBar.SetMaxVolume(volume);
                     volume = 0f;
                     state++;
@@ -74,7 +75,8 @@ public class Calibration : MonoBehaviour
                     CountdownTMP.text = Countdown().ToString();
                     break;
                 case 7:
-                    AudioBar.SetMinVolume(volume);
+                    Debug.Log("Min: " + volume);
+                    AudioBar.SetMinVolume(0f);
                     state++;
                     delta = 4;
                     break;
@@ -132,5 +134,6 @@ public class Calibration : MonoBehaviour
         AudioBar.enabled = true;
         TMP.enabled = false;
         AudioBar.SetActive();
+        float tempVol = LoudnessDetection.GetLoudnessFromMicrophone();
     }
 }

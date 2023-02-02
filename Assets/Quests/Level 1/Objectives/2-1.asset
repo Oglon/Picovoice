@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectiveDesc: Solve the Cesar Cipher in your Office and present the solution to
     your Colleague!
-  objectiveHint: The Cipher starts with A
+  objectiveHint: The Cipher starts with N
   questIndex: 2

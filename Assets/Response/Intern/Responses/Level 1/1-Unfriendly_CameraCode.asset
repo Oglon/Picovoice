@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 1-Unfriendly_CameraCode
   m_EditorClassIdentifier: 
-  text: I don't have the code.
+  text: Do not talk to me like that.
   audioClip: {fileID: 8300000, guid: 818f7636d5664e04dbcd567917f4e83b, type: 3}
-  rude: 0
+  rude: 1
   excuse: 0
   CodeType: 8

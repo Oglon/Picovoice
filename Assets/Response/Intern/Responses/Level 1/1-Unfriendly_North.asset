@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 1-Unfriendly_North
   m_EditorClassIdentifier: 
-  text: The code looks good, but you should maybe tell your Colleague.
+  text: Don't address me in such a way.
   audioClip: {fileID: 8300000, guid: d43f60878eacfc64a92495933a042431, type: 3}
-  rude: 0
+  rude: 1
   excuse: 0
   CodeType: 8

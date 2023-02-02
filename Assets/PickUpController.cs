@@ -81,6 +81,7 @@ public class PickUpController : MonoBehaviour
 
         if (gameObject.CompareTag("Goal"))
         {
+            Cursor.lockState = CursorLockMode.None;
             _analytics.CreateCSV();
             Picovoice.Delete();
             audioSource.Play();

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 1-1
   m_EditorClassIdentifier: 
-  objectiveDesc: Ask around if someone knows about the secret Prize
-  objectiveHint: Ask Employees "Do you know something about the secret prize?"
+  objectiveDesc: Ask around the office if someone knows anything about a secret Prize
+  objectiveHint: Approach Employees and ask them "Do you know about a secret Prize?""
+  questIndex: 1

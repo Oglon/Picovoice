@@ -1,0 +1,11 @@
+Normal_SomeoneInMyOffice,24.66967,Colleague,1.979022, ,1-1 (Objective),Normal_SomeoneInMyOffice,24.66967,Colleague,1.979022
+Normal_North,43.18139,Colleague,1.854328, ,2-1 (Objective),Normal_North,43.18139,Colleague,1.854328
+Normal_NeedHelp,57.41053,Colleague,3.06494, ,3-1 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
+Normal_Documents,70.89229,Colleague,3.06494, ,3-2 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
+Not Understood,80.76465,Boss,3.06494, ,3-3 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
+Normal_CameraCode,85.62952,Boss,3.06494, ,3-4 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
+Normal_Donut,96.50084,Boss,3.06494, ,3-5 (Objective),Normal_Documents,70.89229,Colleague,3.06494
+Not Understood,106.9913,Colleague,3.06494, ,4-1 (Objective),Normal_CameraCode,85.62952,Boss,3.06494
+Normal_1111,111.8259,Colleague,3.06494, ,4-2 (Objective),Normal_CameraCode,85.62952,Boss,3.06494
+, ,4-3 (Objective),Normal_Donut,96.50084,Boss,3.06494
+, ,5-1 (Objective),Normal_1111,111.8259,Colleague,3.06494

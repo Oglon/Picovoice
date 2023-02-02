@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 3-Unfriendly_Donut
   m_EditorClassIdentifier: 
-  text: You sound stressed. The Door Code is 1111.
+  text: You sound stressed. That is still no reason to talk like that.
   audioClip: {fileID: 8300000, guid: 84290685ba82c584db78065c1c865599, type: 3}
-  rude: 0
+  rude: 1
   excuse: 0
   CodeType: 8

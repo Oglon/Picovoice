@@ -19,7 +19,7 @@ public class InternResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse Friendly_Keycard { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_Keycard { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_Keycard { get; private set; }
-
+    
     [field: SerializeField] public DialogueResponse Friendly_Fixed { get; private set; }
     [field: SerializeField] public DialogueResponse Normal_Fixed { get; private set; }
     [field: SerializeField] public DialogueResponse Unfriendly_Fixed { get; private set; }
@@ -338,6 +338,10 @@ public class InternResponseOffice2 : ResponseScript
             return PreviousResponse = NotUnderstood();
         }
 
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddGeneral("Not Understood", Time.timeSinceLevelLoad, getColleagueType(),
+            _analytics.getLastDistance());
+        
         return PreviousResponse = NotUnderstood();
     }
 
@@ -428,6 +432,10 @@ public class InternResponseOffice2 : ResponseScript
 
     public override DialogueResponse GetVolumeResponse()
     {
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddGeneral("Too Loud", Time.timeSinceLevelLoad, getColleagueType(),
+            _analytics.getLastDistance());
+        
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
         DialogueResponse response = new DialogueResponse();

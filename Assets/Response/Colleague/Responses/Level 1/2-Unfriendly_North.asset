@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 2-Unfriendly_North
   m_EditorClassIdentifier: 
-  text: That seems right. I will try a few things to find your file. You could help
-    the Intern in the meantime.
+  text: I will not help you if you talk to me like that.
   audioClip: {fileID: 8300000, guid: d430eede3d82e4c418e1a20134fb76e4, type: 3}
-  rude: 0
+  rude: 1
   excuse: 0
   CodeType: 8

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 4-1
   m_EditorClassIdentifier: 
-  objectiveDesc: Talk to the Boss
-  objectiveHint: Ask the Boss if he wanted to talk with you
+  objectiveDesc: Ask the Boss if he wanted to talk to you
+  objectiveHint: Ask the Boss 'Do you want to talk to me'?
+  questIndex: 4

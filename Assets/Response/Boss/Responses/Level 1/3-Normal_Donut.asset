@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 3-Normal_Donut
   m_EditorClassIdentifier: 
-  text: Thanks. The Door Code is 1111.
+  text: Thanks. The Camera Code is 1111.
   audioClip: {fileID: 8300000, guid: 137193623a1c11d40ab4996de883ab1c, type: 3}
   rude: 0
   excuse: 0

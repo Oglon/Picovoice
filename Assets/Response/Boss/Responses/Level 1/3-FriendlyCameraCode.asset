@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3-FriendlyCameraCode
   m_EditorClassIdentifier: 
   text: You can get the camera code if you are kind enough to bring me a donut.
-  audioClip: {fileID: 8300000, guid: 14ee3125ddc7f94458325d9a4db3e4a5, type: 3}
+  audioClip: {fileID: 8300000, guid: a5cad151adb19cc4c96d08e808224654, type: 3}
   rude: 0
   excuse: 0
   CodeType: 3

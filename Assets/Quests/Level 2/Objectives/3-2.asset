@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 3-2
   m_EditorClassIdentifier: 
-  objectiveDesc: Ask the Intern if he needs your help
-  objectiveHint: Ask the Intern "Do you need my help?"
+  objectiveDesc: Get the Keycard
+  objectiveHint: Ask "Can I have the Keycard"
+  questIndex: 3

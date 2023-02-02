@@ -11,11 +11,28 @@ public class Analytics : MonoBehaviour
 
     private float lastDistance;
 
-    private readonly string _savegameFolder = "savegames";
+    private readonly string _savegameFolder = "Analytics";
+
+    private Picovoice Picovoice;
 
     public void setLastDistance(float distance)
     {
         lastDistance = distance;
+    }
+
+    private void Start()
+    {
+        Picovoice = GameObject.Find("Picovoice").GetComponent<Picovoice>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Picovoice.Delete();
+            SceneManager.LoadScene("StartMenu");
+        }
     }
 
     public float getLastDistance()

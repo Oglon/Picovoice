@@ -4,6 +4,8 @@ public class ColleagueListeningState : ColleagueBaseState
 {
     private Analytics _analytics;
 
+    private float minDistance;
+
     public ColleagueListeningState(ColleagueStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -24,9 +26,14 @@ public class ColleagueListeningState : ColleagueBaseState
 
         if (stateMachine.gameObject.tag == "Colleague")
         {
+            minDistance = float.MaxValue;
+            if ((stateMachine.Player.transform.position - stateMachine.transform.position).magnitude < minDistance)
+            {
+                minDistance = (stateMachine.Player.transform.position - stateMachine.transform.position).magnitude;
+            }
+
             var lookPos = stateMachine.PlayerHead.transform.position - stateMachine.transform.position;
-            _analytics.setLastDistance((stateMachine.PlayerHead.transform.position - stateMachine.transform.position)
-                .sqrMagnitude);
+            _analytics.setLastDistance(minDistance);
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
             stateMachine.transform.rotation =
@@ -37,6 +44,7 @@ public class ColleagueListeningState : ColleagueBaseState
 
         if (!IsInTalkingRange())
         {
+            minDistance = float.MaxValue;
             if (stateMachine.gameObject.tag == "Colleague")
             {
                 var lookPos = stateMachine.MainTarget.transform.position - stateMachine.transform.position;

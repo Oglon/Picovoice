@@ -72,6 +72,6 @@ public class KeycardReader : MonoBehaviour
     public void Deactivate()
     {
         active = false;
-        _outline.OutlineMode = Outline.Mode.OutlineVisible;
+        _outline.OutlineMode = Outline.Mode.OutlineHidden;
     }
 }

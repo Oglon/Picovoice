@@ -83,7 +83,6 @@ public class AudioBar : MonoBehaviour
 
     private int VisualizeAudio(float volume)
     {
-        int bars;
         float step = (MaxVolume - MinVolume) / 10;
         return (int)((volume - MinVolume) / step);
     }

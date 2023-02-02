@@ -196,6 +196,8 @@ public class BaristaStateMachine : StateMachine
                 count++;
                 break;
             case 16:
+                Cursor.lockState = CursorLockMode.None;
+                _rhinoManager.Delete();
                 SceneManager.LoadScene("StartMenu");
                 break;
         }

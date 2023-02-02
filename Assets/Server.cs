@@ -72,6 +72,6 @@ public class Server : MonoBehaviour
     public void Deactivate()
     {
         active = false;
-        outline.OutlineMode = Outline.Mode.OutlineVisible;
+        outline.OutlineMode = Outline.Mode.OutlineHidden;
     }
 }

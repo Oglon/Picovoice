@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 2-1
   m_EditorClassIdentifier: 
-  objectiveDesc: Ask your Colleague if you can help her
-  objectiveHint: Ask the Colleague if she needs help
+  objectiveDesc: Solve the Morse Code in your Office and present the solution to
+    your Colleague!
+  objectiveHint: The Cipher starts with E
+  questIndex: 2

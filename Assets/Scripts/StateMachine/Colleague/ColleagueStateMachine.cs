@@ -12,7 +12,7 @@ public class ColleagueStateMachine : StateMachine
     [field: SerializeField] public ObjectiveHandler ObjectiveHandler { get; private set; }
     [field: SerializeField] public ResponseScript CharacterResponse { get; set; }
     [field: SerializeField] public AudioLoudnessDetection Loudness { get; private set; }
-    [field: SerializeField] public Picovoice Picovoice { get; private set; }
+    public Picovoice Picovoice { get; private set; }
     [field: SerializeField] public bool Sensitive { get; private set; }
     [field: SerializeField] public float RudeTimer { get; set; }
     [field: SerializeField] public int rudeIncidents = 0;
@@ -40,11 +40,12 @@ public class ColleagueStateMachine : StateMachine
     private void Start()
     {
         AudioSource = gameObject.GetComponent<AudioSource>();
+        Picovoice = GameObject.Find("Picovoice").GetComponent<Picovoice>();
 
         Ear = Resources.Load<Sprite>("Ear");
         Speech = Resources.Load<Sprite>("Speech");
         Working = Resources.Load<Sprite>("Working");
-        
+
         uiManager = GameObject.Find("Dialogue Box").GetComponent<UIManager>();
 
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();

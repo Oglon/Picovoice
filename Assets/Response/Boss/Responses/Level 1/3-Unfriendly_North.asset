@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 3-Unfriendly_North
   m_EditorClassIdentifier: 
-  text: I think I'm the wrong person.
+  text: I think I'm the wrong person but you should be more professional in your
+    communication.
   audioClip: {fileID: 8300000, guid: 96429a591379afa4887646440f0eb1f4, type: 3}
   rude: 1
   excuse: 0

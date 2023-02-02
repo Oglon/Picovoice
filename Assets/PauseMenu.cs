@@ -1,3 +1,4 @@
+using System;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,13 @@ public class PauseMenu : MonoBehaviour
 
     [field: SerializeField] public StarterAssetsInputs Inputs;
     [field: SerializeField] public ObjectiveHandler ObjectiveHandler;
-    [field: SerializeField] public Picovoice Picovoice;
+    private Picovoice Picovoice;
+
+
+    private void Start()
+    {
+        Picovoice = GameObject.Find("Picovoice").GetComponent<Picovoice>();
+    }
 
     void Update()
     {
@@ -55,7 +62,8 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Picovoice.Restart();
-        
+        Cursor.lockState = CursorLockMode.None;
+
         string Quest = "";
 
         if (SceneManager.GetActiveScene().name.Contains("1"))

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 4-2
   m_EditorClassIdentifier: 
-  objectiveDesc: Solve the Cipher and present the solution to your Colleague
-  objectiveHint: Present your Colleague the solution 5276
-  questIndex: 6
+  objectiveDesc: Get the Donut for your Boss
+  objectiveHint: Grab the Donut
+  questIndex: 4

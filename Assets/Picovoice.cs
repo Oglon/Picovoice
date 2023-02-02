@@ -17,7 +17,7 @@ public class Picovoice : MonoBehaviour
 
     private const string
         AccessKey =
-            "LEXyhVN7pdElKZ0mRGtgdoPGPg8MzEN2Tj0QuA3LqQESAX+y6o5o8A==";
+            "7TDa4XH8Nbz8qOyz7aGD1mN6Fyp+JZEDdbalKpMI/MqR2lfHLzTLZw==";
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +25,6 @@ public class Picovoice : MonoBehaviour
         GetPlatform();
         _rhinoManager = RhinoManager.Create(AccessKey, GetContextPath(), InferenceCallback);
     }
-
-    // private void Update()
-    // {
-    //     if (!stop)
-    //     {
-    //         Debug.Log("Pico: " + _rhinoManager.IsAudioDeviceAvailable() + " Devices: " + Microphone.devices.Length);
-    //     }
-    // }
 
     public void setStateMachine(ColleagueStateMachine stateMachine)
     {
@@ -47,7 +39,8 @@ public class Picovoice : MonoBehaviour
     void InferenceCallback(Inference inference)
     {
         picoInference = inference;
-        Debug.Log("Pico Inference " + inference);
+        Debug.Log("Pico Inference " + inference.Intent);
+        Debug.Log(_stateMachine);
         _stateMachine.inferenceReaction(picoInference);
     }
 
@@ -81,14 +74,14 @@ public class Picovoice : MonoBehaviour
 
     public static string GetContextPath()
     {
-        string srcPath = Path.Combine(Application.streamingAssetsPath, "contexts/windows/colleague_windows.rhn");
+        string srcPath = Path.Combine(Application.streamingAssetsPath,
+            "contexts/" + GetPlatform() + "/colleague.rhn");
         return srcPath;
     }
 
     public void Restart()
     {
         _rhinoManager.Delete();
-        Start();
     }
 
     public void Delete()

@@ -361,6 +361,10 @@ public class ColleagueResponseOffice2 : ResponseScript
             return PreviousResponse = NotUnderstood();
         }
 
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddGeneral("Not Understood", Time.timeSinceLevelLoad, getColleagueType(),
+            _analytics.getLastDistance());
+        
         return PreviousResponse = NotUnderstood();
     }
 
@@ -452,6 +456,10 @@ public class ColleagueResponseOffice2 : ResponseScript
 
     public override DialogueResponse GetVolumeResponse()
     {
+        _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
+        _analytics.AddGeneral("Too Loud", Time.timeSinceLevelLoad, getColleagueType(),
+            _analytics.getLastDistance());
+        
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
         DialogueResponse response = ScriptableObject.CreateInstance<DialogueResponse>();
