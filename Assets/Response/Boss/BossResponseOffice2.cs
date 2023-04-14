@@ -69,6 +69,8 @@ public class BossResponseOffice2 : ResponseScript
     [field: SerializeField] public DialogueResponse SorryNecessary { get; private set; }
     [field: SerializeField] public DialogueResponse SorryUnnecessary { get; private set; }
     [field: SerializeField] public DialogueResponse LeaveMeAlone { get; private set; }
+    [field: SerializeField] public DialogueResponse GeneralChatter { get; private set; }
+
     public DialogueResponse PreviousResponse { get; private set; }
 
     [field: SerializeField] public Objective Q1O1;
@@ -92,7 +94,7 @@ public class BossResponseOffice2 : ResponseScript
             _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
             _analytics.AddGeneral(inference.Intent, Time.timeSinceLevelLoad, getColleagueType(),
                 _analytics.getLastDistance());
-            
+
             string intent = sensitive ? inference.Intent : RemoveSensitive(inference.Intent);
 
             if (rudeCooldown > 0 && intent != "Sorry")
@@ -114,7 +116,7 @@ public class BossResponseOffice2 : ResponseScript
                     return PreviousResponse = SorryUnnecessary;
                 }
 
-                if (rudeIncidents < 3)
+                if (rudeIncidents < 3 && rudeCooldown > 0)
                 {
                     return PreviousResponse = SorryNecessary;
                 }
@@ -241,6 +243,21 @@ public class BossResponseOffice2 : ResponseScript
                 return PreviousResponse = Unfriendly_Phone;
             }
 
+            if (intent == "Friendly_Fixed")
+            {
+                return PreviousResponse = Fixed;
+            }
+
+            if (intent == "Normal_Fixed")
+            {
+                return PreviousResponse = Fixed;
+            }
+
+            if (intent == "Unfriendly_Fixed")
+            {
+                return PreviousResponse = Fixed;
+            }
+
             if (intent == "Friendly_Escape")
             {
                 return PreviousResponse = Friendly_Escape;
@@ -326,13 +343,18 @@ public class BossResponseOffice2 : ResponseScript
                 return PreviousResponse = HowDoYouLikeItHere;
             }
 
+            if (intent == "GeneralChatter")
+            {
+                return PreviousResponse = GeneralChatter;
+            }
+
             return PreviousResponse = NotUnderstood();
         }
 
         _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
         _analytics.AddGeneral("Not Understood", Time.timeSinceLevelLoad, getColleagueType(),
             _analytics.getLastDistance());
-        
+
         return PreviousResponse = NotUnderstood();
     }
 
@@ -427,7 +449,7 @@ public class BossResponseOffice2 : ResponseScript
         _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
         _analytics.AddGeneral("Too Loud", Time.timeSinceLevelLoad, getColleagueType(),
             _analytics.getLastDistance());
-        
+
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
         DialogueResponse response = new DialogueResponse();
@@ -483,6 +505,7 @@ public class BossResponseOffice2 : ResponseScript
 
         return response;
     }
+
     private string getColleagueType()
     {
         if (name.Contains("Intern"))

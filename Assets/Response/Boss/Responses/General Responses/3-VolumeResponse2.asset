@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3-VolumeResponse2
   m_EditorClassIdentifier: 
   text: Tone down your voice.
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 0097118b2e8723542ba1cb46f8a01ecf, type: 3}
   rude: 1
   excuse: 0
   CodeType: 8

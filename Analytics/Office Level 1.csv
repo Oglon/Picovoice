@@ -1,11 +1,11 @@
-Normal_SomeoneInMyOffice,24.66967,Colleague,1.979022, ,1-1 (Objective),Normal_SomeoneInMyOffice,24.66967,Colleague,1.979022
-Normal_North,43.18139,Colleague,1.854328, ,2-1 (Objective),Normal_North,43.18139,Colleague,1.854328
-Normal_NeedHelp,57.41053,Colleague,3.06494, ,3-1 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
-Normal_Documents,70.89229,Colleague,3.06494, ,3-2 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
-Not Understood,80.76465,Boss,3.06494, ,3-3 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
-Normal_CameraCode,85.62952,Boss,3.06494, ,3-4 (Objective),Normal_NeedHelp,57.41053,Colleague,3.06494
-Normal_Donut,96.50084,Boss,3.06494, ,3-5 (Objective),Normal_Documents,70.89229,Colleague,3.06494
-Not Understood,106.9913,Colleague,3.06494, ,4-1 (Objective),Normal_CameraCode,85.62952,Boss,3.06494
-Normal_1111,111.8259,Colleague,3.06494, ,4-2 (Objective),Normal_CameraCode,85.62952,Boss,3.06494
-, ,4-3 (Objective),Normal_Donut,96.50084,Boss,3.06494
-, ,5-1 (Objective),Normal_1111,111.8259,Colleague,3.06494
+Normal_SomeoneInMyOffice,6.504275,Colleague,1.430127, ,1-1 (Objective),Normal_SomeoneInMyOffice,6.504275,Colleague,1.430127
+Normal_North,20.3132,Colleague,1.793204, ,2-1 (Objective),Normal_North,20.3132,Colleague,1.793204
+Not Understood,27.91753,Colleague,1.793204, ,3-1 (Objective),Normal_NeedHelp,32.98329,Colleague,1.793204
+Normal_NeedHelp,32.98329,Colleague,1.793204, ,3-2 (Objective),Normal_NeedHelp,32.98329,Colleague,1.793204
+Normal_Documents,43.69414,Colleague,1.793204, ,3-3 (Objective),Normal_NeedHelp,32.98329,Colleague,1.793204
+Normal_CameraCode,51.08969,Boss,1.793204, ,3-4 (Objective),Normal_NeedHelp,32.98329,Colleague,1.793204
+Normal_Donut,59.22301,Boss,1.793204, ,3-5 (Objective),Normal_Documents,43.69414,Colleague,1.793204
+Normal_1111,66.24773,Colleague,1.793204, ,4-1 (Objective),Normal_CameraCode,51.08969,Boss,1.793204
+, ,4-2 (Objective),Normal_CameraCode,51.08969,Boss,1.793204
+, ,4-3 (Objective),Normal_Donut,59.22301,Boss,1.793204
+, ,5-1 (Objective),Normal_1111,66.24773,Colleague,1.793204

@@ -67,9 +67,7 @@ public class ColleagueTalkingState : ColleagueBaseState
                 stateMachine.rudeIncidents, stateMachine.RudeTimer);
         }
 
-        Debug.Log(dialogueResponse);
-
-        if (dialogueResponse.excuse)
+        if (dialogueResponse.excuse && stateMachine.Sensitive)
         {
             ReduceRudeTimer();
         }
@@ -81,7 +79,6 @@ public class ColleagueTalkingState : ColleagueBaseState
 
         if (dialogueResponse.CodeType != Code.Empty)
         {
-            Debug.Log(dialogueResponse);
             SpawnGameObject(dialogueResponse.CodeType, stateMachine.ColleagueType);
         }
 

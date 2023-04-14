@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: I think you should apologize.
   audioClip: {fileID: 8300000, guid: a47d0e323883bf048abe13d66a734e95, type: 3}
-  rude: 1
+  rude: 0
   excuse: 0
   CodeType: 8

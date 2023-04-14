@@ -19,6 +19,10 @@ public class Phone : MonoBehaviour
 
     private bool active;
 
+    public float maxDistance = 10f;
+    public float minVolume = 0f;
+    public float maxVolume = 1f;
+
     private void Start()
     {
         player = GameObject.Find("PlayerCapsule").gameObject.transform;
@@ -32,6 +36,16 @@ public class Phone : MonoBehaviour
 
     private void Update()
     {
+        float distance = Vector3.Distance(player.position, transform.position);
+        float volume = Mathf.Lerp(minVolume, maxVolume, distance / maxDistance);
+        volume = 1 - volume;
+        if (volume < 0.1f)
+        {
+            volume = 0.1f;
+        }
+
+        _audioSource.volume = volume;
+
         currentQuest = objectiveHandler.GetCurrentQuest();
         currentObjective = currentQuest.currentObjective;
         if (Objective == currentObjective && active != true)
@@ -72,6 +86,7 @@ public class Phone : MonoBehaviour
     {
         currentQuest.Progress();
         Deactivate();
+        Destroy(gameObject);
     }
 
     public void Deactivate()

@@ -71,6 +71,8 @@ public class BossResponseOffice1 : ResponseScript
     [field: SerializeField] public DialogueResponse SorryNecessary { get; private set; }
     [field: SerializeField] public DialogueResponse SorryUnnecessary { get; private set; }
     [field: SerializeField] public DialogueResponse LeaveMeAlone { get; private set; }
+    [field: SerializeField] public DialogueResponse GeneralChatter { get; private set; }
+
 
     public DialogueResponse PreviousResponse { get; private set; }
 
@@ -95,6 +97,18 @@ public class BossResponseOffice1 : ResponseScript
                 _analytics.getLastDistance());
 
             string intent = sensitive ? inference.Intent : RemoveSensitive(inference.Intent);
+            
+            if (rudeCooldown > 0 && intent != "Sorry")
+            {
+                if (rudeIncidents >= 3)
+                {
+                    GetRudeResponse();
+                }
+                else
+                {
+                    GetRudeCooldownResponse();
+                }
+            }
 
             if (intent == "Sorry")
             {
@@ -103,7 +117,7 @@ public class BossResponseOffice1 : ResponseScript
                     return PreviousResponse = SorryUnnecessary;
                 }
 
-                if (rudeIncidents < 3)
+                if (rudeIncidents < 3 && rudeCooldown > 0)
                 {
                     return PreviousResponse = SorryNecessary;
                 }
@@ -214,6 +228,21 @@ public class BossResponseOffice1 : ResponseScript
                 }
 
                 return PreviousResponse = Unfriendly_CameraCode;
+            }
+
+            if (intent == "Friendly_Documents")
+            {
+                return PreviousResponse = Documents;
+            }
+
+            if (intent == "Normal_Documents")
+            {
+                return PreviousResponse = Documents;
+            }
+
+            if (intent == "Unfriendly_Documents")
+            {
+                return PreviousResponse = Documents;
             }
 
             if (intent == "Friendly_Donut")
@@ -344,6 +373,11 @@ public class BossResponseOffice1 : ResponseScript
             if (intent == "HowDoYouLikeItHere")
             {
                 return PreviousResponse = HowDoYouLikeItHere;
+            }
+
+            if (intent == "GeneralChatter")
+            {
+                return PreviousResponse = GeneralChatter;
             }
 
             return PreviousResponse = NotUnderstood();

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 11-Guide
   m_EditorClassIdentifier: 
-  text: Great now you can pick up your coffee with E and leave. Objects can be dropped
-    by pressing Q.
+  text: Great now you can pick up your coffee with E and leave. Pressing E again
+    will drop the object.
   audioClip: {fileID: 8300000, guid: 156b7da4144c49c47812f15afa9e0c7c, type: 3}
   rude: 0
   excuse: 0

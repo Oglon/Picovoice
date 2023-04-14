@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Pv.Unity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Picovoice : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Picovoice : MonoBehaviour
 
     private const string
         AccessKey =
-            "7TDa4XH8Nbz8qOyz7aGD1mN6Fyp+JZEDdbalKpMI/MqR2lfHLzTLZw==";
+            "QJwhoDsaCFxFuSJ28NORV0CXYtWeu99Wb8f9MrXv7ZlKCY2z8490Nw==";
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +39,13 @@ public class Picovoice : MonoBehaviour
 
     void InferenceCallback(Inference inference)
     {
+        if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+        {
+            return;
+        }
+
         picoInference = inference;
-        Debug.Log("Pico Inference " + inference.Intent);
-        Debug.Log(_stateMachine);
+        Debug.Log(inference.Intent + " " + _stateMachine);
         _stateMachine.inferenceReaction(picoInference);
     }
 

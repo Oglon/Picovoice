@@ -11,6 +11,8 @@ public class KeycardReader : MonoBehaviour
 
     private float UseRange = 4;
 
+    private AudioSource _audioSource;
+
     private Quest currentQuest;
     private Objective currentObjective;
 
@@ -25,6 +27,9 @@ public class KeycardReader : MonoBehaviour
 
         currentQuest = objectiveHandler.GetCurrentQuest();
         _outline = gameObject.GetComponent<Outline>();
+
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = Resources.Load<AudioClip>("Door");
     }
 
     private void Update()
@@ -65,6 +70,7 @@ public class KeycardReader : MonoBehaviour
     private void Use()
     {
         myDoor.Play("DoorOpening", 0, 0.0f);
+        _audioSource.Play();
         currentQuest.Progress();
         Deactivate();
     }

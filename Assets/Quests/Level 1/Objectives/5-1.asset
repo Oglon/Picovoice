@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79f57a3fbd412b47b29726b9647ae58, type: 3}
   m_Name: 5-1
   m_EditorClassIdentifier: 
-  objectiveDesc: Tell the Door Code to the Intern
-  objectiveHint: Tell the Intern 'The Door Code is 1111'
+  objectiveDesc: Tell the Camera Code to the Intern
+  objectiveHint: Tell the Intern 'The Camera Code is 1111'
   questIndex: 5

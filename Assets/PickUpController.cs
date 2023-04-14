@@ -66,6 +66,7 @@ public class PickUpController : MonoBehaviour
         {
             audioSource.Play();
             currentQuest.Progress();
+
             Destroy(gameObject);
             return;
         }

@@ -96,7 +96,7 @@ public class ColleagueStateMachine : StateMachine
     {
         if (isProcessing)
             return;
-
+        
         ToggleProcessing();
         Picovoice.setStateMachine(this);
         Picovoice.RhinoProcessing();

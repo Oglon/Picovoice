@@ -48,7 +48,7 @@ public class BaristaStateMachine : StateMachine
 
     private const string
         AccessKey =
-            "LEXyhVN7pdElKZ0mRGtgdoPGPg8MzEN2Tj0QuA3LqQESAX+y6o5o8A==";
+            "QJwhoDsaCFxFuSJ28NORV0CXYtWeu99Wb8f9MrXv7ZlKCY2z8490Nw==";
 
     [field: SerializeField] public DialogueResponse Guide1 { get; private set; }
     [field: SerializeField] public DialogueResponse Barista2 { get; private set; }
@@ -257,6 +257,9 @@ public class BaristaStateMachine : StateMachine
                     Sprite.sprite = Speech;
                     MicrophoneVisual.IsInactive();
                 }
+            }
+            else if (inference.Intent == "YouToo")
+            {
             }
 
             isProcessing = false;

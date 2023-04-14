@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: SorryNecessary
   m_EditorClassIdentifier: 
-  text: You have nothing to apologize for.
+  text: Thanks for apologizing.
   audioClip: {fileID: 8300000, guid: 7de384f40fa6dda489cfa23e2c2ebd61, type: 3}
   rude: 0
   excuse: 1

@@ -55,7 +55,9 @@ public class Calibration : MonoBehaviour
                     CountdownTMP.text = Countdown().ToString();
                     break;
                 case 3:
+                    LoudnessDetection.EndClip();
                     Debug.Log("Max: " + volume);
+                    PlayerPrefs.SetFloat("MaxVolume", volume);
                     AudioBar.SetMaxVolume(volume);
                     volume = 0f;
                     state++;
@@ -66,17 +68,20 @@ public class Calibration : MonoBehaviour
                     CountdownTMP.text = Countdown().ToString();
                     break;
                 case 5:
+                    LoudnessDetection.MicrophoneToAudioClip();
                     TMP.text = "Be as silent as possible NOW!";
                     delta = 4;
                     state++;
                     break;
                 case 6:
-                    getHighestVolume();
+                    getLowestVolume();
                     CountdownTMP.text = Countdown().ToString();
                     break;
                 case 7:
+                    LoudnessDetection.EndClip();
                     Debug.Log("Min: " + volume);
-                    AudioBar.SetMinVolume(0f);
+                    PlayerPrefs.SetFloat("MinVolume", volume);
+                    AudioBar.SetMinVolume(volume);
                     state++;
                     delta = 4;
                     break;
@@ -87,6 +92,7 @@ public class Calibration : MonoBehaviour
                 case 9:
                     delta = 4f;
                     calibrating = false;
+                    state = 0;
                     break;
             }
         }
@@ -127,6 +133,14 @@ public class Calibration : MonoBehaviour
         volume = tempVol;
     }
 
+    private void getLowestVolume()
+    {
+        float tempVol = LoudnessDetection.GetSilenceFromMicrophone();
+        Debug.Log(tempVol);
+        if (!(tempVol > volume)) return;
+        volume = tempVol;
+    }
+
     public void Test()
     {
         testing = true;
@@ -134,6 +148,7 @@ public class Calibration : MonoBehaviour
         AudioBar.enabled = true;
         TMP.enabled = false;
         AudioBar.SetActive();
+        AudioBar.LoadPlayerPrefs();
         float tempVol = LoudnessDetection.GetLoudnessFromMicrophone();
     }
 }

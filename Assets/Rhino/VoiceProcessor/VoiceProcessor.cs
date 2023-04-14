@@ -105,7 +105,7 @@ namespace Pv.Unity
                 if (_instance == null)
                 {
                     _instance = new GameObject("Pv.Unity.VoiceProcessor").AddComponent<VoiceProcessor>();
-                    DontDestroyOnLoad(_instance.gameObject);
+                    // DontDestroyOnLoad(_instance.gameObject);
                 }
 
                 return _instance;

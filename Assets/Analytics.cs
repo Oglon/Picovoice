@@ -25,16 +25,6 @@ public class Analytics : MonoBehaviour
         Picovoice = GameObject.Find("Picovoice").GetComponent<Picovoice>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Picovoice.Delete();
-            SceneManager.LoadScene("StartMenu");
-        }
-    }
-
     public float getLastDistance()
     {
         return lastDistance;

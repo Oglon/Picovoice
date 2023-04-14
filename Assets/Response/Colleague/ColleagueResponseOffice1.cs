@@ -66,6 +66,8 @@ public class ColleagueResponseOffice1 : ResponseScript
     [field: SerializeField] public DialogueResponse SorryNecessary { get; private set; }
     [field: SerializeField] public DialogueResponse SorryUnnecessary { get; private set; }
     [field: SerializeField] public DialogueResponse LeaveMeAlone { get; private set; }
+    [field: SerializeField] public DialogueResponse GeneralChatter { get; private set; }
+
 
     public DialogueResponse PreviousResponse { get; private set; }
 
@@ -110,7 +112,7 @@ public class ColleagueResponseOffice1 : ResponseScript
                     return PreviousResponse = SorryUnnecessary;
                 }
 
-                if (rudeIncidents < 3)
+                if (rudeIncidents < 3 && rudeCooldown > 0)
                 {
                     return PreviousResponse = SorryNecessary;
                 }
@@ -214,6 +216,36 @@ public class ColleagueResponseOffice1 : ResponseScript
                 return PreviousResponse = Unfriendly_North;
             }
 
+            if (intent == "Friendly_Donut")
+            {
+                return PreviousResponse = Donut;
+            }
+
+            if (intent == "Normal_Donut")
+            {
+                return PreviousResponse = Donut;
+            }
+
+            if (intent == "Unfriendly_Donut")
+            {
+                return PreviousResponse = Donut;
+            }
+
+            if (intent == "Friendly_Documents")
+            {
+                return PreviousResponse = Documents;
+            }
+
+            if (intent == "Normal_Documents")
+            {
+                return PreviousResponse = Documents;
+            }
+
+            if (intent == "Unfriendly_Documents")
+            {
+                return PreviousResponse = Documents;
+            }
+
             if (intent == "Friendly_NeedHelp")
             {
                 return PreviousResponse = Friendly_NeedHelp;
@@ -314,13 +346,18 @@ public class ColleagueResponseOffice1 : ResponseScript
                 return PreviousResponse = HowDoYouLikeItHere;
             }
 
+            if (intent == "GeneralChatter")
+            {
+                return PreviousResponse = GeneralChatter;
+            }
+
             return PreviousResponse = NotUnderstood();
         }
 
         _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
         _analytics.AddGeneral("Not Understood", Time.timeSinceLevelLoad, getColleagueType(),
             _analytics.getLastDistance());
-        
+
         return PreviousResponse = NotUnderstood();
     }
 
@@ -414,7 +451,7 @@ public class ColleagueResponseOffice1 : ResponseScript
         _analytics = GameObject.Find("Analytics").GetComponent<Analytics>();
         _analytics.AddGeneral("Too Loud", Time.timeSinceLevelLoad, getColleagueType(),
             _analytics.getLastDistance());
-        
+
         System.Random rnd = new System.Random();
         int responseInt = rnd.Next(1, 4);
         DialogueResponse response = new DialogueResponse();

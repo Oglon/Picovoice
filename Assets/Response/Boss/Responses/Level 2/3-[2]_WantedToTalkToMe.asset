@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51bb69ac7a0d834a8834b2e8344a9da, type: 3}
   m_Name: 3-[2]_WantedToTalkToMe
   m_EditorClassIdentifier: 
-  text: Yes, please find my phone. it should be ringing.
+  text: Yes, please find my phone. It should be ringing.
   audioClip: {fileID: 8300000, guid: dfa41304118d64546bc7fcc4e026d39b, type: 3}
   rude: 0
   excuse: 0

@@ -1,0 +1,12 @@
+Not Understood,14.22623,Boss,0, ,1-1 (Objective),Friendly_SecretPrize,25.99796,Boss,0
+Not Understood,16.69866,Boss,0, ,1-2 (Objective),Normal_NeedHelp,47.95055,Colleague,1.817804
+Not Understood,20.66636,Boss,0, ,2-1 (Objective),Friendly_Escape,54.69468,Colleague,1.68354
+Friendly_SecretPrize,25.99796,Boss,0, ,3-1 (Objective),Normal_NeedHelp,62.55176,Colleague,3.031684
+Not Understood,37.49804,Boss,0, ,3-2 (Objective),Normal_Keycard,68.64942,Colleague,1.970156
+Normal_NeedHelp,47.95055,Colleague,1.817804, ,3-3 (Objective),Normal_Keycard,68.64942,Colleague,1.970156
+Friendly_Escape,54.69468,Colleague,1.68354, ,3-4 (Objective),Normal_Keycard,68.64942,Colleague,1.970156
+Normal_NeedHelp,62.55176,Colleague,3.031684, ,3-5 (Objective),Normal_Fixed,84.26048,Colleague,1.970156
+Normal_Keycard,68.64942,Colleague,1.970156, ,4-1 (Objective),Normal_WantedToTalkToMe,90.12704,Boss,1.970156
+Normal_Fixed,84.26048,Colleague,1.970156, ,4-2 (Objective),Normal_WantedToTalkToMe,90.12704,Boss,1.970156
+Normal_WantedToTalkToMe,90.12704,Boss,1.970156, ,4-3 (Objective),Normal_Phone,107.5955,Boss,1.970156
+Normal_Phone,107.5955,Boss,1.970156, ,

@@ -27,16 +27,16 @@ public class AudioBar : MonoBehaviour
 
     public AudioLoudnessDetection detector;
 
-    public AudioSource Source;
-
-    public float loudnessSensibility = 100;
-    public float threshold = 0.1f;
-
     public static int maxVolume = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!SceneManager.GetActiveScene().name.Contains("Sensitive"))
+        {
+            return;
+        }
+
         images.Add(Audio1);
         images.Add(Audio2);
         images.Add(Audio3);
@@ -89,6 +89,7 @@ public class AudioBar : MonoBehaviour
 
     private void ActivateBar(int index)
     {
+        Debug.Log(index);
         for (int i = 0; i < images.Count; i++)
         {
             Image image = images[i];
@@ -140,5 +141,26 @@ public class AudioBar : MonoBehaviour
     {
         MinVolume = volume;
         PlayerPrefs.SetFloat("Min", volume);
+    }
+
+    public void LoadPlayerPrefs()
+    {
+        if (PlayerPrefs.HasKey("MaxVolume"))
+        {
+            MaxVolume = PlayerPrefs.GetFloat("MaxVolume");
+        }
+        else
+        {
+            MaxVolume = 1;
+        }
+
+        if (PlayerPrefs.HasKey("MinVolume"))
+        {
+            MinVolume = PlayerPrefs.GetFloat("MinVolume");
+        }
+        else
+        {
+            MinVolume = 0;
+        }
     }
 }

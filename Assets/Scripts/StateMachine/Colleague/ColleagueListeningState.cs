@@ -44,7 +44,6 @@ public class ColleagueListeningState : ColleagueBaseState
 
         if (!IsInTalkingRange())
         {
-            minDistance = float.MaxValue;
             if (stateMachine.gameObject.tag == "Colleague")
             {
                 var lookPos = stateMachine.MainTarget.transform.position - stateMachine.transform.position;
@@ -61,6 +60,7 @@ public class ColleagueListeningState : ColleagueBaseState
 
     public override void Exit()
     {
+        minDistance = float.MaxValue;
         stateMachine.MicrophoneVisual.IsInactive();
     }
 

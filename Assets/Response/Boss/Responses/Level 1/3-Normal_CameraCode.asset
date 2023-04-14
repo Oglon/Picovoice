@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: I will give you the Camera Code if you bring me a Donut.
   audioClip: {fileID: 8300000, guid: 51805b002a58f7948a8e02a5e0e14ce1, type: 3}
-  rude: 1
+  rude: 0
   excuse: 0
   CodeType: 3
